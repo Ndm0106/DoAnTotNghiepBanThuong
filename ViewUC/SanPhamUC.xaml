@@ -1,0 +1,174 @@
+﻿<UserControl x:Class="DoAnTotNghiepBanThuong.ViewUC.SanPhamUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewUC"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border Background="#e1f5fe" CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="10 30 20 5" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto" ></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox
+                    Grid.Column="0"
+                    Width="150"
+                    Background="White"
+                    Height="48"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Tìm kiếm"
+                    AcceptsReturn="True"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"/>
+                <Button Grid.Column="1" x:Name="ThemSanPhanMoiWindow" Click="ThemSanPhanMoiWindow_Click" Width="165" Height="48" Margin="10 0 0 0" HorizontalAlignment="Left" Content="Thêm sản phẩm mới"/>
+                <Button
+                    Margin="10 0 0 0"
+                    Grid.Column="2"
+                    Height="48"
+                    Width="48"
+                    Content="{materialDesign:PackIcon TrayArrowDown}"
+                    ToolTip="Icon"/>
+
+            </Grid>
+            <Border Margin="10" BorderThickness="1" CornerRadius="20" Grid.Row="1" Background="White">
+                <Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <ListView  x:Name="listViewSanPham" materialDesign:ListViewAssist.HeaderRowBackground="AliceBlue">
+                            <!--<ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>-->
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Hành động">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel  Orientation="Horizontal">
+                                                    <Button x:Name="SuaSanPhamWindow" BorderBrush="Black" Background="Transparent" Click="SuaSanPhamWindow_Click">
+                                                        <materialDesign:PackIcon Kind="Pencil"/>
+                                                    </Button>
+                                                    <Button x:Name="XoaSanPham" BorderBrush="Black" Background="Transparent" Click="XoaSanPham_Click" Margin="10 0 0 0">
+                                                        <materialDesign:PackIcon Kind="Close"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Mã sản phẩm">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding IdSanPham}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Tên sản phẩm">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TenSanPham}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Đơn vị tính">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TenDonVi}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Số lô">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding SoLo}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Giá nhập">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding GiaNhap,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Giá bán">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding GiaBanLe,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Ngày sản xuất">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding NgaySanXuat,StringFormat='dd/MM/yyyy'}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Hạn sử dụng">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding HanSuDung,StringFormat='dd/MM/yyyy'}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Mã vạch">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding BarCode}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Hãng sản xuất">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TenNhaSanXuat}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Ghi chú">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding GhiChu}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Id Đơn Vị" DisplayMemberBinding="{Binding IdDonVi}" Width="0">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="GridViewColumnHeader">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Id Nhà sản xuất" DisplayMemberBinding="{Binding IdNhaSanXuat}" Width="0">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="GridViewColumnHeader">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Id Nhóm sản phẩm" DisplayMemberBinding="{Binding IdNhomSanPham}" Width="0">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="GridViewColumnHeader">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

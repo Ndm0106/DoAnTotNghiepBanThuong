@@ -1,0 +1,50 @@
+﻿<Application x:Class="DoAnTotNghiepBanThuong.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DoAnTotNghiepBanThuong"
+             xmlns:Icon="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="LoginWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.LightBlue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Secondary/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="menuButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Height" Value="45"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Margin" Value="15 0 15 5"/>
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="10">
+                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#f7f6f4"/>
+                        <Setter Property="Foreground" Value="#80deea"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="menuButtonIcon" TargetType="Icon:PackIcon">
+                <Setter Property="Margin" Value="25 0 0 0"/>
+                <Setter Property="Width" Value="18"/>
+                <Setter Property="Height" Value="18"/>
+                <Setter Property="Foreground" Value="{Binding Path=Foreground,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Button}}}"/>
+            </Style>
+            <Style x:Key="menuButtonText" TargetType="TextBlock">
+                <Setter Property="Margin" Value="20 0 0 2"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="{Binding Path=Foreground,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Button}}}"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="LoginWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\DonViTinhUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\KhachHangUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\NguoiDungUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\NhaPhanPhoiUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\NhaSanXuatUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\NhomSanPhamUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\PhieuNhapUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\PhieuXuatUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\QuanLyUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\SanPhamUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\ThongKeDoanhThuUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\ThongKeHangCanDateUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\ThongKeNhapHangUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\ThongKeThuocDaBanUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\ThongKeTonKhoUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\ThongKeUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\ThongKeXuatHangUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewUC\TrangChinhUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\CapNhatMatKhau.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaDonNhapHang.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaDonVi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaKhachHang.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaNhanVien.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaNhaPhanPhoi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaNhaSanXuat.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaNhomSanPham.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\SuaSanPham.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemDonBanHang.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemDonNhapHang.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemDonNhapHang_ThemNhaPhanPhoi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemDonNhapHang_ThemSanPhamMoi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemDonVi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemKhachHang.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemNhanVien.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemNhaPhanPhoi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemNhaSanXuat.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemNhomSanPham.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewWindow\ThemSanPham.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\DonViTinhUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\KhachHangUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\NguoiDungUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\NhaPhanPhoiUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\NhaSanXuatUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\NhomSanPhamUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\PhieuNhapUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\PhieuXuatUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\QuanLyUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\SanPhamUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeDoanhThuUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeHangCanDateUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeNhapHangUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeThuocDaBanUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeTonKhoUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeXuatHangUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\TrangChinhUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\CapNhatMatKhau.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaDonNhapHang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaDonVi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaKhachHang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaNhanVien.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaNhaPhanPhoi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaNhaSanXuat.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaNhomSanPham.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\SuaSanPham.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemDonBanHang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemDonNhapHang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemDonNhapHang_ThemNhaPhanPhoi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemDonNhapHang_ThemSanPhamMoi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemDonVi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemKhachHang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemNhanVien.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemNhaPhanPhoi.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemNhaSanXuat.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemNhomSanPham.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewWindow\ThemSanPham.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

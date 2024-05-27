@@ -5,122 +5,140 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong"
         mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="Transparent"    
         Title="MainWindow" Height="780" Width="1380">
     <Border Background="#eceff1" CornerRadius="20">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Background="#80deea" CornerRadius="20 20 20 20" HorizontalAlignment="Left" Margin="10 10 0 10 " Width="220" >
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Center" Kind="AccountCircle" Margin="0 20 0 10" Height="150" Width="150" />
-                        </Grid>
-                        <Border CornerRadius="10" Margin="10 0 10 0" Background="White" Grid.Row="1" >
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" x:Name="txtTenHienThi" Text="Họ Tên:" Foreground="#80deea"/>
-                                <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14"  x:Name="lblTenHienThi" Content=""/>
-                            </StackPanel>
-                        </Border>
-                        <Border CornerRadius="10" Margin="10 5 10 0" Background="White" Grid.Row="2" >
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" x:Name="txtTenChucVu" Text="Chức vụ:" Foreground="#80deea"/>
-                                <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14"  x:Name="lblTenChucVu"  Content=""/>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                    <Grid Grid.Row="1" Margin="0 30 0 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Button Click="BtnClick_TrangChinh" Grid.Row="0" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Home" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Trang chính" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnClick_BanHang" Grid.Row="1" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Shopping" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Bán hàng" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnClick_SanPham" Grid.Row="2" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Medication" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Sản phẩm" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnClick_KhachHang" Grid.Row="3" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="AccountMultiple" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnClick_NhapHang" Grid.Row="4" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="TrayArrowDown" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Nhập hàng" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnClick_QuanLy" Grid.Row="5" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="ListBox" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Quản lý" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnClick_ThongKe" Grid.Row="6" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Finance" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Thống kê" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                        <Button Click="BtnClick_NhanVien" Grid.Row="7" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="AccountCog" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Cài đặt" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Button Width="190" VerticalAlignment="Bottom" Margin="0 0 0 10" Style="{StaticResource menuButton}">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Đăng xuất" Style="{StaticResource menuButtonText}"/>
-                            </StackPanel>
-                        </Button>
-                    </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Click="MinimizeButton_Click" Content="{materialDesign:PackIcon WindowMinimize}" BorderBrush="Transparent" Background="Transparent"/>
+                    <Button Click="MaximizeButton_Click" Content="{materialDesign:PackIcon WindowMaximize}" BorderBrush="Transparent" Background="Transparent"/>
+                    <Button Click="CloseButton_Click" Content="{materialDesign:PackIcon WindowClose}" BorderBrush="Transparent" Background="Transparent"/>
+                </StackPanel>
+            </Grid>
 
-                </Grid>
-            </Border>
-            <Border Margin="0 10 10 10" Grid.Column="1">
+            <Grid Grid.Row="1">
                 <Grid>
-                    <ContentControl x:Name="mainContentControl"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Background="#80deea" CornerRadius="20 20 20 20" HorizontalAlignment="Left" Margin="10 10 0 10 " Width="220" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                    <RowDefinition Height="auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <materialDesign:PackIcon Foreground="White" HorizontalAlignment="Center" Kind="AccountCircle" Margin="0 20 0 10" Height="150" Width="150" />
+                                </Grid>
+                                <Border CornerRadius="10" Margin="10 0 10 0" Background="White" Grid.Row="1" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" x:Name="txtTenHienThi" Text="Họ Tên:" Foreground="#80deea"/>
+                                        <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14"  x:Name="lblTenHienThi" Content=""/>
+                                    </StackPanel>
+                                </Border>
+                                <Border CornerRadius="10" Margin="10 5 10 0" Background="White" Grid.Row="2" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" x:Name="txtTenChucVu" Text="Chức vụ:" Foreground="#80deea"/>
+                                        <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14"  x:Name="lblTenChucVu"  Content=""/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                            <Grid Grid.Row="1" Margin="0 30 0 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Button Click="BtnClick_TrangChinh" Grid.Row="0" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Home" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Trang chính" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="BtnClick_BanHang" Grid.Row="1" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Shopping" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Bán hàng" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="BtnClick_SanPham" Grid.Row="2" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Medication" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Sản phẩm" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="BtnClick_KhachHang" Grid.Row="3" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AccountMultiple" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="BtnClick_NhapHang" Grid.Row="4" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="TrayArrowDown" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Nhập hàng" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="BtnClick_QuanLy" Grid.Row="5" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ListBox" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Quản lý" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="BtnClick_ThongKe" Grid.Row="6" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Finance" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Thống kê" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Click="BtnClick_NhanVien" Grid.Row="7" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AccountCog" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Người dùng" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                <Button Click="BtnClick_DangXuat" Width="190" VerticalAlignment="Bottom" Margin="0 0 0 10" Style="{StaticResource menuButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
+                                        <TextBlock Text="Đăng xuất" Style="{StaticResource menuButtonText}"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+                    <Border Margin="0 10 10 10" Grid.Column="1">
+                        <Grid>
+                            <ContentControl x:Name="mainContentControl"/>
+                        </Grid>
+                    </Border>
                 </Grid>
-            </Border>
+            </Grid>
         </Grid>
     </Border>
 </Window>

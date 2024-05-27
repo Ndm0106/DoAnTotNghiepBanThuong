@@ -23,14 +23,12 @@ namespace DoAnTotNghiepBanThuong.ViewUC
     /// </summary>
     public partial class PhieuXuatUC : UserControl
     {
-        public QLQuayThuocBanThuongContext db;
         public static System.Windows.Controls.ListView? listView;
         private string idNhanVien;
         private string tenNhanVien;
         public PhieuXuatUC(string idNhanVien, string tenNhanVien)
         {
             InitializeComponent();
-            db = new QLQuayThuocBanThuongContext();
             LoadDataPhieuXuat();
             this.tenNhanVien = tenNhanVien;
             this.idNhanVien = idNhanVien;
@@ -39,19 +37,17 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         {
             using (var db = new QLQuayThuocBanThuongContext())
             {
-                var queryDATA = db.DonBanHangs.Select(
-                    dbh => new DonBanHang_MLV
-                    {
-                        IdDonBanHang = dbh.IdDonBanHang,
-                        NgayBan = dbh.NgayBan,
-                        TenKhachHang = dbh.IdKhachHangNavigation.TenKhachHang,
-                        SoDienThoai = dbh.IdKhachHangNavigation.SoDienThoai,
-                        TenHienThi = dbh.IdNhanVienNavigation.TenHienThi,
-                        TongTienDonBanHang = db.ChiTietDonBanHangs.
-                        Where(ctdbh => ctdbh.IdDonBanHang == dbh.IdDonBanHang).
-                        Sum(ctdbh => ctdbh.SoLuongBan * ctdbh.IdSanPhamNavigation.GiaBan)
-                    }
-                    ).ToList();
+                var queryDATA = db.DonBanHangs.Select(dbh => new DonBanHang_MLV
+                {
+                    IdDonBanHang = dbh.IdDonBanHang,
+                    TenHienThi = dbh.IdNhanVienNavigation.TenHienThi,
+                    NgayBan = dbh.NgayBan,
+                    IdKhachHang = dbh.IdKhachHang,
+                    SoDienThoai = dbh.IdKhachHangNavigation.SoDienThoai,
+                    IdNhanVien = dbh.IdNhanVien,
+                    TenKhachHang = dbh.IdKhachHangNavigation.TenKhachHang,
+                    TongTienDonBanHang = dbh.TongTienDonBanHang
+                }).ToList();
                 listViewPhieuXuat.ItemsSource = queryDATA;
                 listView = listViewPhieuXuat;
             }
@@ -65,7 +61,21 @@ namespace DoAnTotNghiepBanThuong.ViewUC
 
         private void SuaPhieuXuatWindow_Click(object sender, RoutedEventArgs e)
         {
-
+            var button = sender as Button;
+            if (button != null)
+            {
+                DonBanHang_MLV selectedDonBanHang = button.DataContext as DonBanHang_MLV;
+                if (selectedDonBanHang != null)
+                {
+                    // Tạo một cửa sổ mới để hiển thị chi tiết đơn nhập hàng
+                    SuaDonBanHang detailWindow = new SuaDonBanHang(selectedDonBanHang);
+                    detailWindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy thông tin đơn hàng.");
+                }
+            }
         }
 
         private void XoaPhieuXuat_Click(object sender, RoutedEventArgs e)
@@ -76,12 +86,14 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                 if (button != null)
                 {
                     // Lấy sản phẩm được chọn từ ListView
-                    var dobanhang = (DonBanHang_MLV)button.DataContext;
+                    DonBanHang_MLV donbanhang = (DonBanHang_MLV)button.DataContext;
                     MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có muốn xoá đơn này ?", "Xác nhận xoá", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        // Xóa sản phẩm từ bảng SanPhams
-                        var itemToRemove = _db.DonBanHangs.FirstOrDefault(s => s.IdDonBanHang == dobanhang.IdDonBanHang);
+                        var relatedRecords = _db.ChiTietDonBanHangs.Where(x => x.IdDonBanHang == donbanhang.IdDonBanHang);
+                        _db.ChiTietDonBanHangs.RemoveRange(relatedRecords);
+                        
+                        var itemToRemove = _db.DonBanHangs.FirstOrDefault(s => s.IdDonBanHang == donbanhang.IdDonBanHang);
                         if (itemToRemove != null)
                         {
                             _db.DonBanHangs.Remove(itemToRemove);
@@ -92,6 +104,11 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                     }
                 }
             }
+        }
+
+        private void btnPhieuXuat_Reload_Click(object sender, RoutedEventArgs e)
+        {
+            LoadDataPhieuXuat();
         }
     }
 }

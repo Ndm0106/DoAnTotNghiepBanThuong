@@ -32,10 +32,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             txtSuaIdSanPham.Text = _sanpham.IdSanPham;
             //txtSuaSoLoSanPham.Text = _sanpham.SoLo;
             txtSuaSoLuongTonSanPham.Text = _sanpham.SoLuongTon.ToString();
-            txtSuaGiaBanLeSanPham.Text = _sanpham.GiaBanLe.ToString();
-            txtSuaGiaNhapSanPham.Text = _sanpham.GiaNhap.ToString();
+            txtSuaGiaBanLeSanPham.Text = _sanpham.GiaBanLe.HasValue ? $"{_sanpham.GiaBanLe.Value:F0}" : "N/A";
+            txtSuaGiaNhapSanPham.Text = _sanpham.GiaNhap.HasValue ? $"{_sanpham.GiaNhap.Value:F0}" : "N/A";
 
-            txtSuaNgaySanXuatSanPham.SelectedDate = _sanpham.NgaySanXuat;
+            txtSuaHamLuongSanPham.Text = _sanpham.HamLuong;
+            txtSuaThanhPhanSanPham.Text = _sanpham.ThanhPhan;
             txtSuaHanSuDungSanPham.SelectedDate = _sanpham.HanSuDung;
 
             txtSuaDonViSanPham.SelectedValue = _sanpham.IdDonVi;
@@ -51,11 +52,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         {
             string suaTenSP = txtSuaTenSanPham.Text;
             string suaNhaSanXuatSP = txtSuaTenSanPham.Text;
-            DateTime? suaNgaySanXuatSP = txtSuaNgaySanXuatSanPham.SelectedDate;
+            
             DateTime? suaHanSuDungSP = txtSuaHanSuDungSanPham.SelectedDate;
             string suaGhiChuSP = txtSuaTenSanPham.Text;
-            string soloSP = txtSuaSoLoSanPham.Text;
-
+            string suathanhphanSP = txtSuaThanhPhanSanPham.Text;
+            string suahamluongSp = txtSuaHamLuongSanPham.Text;
             string suaIdDonVi;
             string suaIdNhaSanXuat;
             string suaIdNhomSanPham;
@@ -117,7 +118,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     suaSanPham.GiaNhap = giaNhap;
                     suaSanPham.GhiChu = txtSuaGhiChuSanPham.Text;
                     suaSanPham.IdDonVi = suaIdDonVi;
-                    
+                    suaSanPham.ThanhPhan = suathanhphanSP;
                     suaSanPham.HanSuDung = suaHanSuDungSP;
                     suaSanPham.IdNhaSanXuat = suaIdNhaSanXuat;
                     suaSanPham.IdNhomSanPham = suaIdNhomSanPham;
@@ -150,9 +151,9 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     TenDonVi = sp.IdDonViNavigation.TenDonVi,
                     SoLuongTon = sp.SoLuongTon,
                     GiaNhap = sp.GiaNhap,
-                    
+                    HamLuong = sp.HamLuong,
                     GiaBanLe = sp.GiaBan,
-                    
+                    ThanhPhan = sp.ThanhPhan,
                     HanSuDung = sp.HanSuDung,
                     TenNhaSanXuat = sp.IdNhaSanXuatNavigation.TenNhaSanXuat,
                     TenNhomSanPham = sp.IdNhomSanPhamNavigation.TenNhomSanPham,

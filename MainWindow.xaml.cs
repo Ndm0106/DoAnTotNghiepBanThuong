@@ -65,11 +65,59 @@ namespace DoAnTotNghiepBanThuong
         {
             mainContentControl.Content = new QuanLyUC();
         }
+        private void BtnClick_DangXuat(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Đăng xuất người dùng
+                Logout();
+            }
+        }
         private void HienThiThongTinNguoiDung(string tenNguoiDung, string chucVu)
         {
             // Hiển thị thông tin người dùng đã đăng nhập lên các Label
             lblTenHienThi.Content = tenNguoiDung;
             lblTenChucVu.Content = chucVu;
+        }
+
+
+
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Logout()
+        {
+            // Thực hiện các thao tác cần thiết khi đăng xuất, ví dụ như xóa thông tin người dùng khỏi bộ nhớ
+            // Tùy thuộc vào cách bạn quản lý trạng thái đăng nhập, bạn có thể cần phải xóa thông tin người dùng ở đây
+
+            // Mở cửa sổ đăng nhập
+            var loginWindow = new LoginWindow();
+            loginWindow.Show();
+
+            // Đóng cửa sổ hiện tại (MainWindow)
+            this.Close();
         }
     }
 }

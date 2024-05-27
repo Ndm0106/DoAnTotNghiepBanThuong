@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="White">
+    <Border Background="AliceBlue">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230"></ColumnDefinition>
@@ -24,13 +24,13 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Margin="10 20 0 0" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Button Background="#80deea" BorderBrush="#80deea" Width="120" Height="49.96">
+                        <Button materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea" Width="120" Height="49.96">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="TrayArrowDown" Height="20" Width="20"  VerticalAlignment="Center"/>
                                 <TextBlock VerticalAlignment="Center" Text="Xuất file"/>
                             </StackPanel>
                         </Button>
-                        <Button Margin="10" Background="#80deea" BorderBrush="#80deea" Width="49.96" Height="49.96">
+                        <Button materialDesign:ButtonAssist.CornerRadius="10" Margin="10" Background="#80deea" BorderBrush="#80deea" Width="49.96" Height="49.96">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Reload" Height="20" Width="20"  VerticalAlignment="Center"/>
                             </StackPanel>
@@ -42,6 +42,7 @@
 
                 <Grid Grid.Row="1" Margin="10 10 0 0" HorizontalAlignment="Left">
                     <DatePicker
+                        Background="White"
 Width="165"
 materialDesign:HintAssist.Hint="Ngày bắt đầu"
 Style="{StaticResource MaterialDesignFilledDatePicker}" />
@@ -49,6 +50,7 @@ Style="{StaticResource MaterialDesignFilledDatePicker}" />
 
                 <Grid Grid.Row="2" HorizontalAlignment="Left" Margin="10 10 0 0" >
                     <DatePicker
+                        Background="White"
 Width="165"
 materialDesign:HintAssist.Hint="Ngày kết thúc"
 Style="{StaticResource MaterialDesignFilledDatePicker}" />
@@ -56,6 +58,7 @@ Style="{StaticResource MaterialDesignFilledDatePicker}" />
 
                 <Grid Grid.Row="3" HorizontalAlignment="Left" Margin="10 10 0 0">
                     <ComboBox
+                        Background="White"
   Width="165"
   materialDesign:HintAssist.Hint="Nhà cung cấp"
   Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -64,6 +67,7 @@ Style="{StaticResource MaterialDesignFilledDatePicker}" />
 
                 <Grid Grid.Row="4" HorizontalAlignment="Left" Margin="10 10 0 0" >
                     <TextBox 
+                        Background="White"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                         Width="165"
                         materialDesign:HintAssist.Hint="Tìm theo tên hoặc mã">
@@ -72,6 +76,7 @@ Style="{StaticResource MaterialDesignFilledDatePicker}" />
 
                 <Grid Grid.Row="5" HorizontalAlignment="Left" Margin="10 10 0 0">
                     <ComboBox
+                        Background="White"
 Width="165"
 materialDesign:HintAssist.Hint="Người thực hiện"
 Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -85,37 +90,36 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Background="GhostWhite">
-                    <TextBlock Margin="0 0 10 0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="30"><Bold>Thống kê chi tiết bán hàng</Bold></TextBlock>
+                    <TextBlock Margin="0 0 10 0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="30"><Bold>THỐNG KÊ CHI TIẾT BÁN HÀNG</Bold></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1" Background="GhostWhite">
                     <Border Background="White" Margin="10" CornerRadius="10" BorderBrush="#eceff1" BorderThickness="1">
                         <Grid >
                             <ScrollViewer>
-                                <ListView x:Name="listViewThongKeNhapHang" Style="{StaticResource MaterialDesignCardsListBox}">
+                                <ListView x:Name="listViewThongKeXuatHang" Style="{StaticResource MaterialDesignCardsListBox}">
                                     <ListView.GroupStyle>
                                         <GroupStyle>
                                             <GroupStyle.HeaderTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Background="Cyan" Margin="20 10 5 0" Orientation="Horizontal">
                                                         <TextBlock Margin="10 0 0 0"  FontSize="14" FontWeight="Bold" Text="Mã phiếu"/>
-                                                        <TextBlock Margin="50 0 0 0"  FontSize="14" FontWeight="Bold" Text="Ngày nhập"/>
-                                                        <TextBlock Margin="120 0 0 0"  FontSize="14" FontWeight="Bold" Text="TênNCC"/>
-                                                        <TextBlock Margin="230 0 0 0"  FontSize="14" FontWeight="Bold" Text="Người thực hiện"/>
+                                                        <TextBlock Margin="50 0 0 0"  FontSize="14" FontWeight="Bold" Text="Ngày bán"/>
+                                                        <TextBlock Margin="120 0 0 0"  FontSize="14" FontWeight="Bold" Text="Tên khách hàng"/>
+                                                        <TextBlock Margin="120 0 0 0"  FontSize="14" FontWeight="Bold" Text="Người thực hiện"/>
+                                                        <TextBlock Margin="60 0 0 0"  FontSize="14" FontWeight="Bold" Text="Tổng tiền"/>
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </GroupStyle.HeaderTemplate>
                                         </GroupStyle>
                                     </ListView.GroupStyle>
-                                    <!-- Định nghĩa cột cho thông tin phiếu nhập -->
-                                    <ListView.View>
+                                    <!--<ListView.View>
                                         <GridView>
-                                            <GridViewColumn Header="ID Phiếu Nhập" DisplayMemberBinding="{Binding IdDonNhapHang}"/>
-                                            <GridViewColumn Header="Ngày Nhập" DisplayMemberBinding="{Binding NgayNhap}" />
-                                            <GridViewColumn Header="Nhà Cung Cấp" DisplayMemberBinding="{Binding TenNhaCungCap}" />
+                                            <GridViewColumn Header="ID Phiếu Xuất" DisplayMemberBinding="{Binding IdDonBanHang}"/>
+                                            <GridViewColumn Header="Ngày Xuất" DisplayMemberBinding="{Binding NgayBan}" />
+                                            <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding TenKhachHang}" />
                                             <GridViewColumn Header="Nhân Viên Thực Hiện" DisplayMemberBinding="{Binding TenNhanVien}" />
                                         </GridView>
-                                    </ListView.View>
-                                    <!-- Định nghĩa cột cho chi tiết phiếu nhập -->
+                                    </ListView.View>-->
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Expander>
@@ -126,54 +130,52 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition Width="Auto" />
-                                                            <!-- Thêm các cột khác nếu cần -->
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBlock Grid.Column="0" Margin="10 0 0 0" HorizontalAlignment="Center" Text="{Binding IdDonNhapHang}" />
-                                                        <TextBlock Grid.Column="1" Margin="30 0 0 0" HorizontalAlignment="Center" Text="{Binding NgayNhap}" />
-                                                        <TextBlock Grid.Column="2" Margin="70 0 0 0" HorizontalAlignment="Center" Text="{Binding TenNhaCungCap}" />
-                                                        <TextBlock Grid.Column="3" Margin="130 0 0 0" HorizontalAlignment="Center" Text="{Binding TenHienThi}" />
-                                                        <!-- Thêm các TextBlock cho các cột khác nếu cần -->
+                                                        <TextBlock Grid.Column="0" Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding IdDonBanHang}" />
+                                                        <TextBlock Grid.Column="1" Margin="30 0 0 0" HorizontalAlignment="Left" Text="{Binding NgayBan}" />
+                                                        <TextBlock Grid.Column="2" Margin="70 0 0 0" HorizontalAlignment="Center" Text="{Binding TenKhachHang}" />
+                                                        <TextBlock Grid.Column="3" Margin="120 0 0 0" HorizontalAlignment="Left" Text="{Binding TenHienThi}" />
+                                                        <TextBlock Grid.Column="4" Margin="300 0 0 0" HorizontalAlignment="Left" Text="{Binding TongTienDonBanHang,StringFormat={}{0:N0}, ConverterCulture=vi-VN}"/>
                                                     </Grid>
                                                 </Expander.Header>
-                                                <ListView ItemsSource="{Binding chiTietDonNhapHang_MLVs}" materialDesign:ListViewAssist.HeaderRowBackground="AliceBlue">
+                                                <ListView ItemsSource="{Binding chiTietDonBanHang_MLVs}" materialDesign:ListViewAssist.HeaderRowBackground="AliceBlue">
                                                     <ListView.View>
                                                         <GridView>
-                                                            <GridViewColumn Header="Tên Sản Phẩm">
+                                                            <GridViewColumn Header="Tên sản phẩm">
                                                                 <GridViewColumn.CellTemplate>
                                                                     <DataTemplate>
                                                                         <TextBlock Text="{Binding TenSanPham}" Padding="20 10 0 0"/>
                                                                     </DataTemplate>
                                                                 </GridViewColumn.CellTemplate>
                                                             </GridViewColumn>
-                                                            <GridViewColumn Header="Đơn Vị">
+                                                            <GridViewColumn Header="Đơn vị">
                                                                 <GridViewColumn.CellTemplate>
                                                                     <DataTemplate>
                                                                         <TextBlock Text="{Binding TenDonVi}" Padding="20 10 0 0"/>
                                                                     </DataTemplate>
                                                                 </GridViewColumn.CellTemplate>
                                                             </GridViewColumn>
-                                                            <GridViewColumn Header="Số Lượng Nhập">
+                                                            <GridViewColumn Header="Số lượng bán">
                                                                 <GridViewColumn.CellTemplate>
                                                                     <DataTemplate>
-                                                                        <TextBlock Text="{Binding SoLuongNhap}" Padding="20 10 0 0"/>
+                                                                        <TextBlock Text="{Binding SoLuongBan}" Padding="20 10 0 0"/>
                                                                     </DataTemplate>
                                                                 </GridViewColumn.CellTemplate>
                                                             </GridViewColumn>
-                                                            <GridViewColumn Header="Đơn Giá Nhập">
+                                                            <GridViewColumn Header="Giá bán">
                                                                 <GridViewColumn.CellTemplate>
                                                                     <DataTemplate>
-                                                                        <TextBlock Text="{Binding DonGiaNhap,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                                        <TextBlock Text="{Binding GiaBan,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
                                                                     </DataTemplate>
                                                                 </GridViewColumn.CellTemplate>
                                                             </GridViewColumn>
-                                                            <GridViewColumn Header="Thành Tiền">
+                                                            <GridViewColumn Header="Thành tiền bán">
                                                                 <GridViewColumn.CellTemplate>
                                                                     <DataTemplate>
-                                                                        <TextBlock Text="{Binding ThanhTienNhap,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                                        <TextBlock Text="{Binding DonGiaBan,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
                                                                     </DataTemplate>
                                                                 </GridViewColumn.CellTemplate>
                                                             </GridViewColumn>
-                                                            <!-- Thêm các cột khác cho chi tiết phiếu nhập nếu cần -->
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>

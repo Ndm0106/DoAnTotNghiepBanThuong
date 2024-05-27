@@ -7,27 +7,30 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="#cfd8dc" CornerRadius="20">
+    <Border Background="AliceBlue" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="20 20 10 0">
-                <TextBlock Grid.Column="0" HorizontalAlignment="Left" FontSize="30" Margin="30 0 0 0"><Bold>Quản lý người dùng</Bold></TextBlock>
+            <Grid Grid.Row="0" Margin="30 20 10 0">
+                <TextBlock Grid.Column="0" HorizontalAlignment="Left" FontSize="40"><Bold>NGƯỜI DÙNG</Bold></TextBlock>
             </Grid>
             <Grid Grid.Row="1" HorizontalAlignment="Right" Margin="10 0 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
-
                 </Grid.ColumnDefinitions>
                 <Button
      x:Name="ThemNhanVienWindow"
      Click="ThemNhanVienWindow_Click"
      Width="120"
-     Margin="0 10 30 0"
+     Margin="0 10 20 0"
+                    Background="#80deea" BorderBrush="#80deea"
+                    Foreground="White"
+                    Height="49.96"
+                    materialDesign:ButtonAssist.CornerRadius="10"
                     Grid.Column="0"
      HorizontalAlignment="Right"
      Style="{StaticResource MaterialDesignRaisedLightButton}"
@@ -41,7 +44,11 @@
 x:Name="DoiMatKhauNhanVienWindow"
 Click="DoiMatKhauNhanVienWindow_Click"
 Width="135"
+                    Background="#80deea" BorderBrush="#80deea"
+                    Foreground="White"
 Margin="0 10 30 0"
+                    materialDesign:ButtonAssist.CornerRadius="10"
+                    Height="49.96"
                Grid.Column="1"
 HorizontalAlignment="Right"
 Style="{StaticResource MaterialDesignRaisedLightButton}"
@@ -53,12 +60,31 @@ ToolTip="Resource name: MaterialDesignRaisedLightButton">
                 </Button>
             </Grid>
             <Grid Grid.Row="2">
-                <Border CornerRadius="5" Background="White" BorderBrush="#eceff1" BorderThickness="0.5" Margin="30 10 30 10">
+                <Border CornerRadius="20" Background="White" BorderBrush="#eceff1" BorderThickness="0.5" Margin="30 10 30 10">
                     <Grid>
                         <ScrollViewer>
                             <ListView x:Name="listViewNhanVien" HorizontalContentAlignment="Center">
                                 <ListView.View>
                                     <GridView>
+                                        <GridViewColumn Header="Hành động">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Button x:Name="SuaNhanVienWindow" Click="SuaNhanVienWindow_Click" Foreground="White" BorderBrush="Transparent" Background="ForestGreen">
+                                                            <StackPanel>
+                                                                <materialDesign:PackIcon Kind="Pencil"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                        <Button x:Name="XoaNhanVien" Click="XoaNhanVien_Click" Margin="2 0 0 0" Foreground="White"  BorderBrush="Transparent" Background="OrangeRed">
+                                                            <materialDesign:PackIcon Kind="Close"/>
+                                                        </Button>
+                                                        <!--<Button x:Name="CapQuyenNhanVien" Click="CapQuyenNhanVien_Click" Margin="5 0 0 0" BorderBrush="Transparent" Foreground="White" Background="MediumPurple">
+                                                            <materialDesign:PackIcon Kind="AccountLockOpen"/>
+                                                        </Button>-->
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
                                         <GridViewColumn Header="IdNhanVien" DisplayMemberBinding="{Binding MatKhau}" Width="0"></GridViewColumn>
                                         <GridViewColumn Header="Họ tên">
                                             <GridViewColumn.CellTemplate>
@@ -95,25 +121,7 @@ ToolTip="Resource name: MaterialDesignRaisedLightButton">
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="Hành động" Width="300">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Button x:Name="SuaNhanVienWindow" Click="SuaNhanVienWindow_Click" BorderBrush="Black" Background="Transparent">
-                                                            <StackPanel>
-                                                                <materialDesign:PackIcon Kind="Pencil"/>
-                                                            </StackPanel>
-                                                        </Button>
-                                                        <Button x:Name="XoaNhanVien" Click="XoaNhanVien_Click" Margin="10 0 0 0" BorderBrush="Black" Background="Transparent">
-                                                            <materialDesign:PackIcon Kind="Close"/>
-                                                        </Button>
-                                                        <Button x:Name="CapQuyenNhanVien" Click="CapQuyenNhanVien_Click" Margin="10 0 0 0" BorderBrush="Black" Background="Transparent">
-                                                            <materialDesign:PackIcon Kind="AccountLockOpen"/>
-                                                        </Button>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
+                                        
                                     </GridView>
                                 </ListView.View>
                             </ListView>

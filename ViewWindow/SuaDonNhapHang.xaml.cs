@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using XAct.Library.Settings;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
 {
@@ -50,7 +51,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             txtSuaDonNhapHang_NgayNhap.Text = selectedDNH_MLV.NgayNhap.ToString();
             txtSuaDonNhapHang_TenHienThi.Text = selectedDNH_MLV.TenHienThi;
             txtSuaDonNhapHang_NhaPhanPhoi.Text = selectedDNH_MLV.TenNhaPhanPhoi;
-            txtSuaTongTienDonNhapHang.Text = selectedDNH_MLV.TongTienDonNhapHang.HasValue ? $"{selectedDNH_MLV.TongTienDonNhapHang.Value:N0} ₫" : "N/A";
+            txtSuaTongTienDonNhapHang.Text = selectedDNH_MLV.TongTienDonNhapHang.HasValue ? $"{selectedDNH_MLV.TongTienDonNhapHang.Value:N0}" : "N/A";
 
         }
 
@@ -84,28 +85,14 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             return chiTietDonNhapHangs;
 
         }
-        private void txtSuaDonNhapHang_TimKiemSanPham_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private bool isSearching = false;
         private SanPham SanPhamChon;
-        private void searchListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void btnSuaDonNhapHang_Them_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void ClearInputFields()
         {
             // Xóa dữ liệu trên các TextBox và ComboBox
             txtSuaDonNhapHang_SuaTenSanPham.Clear();
             txtSuaDonNhapHang_SuaHanSuDung.SelectedDate = null;
-            txtSuaDonNhapHang_SuaSoLo.Clear();
+            //txtSuaDonNhapHang_SuaSoLo.Clear();
 
             txtSuaDonNhapHang_SuaSoLuong.Clear();
             txtSuaDonNhapHang_SuaGiaNhap.Clear();
@@ -133,7 +120,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 }
                 else
                 {
-                    MessageBox.Show("Không thể cập nhật vì selectedDNH_MLV không được khởi tạo.");
+                    MessageBox.Show("Không thể cập nhật");
                 }
             }
         }
@@ -152,7 +139,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     {
                         string tenSanPham = txtSuaDonNhapHang_SuaTenSanPham.Text;
                         int soLuong = int.Parse(txtSuaDonNhapHang_SuaSoLuong.Text);
-                        string soLo = txtSuaDonNhapHang_SuaSoLo.Text;
+                        //string soLo = txtSuaDonNhapHang_SuaSoLo.Text;
                         // Lấy sản phẩm được chọn
                         ChiTietDonNhapHang_MLV selectedProduct = (ChiTietDonNhapHang_MLV)listViewSuaDonNhapHang.SelectedItem;
                         chiTietDonNhapHangs = new ObservableCollection<ChiTietDonNhapHang_MLV>(GetChiTietDonNhapHang());
@@ -165,7 +152,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                                 item.GiaNhap = giaNhap;
                                 item.SoLuongNhap = soLuong;
                                 item.HanSuDung = dateTime;
-                                item.SoLo = soLo;
+                                //item.SoLo = soLo;
+
                                 item.DonGiaNhap = giaNhap * soLuong;
                                 break;
                             }
@@ -175,7 +163,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
 
                         // Cập nhật lại ListView
                         UpdateListView();
-                        UpdateDatabase(selectedProduct.IdSanPham, soLuong, giaNhap, soLo, dateTime);
+                        UpdateDatabase(selectedProduct.IdSanPham, soLuong, giaNhap, dateTime);
                         ClearInputFields();
                         listViewSuaDonNhapHang.ItemsSource = GetChiTietDonNhapHang();
                     }
@@ -203,10 +191,9 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 ChiTietDonNhapHang_MLV selectedSanPham = (ChiTietDonNhapHang_MLV)listViewSuaDonNhapHang.SelectedItem;
                 txtSuaDonNhapHang_SuaTenSanPham.Text = selectedSanPham.TenSanPham;
                 txtSuaDonNhapHang_SuaSoLuong.Text = selectedSanPham.SoLuongNhap.ToString();
-                txtSuaDonNhapHang_SuaGiaNhap.Text = selectedSanPham.GiaNhap.HasValue ? $"{selectedSanPham.GiaNhap.Value:N0}" : "N/A";
+                txtSuaDonNhapHang_SuaGiaNhap.Text = selectedSanPham.GiaNhap.HasValue ? $"{selectedSanPham.GiaNhap.Value:F0}" : "N/A";
                 txtSuaDonNhapHang_SuaHanSuDung.SelectedDate = selectedSanPham.HanSuDung;
-                txtSuaDonNhapHang_SuaSoLo.Text = selectedSanPham.SoLo;
-
+                //txtSuaDonNhapHang_SuaSoLo.Text = selectedSanPham.SoLo;
             }
         }
 
@@ -220,7 +207,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             // Xóa toàn bộ mục trong chiTietDonNhapHangs
             chiTietDonNhapHangs.Clear();
         }
-        private void UpdateDatabase(string idSanPham, int soLuong, decimal giaNhap, string soLo, DateTime hanSuDung)
+        private void UpdateDatabase(string idSanPham, int soLuong, decimal giaNhap, DateTime hanSuDung)
         {
             // Tìm chi tiết đơn nhập hàng tương ứng trong cơ sở dữ liệu
             using (var db = new QLQuayThuocBanThuongContext())
@@ -252,6 +239,50 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 // Lưu các thay đổi vào cơ sở dữ liệu
                 db.SaveChanges();
             }
+        }
+
+        private void btnSuaDonNhapHang_Thoat_Click(object sender, RoutedEventArgs e)
+        {
+            var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (thongbao == MessageBoxResult.OK)
+                this.Close();
+        }
+
+        private void btnSuaDonNhapHang_Xoa_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as System.Windows.Controls.Button;
+            if (button != null)
+            {
+                // Lấy sản phẩm được chọn từ ListView
+                var chiTietSanPham = (ChiTietDonNhapHang_MLV)button.DataContext;
+                MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có muốn xoá sản phẩm này ?", "Xác nhận xoá", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    chiTietDonNhapHangs.Remove(chiTietSanPham);
+                    //listViewSuaDonNhapHang.ItemsSource = chiTietDonNhapHangs;
+                    decimal tongTienDonNhapHang = (decimal)chiTietDonNhapHangs.Sum(item => item.DonGiaNhap);
+                    txtSuaTongTienDonNhapHang.Text = $"{tongTienDonNhapHang:N0}"; 
+                }
+            }
+        }
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

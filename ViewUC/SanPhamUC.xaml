@@ -7,13 +7,17 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="#e1f5fe" CornerRadius="20">
+    <Border Background="AliceBlue" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="10 30 20 5" HorizontalAlignment="Right">
+            <Grid Grid.Row="0" Margin="20 20 0 0">
+                <TextBlock FontSize="40"><Bold>SẢN PHẨM</Bold></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0 0 20 0" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto" ></ColumnDefinition>
@@ -29,36 +33,45 @@
                     AcceptsReturn="True"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                     TextWrapping="Wrap"/>
-                <Button Grid.Column="1" x:Name="ThemSanPhanMoiWindow" Click="ThemSanPhanMoiWindow_Click" Width="165" Height="48" Margin="10 0 0 0" HorizontalAlignment="Left" Content="Thêm sản phẩm mới"/>
+                <Button Grid.Column="1" x:Name="ThemSanPhanMoiWindow" 
+                        Click="ThemSanPhanMoiWindow_Click" 
+                        Width="180" Height="48" 
+                        Margin="10 0 0 0" 
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        Background="#80deea"
+                        BorderBrush="#80deea"
+                        HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Plus"/>
+                        <TextBlock VerticalAlignment="Center"  Text="Thêm sản phẩm mới"/>
+                    </StackPanel>
+                </Button>
                 <Button
                     Margin="10 0 0 0"
                     Grid.Column="2"
                     Height="48"
                     Width="48"
+                    Background="#80deea"
+                    BorderBrush="#80deea"
+                    materialDesign:ButtonAssist.CornerRadius="10"
                     Content="{materialDesign:PackIcon TrayArrowDown}"
                     ToolTip="Icon"/>
 
             </Grid>
-            <Border Margin="10" BorderThickness="1" CornerRadius="20" Grid.Row="1" Background="White">
+            <Border Margin="20 10 20 10" BorderThickness="1" CornerRadius="20" Grid.Row="2" Background="White">
                 <Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <ListView  x:Name="listViewSanPham" materialDesign:ListViewAssist.HeaderRowBackground="AliceBlue">
-                            <!--<ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                </Style>
-                            </ListView.ItemContainerStyle>-->
+                        <ListView  x:Name="listViewSanPham">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Hành động">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel  Orientation="Horizontal">
-                                                    <Button x:Name="SuaSanPhamWindow" BorderBrush="Black" Background="Transparent" Click="SuaSanPhamWindow_Click">
+                                                    <Button x:Name="SuaSanPhamWindow" BorderBrush="Transparent" Foreground="White" Background="ForestGreen" Click="SuaSanPhamWindow_Click">
                                                         <materialDesign:PackIcon Kind="Pencil"/>
                                                     </Button>
-                                                    <Button x:Name="XoaSanPham" BorderBrush="Black" Background="Transparent" Click="XoaSanPham_Click" Margin="10 0 0 0">
+                                                    <Button x:Name="XoaSanPham" BorderBrush="Transparent" Foreground="White" Background="OrangeRed" Click="XoaSanPham_Click" Margin="10 0 0 0">
                                                         <materialDesign:PackIcon Kind="Close"/>
                                                     </Button>
                                                 </StackPanel>
@@ -86,31 +99,38 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Số lô">
+                                    <GridViewColumn Header="Số lượng">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding SoLo}" Padding="20 10 0 0"/>
+                                                <TextBlock Text="{Binding SoLuongTon}" Padding="20 10 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     <GridViewColumn Header="Giá nhập">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding GiaNhap,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                <TextBlock Text="{Binding GiaNhap,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     <GridViewColumn Header="Giá bán">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding GiaBanLe,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                <TextBlock Text="{Binding GiaBanLe,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Ngày sản xuất">
+                                    <GridViewColumn Header="Thành phần">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding NgaySanXuat,StringFormat='dd/MM/yyyy'}" Padding="20 10 0 0"/>
+                                                <TextBlock Text="{Binding ThanhPhan}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Hàm lượng">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding HamLuong}" Padding="20 10 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -128,7 +148,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Hãng sản xuất">
+                                    <GridViewColumn Header="Nhà sản xuất">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding TenNhaSanXuat}" Padding="20 10 0 0"/>

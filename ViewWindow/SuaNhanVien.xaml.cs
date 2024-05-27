@@ -110,7 +110,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         }
         private void btnSuaNhanVien_Thoát(object sender, EventArgs e)
         {
-            var thongbao = MessageBox.Show("Bạn có muốn thoát phiếu sửa", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (thongbao == MessageBoxResult.OK)
                 this.Close();
         }

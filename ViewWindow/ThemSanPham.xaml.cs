@@ -29,8 +29,6 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             LoadComboBox();
 
 
-
-
             //tạo mã sản phẩm
             Guid guid = Guid.NewGuid();
             Random random = new Random();
@@ -53,13 +51,13 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         {
             string tenSP = txtThemTenSanPham.Text;
             DonVi? selectedTenDV_SP = txtThemDonViSanPham.SelectedItem as Model.DonVi;
-            DateTime? ngaysanxuatSP = txtThemNgaySanXuatSanPham.SelectedDate;
+            string hamluongSP = txtThemHamLuongSanPham.Text;
             DateTime? hansudungSP = txtThemHanSuDungSanPham.SelectedDate;
             string gianhapSP = txtThemGiaNhapSanPham.Text;
             string giabanleSP = txtThemGiaBanLeSanPham.Text;
             NhaSanXuat? selectedtenNSX_SP = txtThemNhaSanXuatSanPham.SelectedItem as NhaSanXuat;
             string soluongtonSP = txtThemSoLuongTonSanPham.Text;
-            string soloSP = txtThemSoLoSanPham.Text;
+            string thanhphanSP = txtThemThanhPhanSanPham.Text;
             NhomSanPham? selectedtenNSP_SP = txtThemNhomSanPhamSanPham.SelectedItem as NhomSanPham;
 
             if (string.IsNullOrEmpty(tenSP))
@@ -81,9 +79,9 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     IdSanPham = txtThemIdSanPham.Text,
                     TenSanPham = tenSP,
                     IdDonVi = selectedTenDV_SP.IdDonVi,
-                    
+                    ThanhPhan = thanhphanSP,
                     SoLuongTon = int.Parse(soluongtonSP),
-                    
+                    HamLuong = hamluongSP,
                     GiaNhap = decimal.Parse(gianhapSP),
                     GiaBan = decimal.Parse(giabanleSP),
                     HanSuDung = hansudungSP,
@@ -120,6 +118,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                                 TenNhaSanXuat = sp.IdNhaSanXuatNavigation.TenNhaSanXuat,
                                 SoLuongTon = sp.SoLuongTon,
                                 GiaBanLe = sp.GiaBan,
+                                ThanhPhan = sp.ThanhPhan,
+                                HamLuong = sp.HamLuong,
                                 GiaNhap = sp.GiaNhap,
                                 TenNhomSanPham = sp.IdNhomSanPhamNavigation.TenNhomSanPham,
                                 HanSuDung = sp.HanSuDung,

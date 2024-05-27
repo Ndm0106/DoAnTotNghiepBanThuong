@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ViewUC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,67 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class ThemDonNhapHang_ThemNhaPhanPhoi : Window
     {
-        public ThemDonNhapHang_ThemNhaPhanPhoi()
+        private QLQuayThuocBanThuongContext _dbContext;
+        public ThemDonNhapHang_ThemNhaPhanPhoi(QLQuayThuocBanThuongContext _db)
         {
             InitializeComponent();
+            _dbContext = _db;
+            // Sinh GUID mới
+            Guid guid = Guid.NewGuid();
+
+            // Tạo một đối tượng Random
+            Random random = new Random();
+
+            // Sinh số ngẫu nhiên từ 0 đến 999 và định dạng nó thành chuỗi có 3 chữ số, sau đó thêm vào cuối chuỗi "SP000"
+            string randomDigits = random.Next(0, 1000).ToString("D3");
+
+            // Kết hợp chuỗi "SP000" với chuỗi số ngẫu nhiên
+            string result = $"NPP000{randomDigits}";
+            txtThemMoiDonNhapHang_ThemNhaPhanPhoi_IdNhaPhanPhoi.Text = result;
+            
+        }
+
+        private void btnThemDonNhapHang_ThemMoiNhaPhanPhoi_Luu_Click(object sender, RoutedEventArgs e)
+        {
+            string tenNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_TenNhaPhanPhoi.Text.Trim();
+            string diachiNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_DiaChi.Text.Trim();
+            string faxNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_Fax.Text.Trim();
+            string sodienthoaiNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_SoDienThoai.Text.Trim();
+            string emailNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_Email.Text.Trim();
+            string masothueNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_MaSoThue.Text.Trim();
+            var queryNPP = _dbContext.NhaPhanPhois.Any(x => x.TenNhaPhanPhoi == tenNPP);
+            if (string.IsNullOrEmpty(tenNPP))
+            {
+                MessageBox.Show("Tên nhà cung cấp không đc để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (queryNPP)
+            {
+                MessageBox.Show("Đã tồn tại nhà cung cấp này", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
+
+            NhaPhanPhoi NhaPhanPhoi = new NhaPhanPhoi
+            {
+                IdNhaPhanPhoi = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_IdNhaPhanPhoi.Text,
+                TenNhaPhanPhoi = tenNPP,
+                DiaChi = diachiNPP,
+                Fax = faxNPP,
+                SoDienThoai = sodienthoaiNPP,
+                Email = emailNPP,
+                MaSoThue = masothueNPP
+            };
+            _dbContext.NhaPhanPhois.Add(NhaPhanPhoi);
+            _dbContext.SaveChanges();            
+            MessageBox.Show("Nhà phân phối mới đã được thêm thành công", "Thông báo", MessageBoxButton.OK);
+            this.Close();
+        }
+
+        private void btnThemDonNhapHang_ThemMoiNhaPhanPhoi_Thoat_Click(object sender, RoutedEventArgs e)
+        {
+            var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (thongbao == MessageBoxResult.OK)
+                this.Close();
         }
     }
 }

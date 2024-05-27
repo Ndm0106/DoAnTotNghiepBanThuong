@@ -6,17 +6,21 @@
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewWindow"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="SuaKhachHang" Height="330" Width="1000">
-    <Border Background="#f3e5f5" BorderThickness="1" BorderBrush="#eceff1" CornerRadius="20">
+        Title="SuaKhachHang" Height="390" Width="650">
+    <Border Background="#f3e5f5" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="10">
-                <TextBlock FontSize="30"><Bold>Cập nhật khách hàng</Bold></TextBlock>
+            <Grid Grid.Row="0" Margin="20 10 0 10">
+                <TextBlock FontSize="40"><Bold>Cập nhật khách hàng</Bold></TextBlock>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -26,9 +30,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    
                 </Grid.ColumnDefinitions>
-                <Grid Margin="10" Grid.Row="0" Grid.Column="0">
+                <Grid Margin="20 10 0 0" Grid.Row="0" Grid.Column="0">
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Mã khách hàng</Bold></TextBlock>
                         <TextBox
@@ -45,7 +49,7 @@ VerticalScrollBarVisibility="Auto" />
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="10" Grid.Row="0" Grid.Column="1">
+                <Grid Margin="10 10 0 0" Grid.Row="0" Grid.Column="1">
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Tên khách hàng</Bold></TextBlock>
                         <TextBox
@@ -61,26 +65,9 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"
 VerticalScrollBarVisibility="Auto" />
                     </StackPanel>
                 </Grid>
-
-                <Grid Margin="10" Grid.Row="0" Grid.Column="2">
+                <Grid Margin="20 10 0 0" Grid.Row="1" Grid.Column="0">
                     <StackPanel>
-                        <TextBlock FontSize="14"><Bold>Địa chỉ</Bold></TextBlock>
-                        <TextBox
-x:Name="txtSuaDiaChiKhachHang"
-Width="300"
-Background="White"
-Height="49.96"
-VerticalAlignment="Top"
-materialDesign:HintAssist.Hint="Địa chỉ"
-
-Style="{StaticResource MaterialDesignOutlinedTextBox}"
-
-VerticalScrollBarVisibility="Auto" />
-                    </StackPanel>
-                </Grid>
-                <Grid Margin="10" Grid.Row="1" Grid.Column="0">
-                    <StackPanel>
-                        <TextBlock FontSize="14"><Bold>Sô điện thoại</Bold></TextBlock>
+                        <TextBlock FontSize="14"><Bold>Số điện thoại</Bold></TextBlock>
                         <TextBox
 x:Name="txtSuaSoDienThoaiKhachHang"
 Width="300"
@@ -90,7 +77,7 @@ materialDesign:HintAssist.Hint="Số điện thoại"
 Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                     </StackPanel>
                 </Grid>
-                <Grid Margin="10" Grid.Row="1" Grid.Column="1">
+                <Grid Margin="10 10 0 0" Grid.Row="1" Grid.Column="1">
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Email</Bold></TextBlock>
                         <TextBox
@@ -105,13 +92,29 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 </Grid>
             </Grid>
 
-
-            <Grid Grid.Row="2" Margin="10">
+            <Grid Grid.Row="2" Margin="20 10 0 0">
+                <StackPanel>
+                    <TextBlock FontSize="14"><Bold>Địa chỉ</Bold></TextBlock>
+                    <TextBox
+x:Name="txtSuaDiaChiKhachHang"
+Width="610"
+Background="White"
+Height="49.96"
+VerticalAlignment="Top"
+materialDesign:HintAssist.Hint="Địa chỉ"
+HorizontalAlignment="Left"
+Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="3" Margin="10 20 0 0">
                 <Button
 Click="btnSuaKhachHang_Sua"
 HorizontalAlignment="Right"
-Width="100"
-Margin="0 0 130 0"
+                    Background="ForestGreen"
+                    BorderBrush="ForestGreen"
+                    Foreground="White"
+Width="90"
+Margin="0 0 120 0"
 VerticalAlignment="Center" 
 Height="35" 
 materialDesign:ButtonAssist.CornerRadius="10"
@@ -125,8 +128,9 @@ ToolTip="MaterialDesignRaisedButton with Round Corners">
                 </Button>
                 <Button
                     BorderBrush="OrangeRed"
+                    Foreground="White"
 Click="btnSuaKhachHang_Thoat"
-Width="100"
+Width="90"
 Margin="0 0 20 0"
 HorizontalAlignment="Right"
 Background="OrangeRed"

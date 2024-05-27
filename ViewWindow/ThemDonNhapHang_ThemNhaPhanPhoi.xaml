@@ -5,18 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewWindow"
         mc:Ignorable="d"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ThemDonNhapHang_ThemNhaPhanPhoi" Height="310" Width="550">
-    <Border>
+        Title="ThemDonNhapHang_ThemNhaPhanPhoi" Height="380" Width="820">
+    <Border Background="AliceBlue" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="10">
-                <TextBlock FontSize="30"><Bold>Thêm nhà cung cấp</Bold></TextBlock>
+                <TextBlock FontSize="30"><Bold>Thêm nhà phân phối</Bold></TextBlock>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -30,14 +34,14 @@
                 </Grid.ColumnDefinitions>
                 <Grid Margin="10" Grid.Row="0" Grid.Column="0">
                     <StackPanel>
-                        <TextBlock FontSize="14"><Bold>Mã nhà cung cấp</Bold></TextBlock>
+                        <TextBlock FontSize="14"><Bold>Mã nhà phân phối</Bold></TextBlock>
                         <TextBox
-    x:Name="ThemMoiDonNhapHang_ThemNhaPhanPhoi_IdNhaPhanPhoi"
-    Width="150"
+    x:Name="txtThemMoiDonNhapHang_ThemNhaPhanPhoi_IdNhaPhanPhoi"
+    Width="250"
     Background="White"
     Height="49.96"
     VerticalAlignment="Top"
-    
+    IsEnabled="False"
     AcceptsReturn="True"
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
@@ -47,14 +51,14 @@
 
                 <Grid Margin="10" Grid.Row="0" Grid.Column="1">
                     <StackPanel>
-                        <TextBlock FontSize="14"><Bold>Tên nhà cung cấp</Bold></TextBlock>
+                        <TextBlock FontSize="14"><Bold>Tên nhà phân phối</Bold></TextBlock>
                         <TextBox
-    x:Name="ThemMoiDonNhapHang_ThemNhaPhanPhoi_TenNhaPhanPhoi"
-    Width="150"
+    x:Name="txtThemMoiDonNhapHang_ThemNhaPhanPhoi_TenNhaPhanPhoi"
+    Width="250"
     Background="White"
     Height="49.96"
     VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Tên nhà cung cấp"
+    materialDesign:HintAssist.Hint="Tên nhà phân phối"
     AcceptsReturn="True"
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     TextWrapping="Wrap"
@@ -64,10 +68,10 @@
 
                 <Grid Margin="10" Grid.Row="0" Grid.Column="2">
                     <StackPanel>
-                        <TextBlock FontSize="14"><Bold>Địa chỉ</Bold></TextBlock>
+                        <TextBlock FontSize="14"><Bold>Mã số thuế</Bold></TextBlock>
                         <TextBox
-    x:Name="ThemMoiDonNhapHang_ThemNhaPhanPhoi_DiaChi"
-    Width="150"
+    x:Name="txtThemMoiDonNhapHang_ThemNhaPhanPhoi_MaSoThue"
+    Width="250"
     Background="White"
     Height="49.96"
     VerticalAlignment="Top"
@@ -83,8 +87,8 @@
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Fax</Bold></TextBlock>
                         <TextBox
-    x:Name="ThemMoiDonNhapHang_ThemNhaPhanPhoi_Fax"
-    Width="150"
+    x:Name="txtThemMoiDonNhapHang_ThemNhaPhanPhoi_Fax"
+    Width="250"
     Background="White"
     Height="49.96"
     VerticalAlignment="Top"
@@ -100,8 +104,8 @@
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Sô điện thoại</Bold></TextBlock>
                         <TextBox
-    x:Name="ThemMoiDonNhapHang_ThemNhaPhanPhoi_SoDienThoai"
-    Width="150"
+    x:Name="txtThemMoiDonNhapHang_ThemNhaPhanPhoi_SoDienThoai"
+    Width="250"
     Background="White"
     Height="49.96"
     VerticalAlignment="Top"
@@ -116,8 +120,8 @@
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Email</Bold></TextBlock>
                         <TextBox
-    x:Name="ThemMoiDonNhapHang_ThemNhaPhanPhoi_Email"
-    Width="150"
+    x:Name="txtThemMoiDonNhapHang_ThemNhaPhanPhoi_Email"
+    Width="250"
     Background="White"
     Height="49.96"
     VerticalAlignment="Top"
@@ -129,11 +133,26 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-
-
             <Grid Grid.Row="2" Margin="10">
+                <TextBlock FontSize="14"><Bold>Địa chỉ</Bold></TextBlock>
+                <TextBox
+x:Name="txtThemMoiDonNhapHang_ThemNhaPhanPhoi_DiaChi"
+                    HorizontalAlignment="Left"
+Width="790"
+Background="White"
+Height="49.96"
+VerticalAlignment="Top"
+materialDesign:HintAssist.Hint="Địa chỉ"
+AcceptsReturn="True"
+Style="{StaticResource MaterialDesignOutlinedTextBox}"
+TextWrapping="Wrap"
+VerticalScrollBarVisibility="Auto" />
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="10">
                 <Button
     x:Name="btnThemDonNhapHang_ThemMoiNhaPhanPhoi_Luu"
+                    Click="btnThemDonNhapHang_ThemMoiNhaPhanPhoi_Luu_Click"
     HorizontalAlignment="Right"
     Width="100"
     Margin="0 0 130 0"
@@ -149,7 +168,8 @@
                     </StackPanel>
                 </Button>
                 <Button
-    x:Name="btnThemDonNhapHang_ThemMoiNhaPhanPhoi_Thoát"
+    x:Name="btnThemDonNhapHang_ThemMoiNhaPhanPhoi_Thoat"
+                    Click="btnThemDonNhapHang_ThemMoiNhaPhanPhoi_Thoat_Click"
     Width="100"
     Margin="0 0 20 0"
     HorizontalAlignment="Right"

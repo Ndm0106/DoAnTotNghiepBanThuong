@@ -11,8 +11,8 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ThemNhaPhanPhoi" Height="490" Width="450">
-    <Border Background="#ffebee" BorderThickness="1" BorderBrush="#eceff1" CornerRadius="20">
+        Title="ThemNhaPhanPhoi" Height="380" Width="820">
+    <Border Background="AliceBlue" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -20,157 +20,166 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="10">
-                <TextBlock FontSize="30"><Bold>Thêm nhà phân phối</Bold></TextBlock>
+            <Grid Grid.Row="0" Margin="20 10 0 0">
+                <TextBlock FontSize="40"><Bold>Thêm nhà phân phối</Bold></TextBlock>
             </Grid>
             <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-
-                <Grid Margin="10" Grid.Row="0" Grid.Column="0">
-                    <StackPanel>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="20 10 0 0" Grid.Row="0" Grid.Column="0">
+                    <StackPanel HorizontalAlignment="Left">
                         <TextBlock FontSize="14"><Bold>Mã nhà phân phối</Bold></TextBlock>
                         <TextBox
-                            HorizontalAlignment="Left"
-x:Name="txtThemIdNhaPhanPhoi" 
-Width="200"
-Background="White"
-Height="49.96"
-VerticalAlignment="Top"
-IsEnabled="False"
-Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            
+    x:Name="txtThemIdNhaPhanPhoi"
+    Width="250"
+    Background="White"
+    Height="49.96"
+    VerticalAlignment="Top"
+    IsEnabled="False"
+    AcceptsReturn="True"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto" />
                     </StackPanel>
                 </Grid>
 
-
-                <Grid Margin="10" Grid.Row="0" Grid.Column="1">
-                    <StackPanel>
+               
+                <Grid Margin="10 10 0 0" Grid.Row="0" Grid.Column="1">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                         <TextBlock FontSize="14"><Bold>Tên nhà phân phối</Bold></TextBlock>
                         <TextBox
-x:Name="txtThemTenNhaPhanPhoi" 
-                            HorizontalAlignment="Left"
-Width="200"
-Background="White"
-Height="49.96"
-VerticalAlignment="Top"
-materialDesign:HintAssist.Hint="Tên nhà phân phối"
-Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+    x:Name="txtThemTenNhaPhanPhoi"
+    Width="250"
+    Background="White"
+    Height="49.96"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Tên nhà phân phối"
+    AcceptsReturn="True"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto" />
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="10" Grid.Row="1" Grid.Column="0">
-                    <StackPanel>
+                <Grid Margin="10 10 0 0" Grid.Row="0" Grid.Column="2">
+                    <StackPanel HorizontalAlignment="Left">
                         <TextBlock FontSize="14"><Bold>Mã số thuế</Bold></TextBlock>
                         <TextBox
-x:Name="txtThemMaSoThueNhaPhanPhoi" 
-                            HorizontalAlignment="Left"
-Width="200"
-Background="White"
-Height="49.96"
-VerticalAlignment="Top"
-Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+    x:Name="txtThemMaSoThueNhaPhanPhoi"
+    Width="250"
+    Background="White"
+    Height="49.96"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Địa chỉ"
+    AcceptsReturn="True"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto" />
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="10" Grid.Row="1" Grid.Column="1">
-                    <StackPanel>
+                <Grid Margin="20 10 0 0" Grid.Row="1" Grid.Column="0">
+                    <StackPanel HorizontalAlignment="Left">
                         <TextBlock FontSize="14"><Bold>Fax</Bold></TextBlock>
                         <TextBox
-x:Name="txtThemFaxNhaPhanPhoi"
-                            HorizontalAlignment="Left"
-Width="200"
-Background="White"
-Height="49.96"
-VerticalAlignment="Top"
-materialDesign:HintAssist.Hint="Fax"
-Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+    x:Name="txtThemFaxNhaPhanPhoi"
+    Width="250"
+    Background="White"
+    Height="49.96"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Fax"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="10" Grid.Row="2" Grid.Column="0">
-                    <StackPanel>
-                        <TextBlock FontSize="14"><Bold>Sô điện thoại</Bold></TextBlock>
+                <Grid Margin="10 10 0 0" Grid.Row="1" Grid.Column="1">
+                    <StackPanel HorizontalAlignment="Left">
+                        <TextBlock FontSize="14"><Bold>Số điện thoại</Bold></TextBlock>
                         <TextBox
-x:Name="txtThemSoDienThoaiNhaPhanPhoi"
-                            HorizontalAlignment="Left"
-Width="200"
-Background="White"
-Height="49.96"
-materialDesign:HintAssist.Hint="Số điện thoại"
-Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+    x:Name="txtThemSoDienThoaiNhaPhanPhoi"
+    Width="250"
+    Background="White"
+    Height="49.96"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Số điện thoại"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
                 </Grid>
-
-                <Grid Margin="10" Grid.Row="2" Grid.Column="1">
-                    <StackPanel>
+                <Grid Margin="10" Grid.Row="1" Grid.Column="2">
+                    <StackPanel HorizontalAlignment="Left">
                         <TextBlock FontSize="14"><Bold>Email</Bold></TextBlock>
                         <TextBox
-x:Name="txtThemEmailNhaPhanPhoi"
-                            HorizontalAlignment="Left"
-Width="200"
-Background="White"
-Height="49.96"
-VerticalAlignment="Top"
-materialDesign:HintAssist.Hint="Email"
-Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+    x:Name="txtThemEmailNhaPhanPhoi"
+    Width="250"
+    Background="White"
+    Height="49.96"
+    VerticalAlignment="Top"
+    materialDesign:HintAssist.Hint="Email"
+    AcceptsReturn="True"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto" />
                     </StackPanel>
                 </Grid>
-
-
-
-
             </Grid>
-            <Grid Margin="10" Grid.Row="2">
-                <StackPanel>
+            
+            <Grid Grid.Row="2" Margin="20 10 0 0">
+                <StackPanel HorizontalAlignment="Left">
                     <TextBlock FontSize="14"><Bold>Địa chỉ</Bold></TextBlock>
                     <TextBox
-                        HorizontalAlignment="Left"
 x:Name="txtThemDiaChiNhaPhanPhoi"
-Width="420"
+                    HorizontalAlignment="Left"
+Width="770"
 Background="White"
 Height="49.96"
 VerticalAlignment="Top"
 materialDesign:HintAssist.Hint="Địa chỉ"
-Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+AcceptsReturn="True"
+Style="{StaticResource MaterialDesignOutlinedTextBox}"
+TextWrapping="Wrap"
+VerticalScrollBarVisibility="Auto" />
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="3" Margin="10">
+            <Grid Grid.Row="3" Margin="0 20 10 0">
                 <Button
-Click="btnThemNhaPhanPhoi_Them"
-HorizontalAlignment="Right"
-Width="100"
-Margin="0 0 130 0"
-VerticalAlignment="Center" 
-Height="35" 
-materialDesign:ButtonAssist.CornerRadius="10"
-IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"  
-Style="{StaticResource MaterialDesignRaisedButton}" 
-ToolTip="MaterialDesignRaisedButton with Round Corners">
+    
+                    Click="btnThemNhaPhanPhoi_Them"
+    HorizontalAlignment="Right"
+    Width="90"
+    Margin="0 0 120 0"
+    VerticalAlignment="Center" 
+    Height="35" 
+    materialDesign:ButtonAssist.CornerRadius="10"
+    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"  
+    Style="{StaticResource MaterialDesignRaisedButton}" 
+    ToolTip="MaterialDesignRaisedButton with Round Corners">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon VerticalAlignment="Center" Kind="Check"/>
                         <TextBlock VerticalAlignment="Center" Text="Lưu" />
                     </StackPanel>
                 </Button>
                 <Button
+    
+                    Click="btnThemNhaPhanPhoi_Thoat"
+    Width="90"
+    Margin="0 0 20 0"
+    HorizontalAlignment="Right"
+    Background="OrangeRed"
                     BorderBrush="OrangeRed"
-Click="btnThemNhaPhanPhoi_Thoat"
-Width="100"
-Margin="0 0 20 0"
-HorizontalAlignment="Right"
-Background="OrangeRed"
-Height="35"
-materialDesign:ButtonAssist.CornerRadius="10"
-IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-Style="{StaticResource MaterialDesignRaisedButton}"
-ToolTip="MaterialDesignRaisedButton with Round Corners">
+    Height="35"
+    materialDesign:ButtonAssist.CornerRadius="10"
+    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+    Style="{StaticResource MaterialDesignRaisedButton}"
+    ToolTip="MaterialDesignRaisedButton with Round Corners">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon VerticalAlignment="Center" Kind="Close"/>
                         <TextBlock VerticalAlignment="Center" Text="Thoát" />

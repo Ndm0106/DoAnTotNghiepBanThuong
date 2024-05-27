@@ -5,102 +5,96 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong"
         mc:Ignorable="d"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="LoginWindow" Height="450" Width="450">
-    <Border Background="White"  CornerRadius="10 10 10 10">
-        <Grid>
+    <Border CornerRadius="20">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="LightCyan" Offset="0"/>
+                <GradientStop Color="LightBlue" Offset="0.5"/>
+                <GradientStop Color="DarkTurquoise" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Border Background="White" Margin="50 30 50 30" CornerRadius="20" BorderThickness="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" Margin="20 30 20 0">
+                    <TextBlock  FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkTurquoise" Text="Đăng nhập"/>
+                </Grid>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="1">
-                <Border CornerRadius="0 0 10 10">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="LightCyan" Offset="0"/>
-                            <GradientStop Color="LightBlue" Offset="0.5"/>
-                            <GradientStop Color="DarkTurquoise" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                </Border>
-                <Grid>
-                    <Grid.Resources>
-                        <Style TargetType="Grid">
-                            <Setter Property="Width" Value="350"/>
-                            <Setter Property="Height" Value="400"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </Grid.Resources>
-                    <Border Background="White" CornerRadius="20" BorderThickness="5"/>
-                    <TextBlock 
-                Margin="0 0 0 200"
-                Width="250" 
-                Height="100"
-                FontSize="50"
-                HorizontalAlignment="Center"
-                Foreground="#80cbc4"
-                Text="Đăng nhập"/>
-                    <Grid Height="100" Width="345" Margin="0 0 0 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                        </Grid.RowDefinitions>
+                <Grid Grid.Row="1" Margin="20 50 20 0">
+                    <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon 
-                    Grid.Row="0"
-                    Foreground="#80cbc4"
-                    Margin="40 10 0 0"
-                    Width="40"
-                    Height="40"
-                    Kind="Account"/>
-                        <TextBox Grid.Row="0"
-                    Margin="80 5 70 0"
-                    x:Name="UsernameBox"
-                    VerticalAlignment="Center" 
-                    materialDesign:HintAssist.Hint="Username"       
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-                        <materialDesign:PackIcon 
-                    Foreground="#80cbc4"
-                    Grid.Row="1"
-                    Margin="40 10 0 0"
-                    Width="40"
-                    Height="40"
-                    Kind="Lock"/>
+
+Foreground="#80deea"
+Width="49.96"
+Height="49.96"
+Kind="Account"/>
+                        <TextBox 
+                            Width="200"
+                            BorderBrush="#80deea"
+x:Name="UsernameBox"
+VerticalAlignment="Center" 
+materialDesign:HintAssist.Hint="Tài khoản"       
+Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="20 10 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon  Foreground="#80deea" Width="49.96"
+                    Height="49.96" Kind="lock"/>
                         <PasswordBox
-                    
-                    Grid.Row="1"
-                    Margin="80 10 70 0"
-                    x:Name="FloatingPasswordBox"
-                    materialDesign:HintAssist.Hint="Password"
-                    materialDesign:TextFieldAssist.HasClearButton="True" 
-                    Style="{StaticResource MaterialDesignRevealPasswordBox}">
+                            BorderBrush="#80deea"
+                            Width="200"
+x:Name="FloatingPasswordBox"
+materialDesign:HintAssist.Hint="Mật khẩu"
+materialDesign:TextFieldAssist.HasClearButton="True" 
+Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}">
                         </PasswordBox>
-                    </Grid>
-                    <Button
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="3" Margin="20 30 20 0">
+                    <StackPanel Orientation="Horizontal">
+                        <Button
                     x:Name="btnDangNhap"
                     Click="btnDangNhap_Click"
                     IsDefault="true"
-                    HorizontalAlignment="Left"
-                    Margin="50 200 0 0"
-                    
+                    Background="#80deea"
+                    BorderBrush="#80deea"
+                            Foreground="White"
                     Width="105"
+                            Margin="30 0 0 0"
                     Content="Đăng Nhập"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton" />
-                    <Button
+                        <Button
                     x:Name="btnThoat"
                     Click="btnThoat_Click"
-                    HorizontalAlignment="Right"
-                    Margin="0 200 50 0"
                     Width="105"
+                            Margin="40 0 0 0"
+                    Background="OrangeRed"
+                    BorderBrush="OrangeRed"
+                            Foreground="White"
                     Content="Thoát"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                     ToolTip="Resource name: MaterialDesignRaisedLightButton" />
+                    </StackPanel>
                 </Grid>
             </Grid>
-        </Grid>
+        </Border>
     </Border>
 </Window>

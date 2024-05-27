@@ -7,15 +7,17 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="#e0f2f1" CornerRadius="20">
+    <Border Background="AliceBlue" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
-
-                <RowDefinition Height="70" ></RowDefinition>
+                <RowDefinition Height="auto" ></RowDefinition>
+                <RowDefinition Height="auto" ></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0" Margin="0 0 20 0" HorizontalAlignment="Right" >
+            <Grid Grid.Row="0" Margin="20 20 0 0">
+                <TextBlock FontSize="40"><Bold>ĐƠN VỊ</Bold></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1" Margin="0 10 20 0" HorizontalAlignment="Right" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -31,35 +33,48 @@ AcceptsReturn="True"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"
 TextWrapping="Wrap"/>
                 </Grid>
-                <Button x:Name="ThemDonViWindow" Background="#80deea" BorderBrush="#80deea"  Click="ThemDonViWindow_Click" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0" Width="125" Height="49.96">
+                <Button x:Name="ThemDonViWindow" materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea"  Click="ThemDonViWindow_Click" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0 0 0" Width="125" Height="49.96">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="plus" Height="20" Width="20" VerticalAlignment="Center"/>
                         <TextBlock FontSize="16" VerticalAlignment="Center" Text="Thêm mới"/>
                     </StackPanel>
                 </Button>
             </Grid>
-            <Border Margin="10" Grid.Row="1" CornerRadius="20" Background="White" BorderBrush="#cfd8dc" BorderThickness="0.5">
+            <Border Margin="20 10 20 10" Grid.Row="2" CornerRadius="20" Background="White" BorderBrush="#cfd8dc" BorderThickness="0.5">
                 <Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <ListView x:Name="listViewDonVi" >
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Mã đơn vị" DisplayMemberBinding="{Binding IdDonVi}"></GridViewColumn>
-                                    <GridViewColumn Header="Tên đơn vị" DisplayMemberBinding="{Binding TenDonVi}" ></GridViewColumn>
                                     <GridViewColumn Header="Hành động">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button x:Name="SuaDonViWindow" BorderBrush="Black" Background="Transparent" Click="SuaDonViWindow_Click"  >
+                                                    <Button x:Name="SuaDonViWindow" Foreground="White" BorderBrush="Transparent" Background="ForestGreen" Click="SuaDonViWindow_Click"  >
                                                         <materialDesign:PackIcon Kind="Pencil"/>
                                                     </Button>
-                                                    <Button x:Name="XoaDonVi" BorderBrush="Black" Background="Transparent" Click="XoaDonVi_Click" Margin="10 0 0 0" >
+                                                    <Button x:Name="XoaDonVi" BorderBrush="Transparent" Foreground="White" Background="OrangeRed" Click="XoaDonVi_Click" Margin="5 0 0 0" >
                                                         <materialDesign:PackIcon Kind="Close"/>
                                                     </Button>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
+                                    <GridViewColumn Header="Mã đơn vị">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding IdDonVi}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Tên đơn vị">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TenDonVi}" Padding="20 10 0 0"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                   
                                 </GridView>
                             </ListView.View>
                         </ListView>

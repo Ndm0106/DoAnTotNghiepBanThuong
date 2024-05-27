@@ -1,6 +1,7 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
 using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewWindow;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,9 +48,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                     IdNhaPhanPhoi = dnh.IdNhaPhanPhoi,
                     IdNhanVien = dnh.IdNhanVien,
                     TenNhaPhanPhoi = dnh.IdNhaPhanPhoiNavigation.TenNhaPhanPhoi,
-                    TongTienDonNhapHang = db.ChiTietDonNhapHangs
-                        .Where(ctdnh => ctdnh.IdDonNhapHang == dnh.IdDonNhapHang)
-                        .Sum(ctdnh => ctdnh.SoLuongNhap * ctdnh.IdSanPhamNavigation.GiaNhap)
+                    TongTienDonNhapHang = dnh.TongTienDonNhapHang
                 }).ToList();
 
                 listViewPhieuNhap.ItemsSource = queryDATA;
@@ -88,12 +87,14 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                 var button = sender as System.Windows.Controls.Button;
                 if (button != null)
                 {
-                    // Lấy sản phẩm được chọn từ ListView
+                    
                     var donhaphang = (DonNhapHang_MLV)button.DataContext;
                     MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có muốn xoá đơn này ?", "Xác nhận xoá", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        // Xóa sản phẩm từ bảng SanPhams
+                        var relatedRecords = _db.ChiTietDonNhapHangs.Where(x => x.IdDonNhapHang == donhaphang.IdDonNhapHang);
+                        _db.ChiTietDonNhapHangs.RemoveRange(relatedRecords);
+                        
                         var itemToRemove = _db.DonNhapHangs.FirstOrDefault(s => s.IdDonNhapHang == donhaphang.IdDonNhapHang);
                         if (itemToRemove != null)
                         {

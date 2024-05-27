@@ -10,8 +10,8 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ThemSanPham" Height="600" Width="700">
-    <Border Background="AliceBlue">
+        Title="ThemSanPham" Height="610" Width="720">
+    <Border Background="AliceBlue" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -21,19 +21,18 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <TextBlock Margin="15 10 0 0" FontSize="30"><Bold>Thêm mới sản phẩm</Bold></TextBlock>
+            <Grid Grid.Row="0" Margin="30 10 0 0">
+                <TextBlock  FontSize="40"><Bold>Thêm mới sản phẩm</Bold></TextBlock>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0" Margin="20 0 0 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
-
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -93,26 +92,34 @@
                     </Grid>
                     <Grid Margin="10" Grid.Row="1" Grid.Column="1">
                         <StackPanel>
-                            <TextBlock FontSize="14"><Bold>Số lô</Bold></TextBlock>
+                            <TextBlock FontSize="14"><Bold>Thành phần</Bold></TextBlock>
                             <TextBox
-                            x:Name="txtThemSoLoSanPham"
-                            Width="150"      
-                            Background="White"   
-                            Height="49.96"    
-                            VerticalAlignment="Top"    
-                            materialDesign:HintAssist.Hint="Số lô" 
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+x:Name="txtThemThanhPhanSanPham"
+Width="150"
+Background="White"          
+Height="49.96"          
+VerticalAlignment="Top"          
+materialDesign:HintAssist.Hint="Tên sản phẩm"          
+AcceptsReturn="True"          
+Style="{StaticResource MaterialDesignOutlinedTextBox}"           
+TextWrapping="Wrap"          
+VerticalScrollBarVisibility="Auto" />
                         </StackPanel>
                     </Grid>
                     <Grid Margin="10" Grid.Row="1" Grid.Column="2">
                         <StackPanel>
-                            <TextBlock FontSize="14"><Bold>Ngày sản xuất</Bold></TextBlock>
-                            <DatePicker
-                            x:Name="txtThemNgaySanXuatSanPham"
-                            Background="White"
-                            Width="150" 
-                            materialDesign:HintAssist.Hint="Ngày sản xuất"
-                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                            <TextBlock FontSize="14"><Bold>Hàm lượng</Bold></TextBlock>
+                            <TextBox
+x:Name="txtThemHamLuongSanPham"
+Width="150"
+Background="White"          
+Height="49.96"          
+VerticalAlignment="Top"          
+materialDesign:HintAssist.Hint="Tên sản phẩm"          
+AcceptsReturn="True"          
+Style="{StaticResource MaterialDesignOutlinedTextBox}"           
+TextWrapping="Wrap"          
+VerticalScrollBarVisibility="Auto" />
                         </StackPanel>
                     </Grid>
                     <Grid Margin="10" Grid.Row="1" Grid.Column="3">
@@ -157,7 +164,7 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
 
 
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Margin="20 0 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -210,7 +217,7 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="3" Margin="10">
+            <Grid Grid.Row="3" Margin="30 0 0 0">
 
                 <StackPanel>
                     <TextBlock FontSize="14"><Bold>Nhà sản xuất</Bold></TextBlock>
@@ -218,7 +225,7 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
 x:Name="txtThemNhaSanXuatSanPham"
 Background="White"
 Width="660"          
-                        HorizontalAlignment="Left"
+HorizontalAlignment="Left"                        
 materialDesign:HintAssist.Hint="Nhà sản xuất" 
 IsEditable="True" IsTextSearchEnabled="True"      
 TextSearch.TextPath="TenNhaSanXuat"
@@ -230,31 +237,36 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
 
 
 
-            <Grid Margin="10" Grid.Row="4">
-                <TextBox
-                    x:Name="txtThemGhiChuSanPham"
-    Height="100"
-                    Background="White"
-                    HorizontalAlignment="Left"
-                    Width="660"
-    VerticalAlignment="Top"
-    materialDesign:HintAssist.Hint="Chi chú"
-    AcceptsReturn="True"
-    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"/>
+            <Grid Margin="30 10 0 0" Grid.Row="4">
+                <StackPanel>
+                    <TextBlock FontSize="14"><Bold>Ghi chú</Bold></TextBlock>
+                    <TextBox
+                x:Name="txtThemGhiChuSanPham"
+Height="100"
+                Background="White"
+                HorizontalAlignment="Left"
+                Width="660"
+VerticalAlignment="Top"
+materialDesign:HintAssist.Hint="Chi chú"
+AcceptsReturn="True"
+Style="{StaticResource MaterialDesignOutlinedTextBox}"
+TextWrapping="Wrap"
+VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="5" Margin="10">
+            <Grid Grid.Row="5" Margin="0 20 10 0">
                 <Button
                     Click="btnThemSanPham_Them"
                 HorizontalAlignment="Right"
-                Width="100"
-                Margin="0 0 130 0"
+                Width="90"
+                Margin="0 0 120 0"
                 VerticalAlignment="Center" 
+                    Background="ForestGreen"
+                    BorderBrush="ForestGreen"
+                    Foreground="White"
                 Height="35" 
-                materialDesign:ButtonAssist.CornerRadius="10"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"  
+                materialDesign:ButtonAssist.CornerRadius="10" 
                 Style="{StaticResource MaterialDesignRaisedButton}" 
                 ToolTip="MaterialDesignRaisedButton with Round Corners">
                     <StackPanel Orientation="Horizontal">
@@ -265,13 +277,14 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                 <Button
                 
                     Click="btnThemSanPham_Thoat"
-                Width="100"
+                Width="90"
                 Margin="0 0 20 0"
                 HorizontalAlignment="Right"
                 Background="OrangeRed"
+                    BorderBrush="OrangeRed"
+                    Foreground="White"
                 Height="35"
-                materialDesign:ButtonAssist.CornerRadius="10"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                materialDesign:ButtonAssist.CornerRadius="10"                
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 ToolTip="MaterialDesignRaisedButton with Round Corners">
                     <StackPanel Orientation="Horizontal">

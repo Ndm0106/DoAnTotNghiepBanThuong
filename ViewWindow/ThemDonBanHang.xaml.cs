@@ -46,6 +46,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             this.tenNguoiBan = tenNguoiBan;
             this.idNhanVien = idNhanVien;
             txtThemDonBanHang_TenNguoiThucHien.Text = tenNguoiBan;
+            txtTongTienChietKhau.Text = "0";
+            txtThemDonBanHang_ChietKhau.Text = "0";
         }
         private void btnThemDonBanHang_Luu_Click(object sender, RoutedEventArgs e)
         {
@@ -67,7 +69,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 IdNhanVien = idNhanVien,
                 IdKhachHang = ((KhachHang)txtThemDonBanHang_KhachHang.SelectedItem)?.IdKhachHang,
                 NgayBan = DateTime.Now,
-                TongTienDonBanHang = decimal.Parse(txtTongTienDonBanHang.Text)
+                TongTienDonBanHang = decimal.Parse(txtTongTienThanhToanDonBanHang.Text)
                 // Gán các thông tin khác của đơn nhập hàng từ các điều khiển khác nếu cần
             };
             db.DonBanHangs.Add(newDonBanHang);
@@ -81,14 +83,14 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     IdChiTietDonBanHang = Guid.NewGuid().ToString(),
                     IdDonBanHang = newDonBanHangid,
                     IdSanPham = sanPham_MLV.IdSanPham,
-                    SoLuongBan = sanPham_MLV.SoLuongNhap,
-                    DonGiaBan = sanPham_MLV.GiaNhap * sanPham_MLV.SoLuongNhap,
+                    ChietKhau = int.Parse(txtThemDonBanHang_ChietKhau.Text),
+                    SoLuongBan = sanPham_MLV.SoLuongBan,
+                    DonGiaBan = sanPham_MLV.GiaBanLe * sanPham_MLV.SoLuongBan,
                     // Thêm các thông tin khác của chi tiết đơn nhập hàng nếu cần
                 };
                 db.ChiTietDonBanHangs.Add(chiTietDonBanHang);
             }
             db.SaveChanges();
-
             PhieuXuatUC.listView.ItemsSource = db.DonBanHangs.ToList();
             MessageBox.Show("Đã tạo mới đơn bán hàng và nhập chi tiết đơn hàng thành công!");
             this.Close();
@@ -100,24 +102,29 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             {
                 //string idDonNhaHang = txtThemDonNhapHang_IdDonNhapHang.Text;
                 int soluongbanSanPham;
-                if (int.TryParse(txtThemDonBanHang_SoLuongBan.Text, out soluongbanSanPham))
+                decimal chietkhauSanPham;
+                if (int.TryParse(txtThemDonBanHang_SoLuongBan.Text, out soluongbanSanPham)&&(decimal.TryParse(txtThemDonBanHang_ChietKhau.Text, out chietkhauSanPham)))
                 {
                     SanPham_MLV newItem = new SanPham_MLV
                     {
                         IdSanPham = SanPhamChon.IdSanPham,
                         TenSanPham = SanPhamChon.TenSanPham,
-                        
-                        GiaNhap = SanPhamChon.GiaNhap,
+                        ChietKhau = chietkhauSanPham,
+                        GiaBanLe = SanPhamChon.GiaBan,
                         HanSuDung = SanPhamChon.HanSuDung,
                         IdDonVi = SanPhamChon.IdDonVi,
                         TenDonVi = SanPhamChon.IdDonViNavigation.TenDonVi,
                         SoLuongBan = soluongbanSanPham,
-                        TongTienSanPham = soluongbanSanPham * SanPhamChon.GiaNhap
+                        TongTienSanPham = soluongbanSanPham * SanPhamChon.GiaBan
                     };
                     sanPhamObservableList.Add(newItem);
                     ClearInputFields();
+                    decimal tongTienChietKhau = sanPhamObservableList.Sum(item => (decimal)item.ChietKhau);
                     decimal tongTienDonBanHang = sanPhamObservableList.Sum(item => (decimal)item.TongTienSanPham);
+                    decimal tongTienThanhToanDonBanhang = tongTienDonBanHang - tongTienChietKhau;
                     txtTongTienDonBanHang.Text = tongTienDonBanHang.ToString("N0");
+                    txtThemDonBanHang_ChietKhau.Text = tongTienChietKhau.ToString("N0");
+                    txtTongTienThanhToanDonBanHang.Text = tongTienThanhToanDonBanhang.ToString("N0");
                 }
                 else
                 {
@@ -184,7 +191,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         }
         private void btnThemKhachHang_Click(object sender, RoutedEventArgs e)
         {
-
+            var DonBanHang_ThemKhachHang = new ThemDonBanHang_ThemKhachHang(db);
+            DonBanHang_ThemKhachHang.Show();
         }
         private void GenerateIdDonBanHang()
         {
@@ -220,7 +228,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             // Xóa dữ liệu trên các TextBox và ComboBox
             txtThemDonBanHang_TimKiemSanPham.Clear();
             txtThemDonBanHang_HanSuDung.SelectedDate = null;
-            txtThemDonBanHang_SoLo.Clear();
+            txtThemDonBanHang_SoLuongTon.Clear();
             txtThemDonBanHang_DonViTinh.SelectedIndex = -1;
             txtThemDonBanHang_SoLuongBan.Clear();
             txtThemDonBanHang_GiaBan.Clear();

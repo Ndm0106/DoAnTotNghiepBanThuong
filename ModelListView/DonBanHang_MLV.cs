@@ -16,5 +16,6 @@ namespace DoAnTotNghiepBanThuong.ModelListView
         public string TenKhachHang { get; set; } = null!;
         public string? SoDienThoai { get; set; }
         public string TenHienThi { get; set; } = null!;
+        public List<ChiTietDonBanHang_MLV>? chiTietDonBanHang_MLVs { get; set; }
     }
 }

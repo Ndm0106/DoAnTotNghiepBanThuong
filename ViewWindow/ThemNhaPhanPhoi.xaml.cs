@@ -73,12 +73,12 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             _dbContext.SaveChanges();
 
             NhaPhanPhoiUC.listView.ItemsSource = _dbContext.NhaPhanPhois.ToList();
-            MessageBox.Show("Nhà cung cấp mới đã được thêm thành công", "Thông báo", MessageBoxButton.OK);
+            MessageBox.Show("Nhà phân phối mới đã được thêm thành công", "Thông báo", MessageBoxButton.OK);
             this.Close();
         }
         private void btnThemNhaPhanPhoi_Thoat(object sender, RoutedEventArgs e)
         {
-            var thongbao = MessageBox.Show("Bạn có muốn thoát phiếu nhập", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (thongbao == MessageBoxResult.OK)
                 this.Close();
         }

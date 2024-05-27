@@ -64,7 +64,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             {
                 //string idDonNhaHang = txtThemDonNhapHang_IdDonNhapHang.Text;
                 int soluongnhapSanPham;
-                if (int.TryParse(txtThemDonNhapHang_SoLuong.Text, out soluongnhapSanPham))
+                if (int.TryParse(txtThemDonNhapHang_SoLuongNhap.Text, out soluongnhapSanPham))
                 {
                     SanPham_MLV newItem = new SanPham_MLV
                     {
@@ -110,6 +110,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             txtThemDonNhapHang_NhaPhanPhoi.SelectedValuePath = "IdNhaPhanPhoi";
 
         }
+        
         private void btnThemDonNhapHang_Luu_Click(object sender, RoutedEventArgs e)
         {
             if (sanPhamObservableList.Count == 0)
@@ -150,9 +151,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 };
                 db.ChiTietDonNhapHangs.Add(chiTietDonNhapHang);
             }
-            db.SaveChanges();
-
-            PhieuNhapUC.listView.ItemsSource = db.DonNhapHangs.ToList();
+            db.SaveChanges();      
+            //PhieuNhapUC.listView.ItemsSource = db.DonNhapHangs.ToList();
             MessageBox.Show("Đã tạo mới đơn nhập hàng và nhập chi tiết đơn hàng thành công!");
             this.Close();
         }
@@ -190,7 +190,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 txtThemDonNhapHang_TimKiemSanPham.Text = SanPhamChon.TenSanPham;
                 
                 txtThemDonNhapHang_DonViTinh.Text = SanPhamChon.IdDonViNavigation.TenDonVi;
-                txtThemDonNhapHang_GiaNhap.Text = SanPhamChon.GiaNhap.ToString();
+                txtThemDonNhapHang_GiaNhap.Text = SanPhamChon.GiaNhap.HasValue ? $"{SanPhamChon.GiaNhap.Value:F0}" : "N/A"; 
                 txtThemDonNhapHang_HanSuDung.Text = SanPhamChon.HanSuDung.ToString();
                 // Close the popup after selection
                 idSanPham = SanPhamChon.IdSanPham;
@@ -203,9 +203,9 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             // Xóa dữ liệu trên các TextBox và ComboBox
             txtThemDonNhapHang_TimKiemSanPham.Clear();
             txtThemDonNhapHang_HanSuDung.SelectedDate = null;
-            txtThemDonNhapHang_SoLo.Clear();
+            txtThemDonNhapHang_SoLuongNhap.Clear();
             txtThemDonNhapHang_DonViTinh.SelectedIndex = -1;
-            txtThemDonNhapHang_SoLuong.Clear();
+            //txtThemDonNhapHang_SoLuongNhap.Clear();
             txtThemDonNhapHang_GiaNhap.Clear();
         }
 
@@ -225,5 +225,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             txtThemDonNhapHang_IdDonNhapHang.Text = result;
         }
 
+        private void btnThemDonNhapHang_Thoat_Click(object sender, RoutedEventArgs e)
+        {
+            var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            if (thongbao == MessageBoxResult.OK)
+                this.Close();
+        }
     }
 }

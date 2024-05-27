@@ -47,7 +47,8 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                                  SoLuongTon = sp.SoLuongTon,
                                  GiaBanLe = sp.GiaBan,
                                  GiaNhap = sp.GiaNhap,
-                                 
+                                 ThanhPhan = sp.ThanhPhan,
+                                 HamLuong = sp.HamLuong,
                                  TenNhomSanPham = sp.IdNhomSanPhamNavigation.TenNhomSanPham,
                                  HanSuDung = sp.HanSuDung,
                                  

@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewuc\\thongkenhaphanguc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewuc\\thongkenhaphanguc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewuc\\phieunhapuc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewuc\\phieunhapuc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewuc\\sanphamuc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewuc\\sanphamuc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewuc\\nguoidunguc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewuc\\nguoidunguc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewwindow\\themsanpham.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewwindow\\themsanpham.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewuc\\thongkenhaphanguc.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewuc\\thongkenhaphanguc.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,66 +23,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAAADgAAABPAAAA",
+              "Title": "ThongKeNhapHangUC.xaml.cs",
+              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml.cs",
+              "RelativeDocumentMoniker": "ViewUC\\ThongKeNhapHangUC.xaml.cs",
+              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml.cs",
+              "RelativeToolTip": "ViewUC\\ThongKeNhapHangUC.xaml.cs",
+              "ViewState": "AQIAAJIAAAAAAAAAAAAAAKgAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T15:41:26.437Z",
+              "WhenOpened": "2024-05-26T16:52:13.422Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PhieuNhapUC.xaml.cs",
-              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\PhieuNhapUC.xaml.cs",
-              "RelativeDocumentMoniker": "ViewUC\\PhieuNhapUC.xaml.cs",
-              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\PhieuNhapUC.xaml.cs",
-              "RelativeToolTip": "ViewUC\\PhieuNhapUC.xaml.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAcwEoAAABaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T15:40:49.437Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SanPhamUC.xaml.cs",
-              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\SanPhamUC.xaml.cs",
-              "RelativeDocumentMoniker": "ViewUC\\SanPhamUC.xaml.cs",
-              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\SanPhamUC.xaml.cs",
-              "RelativeToolTip": "ViewUC\\SanPhamUC.xaml.cs",
-              "ViewState": "AQIAAC8AAAAAAAAAAAAcwD0AAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T15:39:57.381Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NguoiDungUC.xaml.cs",
-              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\NguoiDungUC.xaml.cs",
-              "RelativeDocumentMoniker": "ViewUC\\NguoiDungUC.xaml.cs",
-              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\NguoiDungUC.xaml.cs",
-              "RelativeToolTip": "ViewUC\\NguoiDungUC.xaml.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAcwGcAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T15:39:33.493Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ThemSanPham.xaml.cs",
-              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewWindow\\ThemSanPham.xaml.cs",
-              "RelativeDocumentMoniker": "ViewWindow\\ThemSanPham.xaml.cs",
-              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewWindow\\ThemSanPham.xaml.cs",
-              "RelativeToolTip": "ViewWindow\\ThemSanPham.xaml.cs",
-              "ViewState": "AQIAAGoAAAAAAAAAAAAAAHwAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T15:38:15.416Z",
+              "Title": "ThongKeNhapHangUC.xaml",
+              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml",
+              "RelativeDocumentMoniker": "ViewUC\\ThongKeNhapHangUC.xaml",
+              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml",
+              "RelativeToolTip": "ViewUC\\ThongKeNhapHangUC.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-26T16:49:58.806Z",
               "EditorCaption": ""
             }
           ]

@@ -6,7 +6,64 @@
              xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewUC"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Border Background="AliceBlue">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="20">
+                <TextBlock FontSize="30"><Bold>THỐNG KÊ SẢN PHẨM CẬN DATE/HẾT HẠN</Bold></TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel Margin="0 0 20 0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <CheckBox x:Name="CkbCanDate" Content="Sản phẩm cận date" Checked="CkbCanDate_Checked" Unchecked="CkbCanDate_Unchecked" />
+                    <CheckBox x:Name="CkbHetHan" Content="Sản phẩm hết hạn" Checked="CkbHetHan_Checked" Unchecked="CkbHetHan_Unchecked" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2" Margin="20 5 20 10">
+                <Border Background="White" CornerRadius="20">
+                    <Grid>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <ListView x:Name="LvSanPham" Background="White">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Mã sản phẩm">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding IdSanPham}" Padding="20 0 0 0"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Tên sản phẩm">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding TenSanPham}" Padding="20 0 0 0"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Đơn vị">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding TenDonVi}" Padding="20 0 0 0"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Hạn sử dụng">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding HanSuDung,StringFormat='dd/MM/yyyy'}" Padding="20 0 0 0"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>

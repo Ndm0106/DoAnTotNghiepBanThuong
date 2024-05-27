@@ -14,5 +14,9 @@ namespace DoAnTotNghiepBanThuong.ModelListView
         public int? SoLuongBan { get; set; }
         public decimal? DonGiaBan { get; set; }
         public decimal? ChietKhau { get; set; }
+        public string? TenSanPham { get; set; }
+        public string? TenDonVi { get; set; }
+        public decimal? GiaBan { get; set; }
+        public DateTime? HanSuDung { get; set; }
     }
 }

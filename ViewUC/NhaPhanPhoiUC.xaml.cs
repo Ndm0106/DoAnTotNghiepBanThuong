@@ -30,6 +30,9 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             _db = new QLQuayThuocBanThuongContext();
             LoadDataNhaPhanPhoi();
         }
+
+        
+
         private void LoadDataNhaPhanPhoi()
         {
             listViewNhaPhanPhoi.ItemsSource = _db.NhaPhanPhois.ToList();

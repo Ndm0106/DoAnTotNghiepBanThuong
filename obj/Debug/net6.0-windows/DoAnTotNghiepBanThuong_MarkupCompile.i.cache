@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\App.xaml
-40-1076809241
+411835924405
 
-711898206728
-2211972794060
-LoginWindow.xaml;MainWindow.xaml;ViewUC\DonViTinhUC.xaml;ViewUC\KhachHangUC.xaml;ViewUC\NguoiDungUC.xaml;ViewUC\NhaPhanPhoiUC.xaml;ViewUC\NhaSanXuatUC.xaml;ViewUC\NhomSanPhamUC.xaml;ViewUC\PhieuNhapUC.xaml;ViewUC\PhieuXuatUC.xaml;ViewUC\QuanLyUC.xaml;ViewUC\SanPhamUC.xaml;ViewUC\ThongKeDoanhThuUC.xaml;ViewUC\ThongKeHangCanDateUC.xaml;ViewUC\ThongKeNhapHangUC.xaml;ViewUC\ThongKeThuocDaBanUC.xaml;ViewUC\ThongKeTonKhoUC.xaml;ViewUC\ThongKeUC.xaml;ViewUC\ThongKeXuatHangUC.xaml;ViewUC\TrangChinhUC.xaml;ViewWindow\CapNhatMatKhau.xaml;ViewWindow\SuaDonNhapHang.xaml;ViewWindow\SuaDonVi.xaml;ViewWindow\SuaKhachHang.xaml;ViewWindow\SuaNhanVien.xaml;ViewWindow\SuaNhaPhanPhoi.xaml;ViewWindow\SuaNhaSanXuat.xaml;ViewWindow\SuaNhomSanPham.xaml;ViewWindow\SuaSanPham.xaml;ViewWindow\ThemDonBanHang.xaml;ViewWindow\ThemDonNhapHang.xaml;ViewWindow\ThemDonNhapHang_ThemNhaPhanPhoi.xaml;ViewWindow\ThemDonNhapHang_ThemSanPhamMoi.xaml;ViewWindow\ThemDonVi.xaml;ViewWindow\ThemKhachHang.xaml;ViewWindow\ThemNhanVien.xaml;ViewWindow\ThemNhaPhanPhoi.xaml;ViewWindow\ThemNhaSanXuat.xaml;ViewWindow\ThemNhomSanPham.xaml;ViewWindow\ThemSanPham.xaml;
+72-610278042
+232-1414616078
+LoginWindow.xaml;MainWindow.xaml;ViewUC\DonViTinhUC.xaml;ViewUC\KhachHangUC.xaml;ViewUC\NguoiDungUC.xaml;ViewUC\NhaPhanPhoiUC.xaml;ViewUC\NhaSanXuatUC.xaml;ViewUC\NhomSanPhamUC.xaml;ViewUC\PhieuNhapUC.xaml;ViewUC\PhieuXuatUC.xaml;ViewUC\QuanLyUC.xaml;ViewUC\SanPhamUC.xaml;ViewUC\ThongKeDoanhThuUC.xaml;ViewUC\ThongKeHangCanDateUC.xaml;ViewUC\ThongKeNhapHangUC.xaml;ViewUC\ThongKeTonKhoUC.xaml;ViewUC\ThongKeUC.xaml;ViewUC\ThongKeXuatHangUC.xaml;ViewUC\TrangChinhUC.xaml;ViewWindow\CapNhatMatKhau.xaml;ViewWindow\SuaDonBanHang.xaml;ViewWindow\SuaDonNhapHang.xaml;ViewWindow\SuaDonVi.xaml;ViewWindow\SuaKhachHang.xaml;ViewWindow\SuaNhanVien.xaml;ViewWindow\SuaNhaPhanPhoi.xaml;ViewWindow\SuaNhaSanXuat.xaml;ViewWindow\SuaNhomSanPham.xaml;ViewWindow\SuaSanPham.xaml;ViewWindow\ThemDonBanHang.xaml;ViewWindow\ThemDonBanHang_ThemKhachHang.xaml;ViewWindow\ThemDonNhapHang.xaml;ViewWindow\ThemDonNhapHang_ThemNhaPhanPhoi.xaml;ViewWindow\ThemDonNhapHang_ThemSanPhamMoi.xaml;ViewWindow\ThemDonVi.xaml;ViewWindow\ThemKhachHang.xaml;ViewWindow\ThemNhanVien.xaml;ViewWindow\ThemNhaPhanPhoi.xaml;ViewWindow\ThemNhaSanXuat.xaml;ViewWindow\ThemNhomSanPham.xaml;ViewWindow\ThemSanPham.xaml;
 
-False
+True
 

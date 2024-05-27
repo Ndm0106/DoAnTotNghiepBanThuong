@@ -11,7 +11,7 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="SuaNhaPhanPhoi" Height="490" Width="850">
+        Title="SuaNhaPhanPhoi" Height="500" Width="850">
     <Border Background="#ffebee" BorderThickness="1" BorderBrush="#eceff1" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
@@ -20,8 +20,8 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="10">
-                <TextBlock FontSize="30"><Bold>Cập nhật nhà phân phối</Bold></TextBlock>
+            <Grid Grid.Row="0" Margin="20 10 0 10">
+                <TextBlock FontSize="40"><Bold>Cập nhật nhà phân phối</Bold></TextBlock>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -34,7 +34,7 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Grid Margin="10" Grid.Row="0" Grid.Column="0">
+                <Grid Margin="20 10 0 0" Grid.Row="0" Grid.Column="0">
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Mã nhà phân phối</Bold></TextBlock>
                         <TextBox
@@ -65,7 +65,7 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="10" Grid.Row="1" Grid.Column="0">
+                <Grid Margin="20 10 0 0" Grid.Row="1" Grid.Column="0">
                     <StackPanel>
                         <TextBlock FontSize="14"><Bold>Mã số thuế</Bold></TextBlock>
                         <TextBox
@@ -95,9 +95,9 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
                 </Grid>
 
-                <Grid Margin="10" Grid.Row="2" Grid.Column="0">
+                <Grid Margin="20 10 0 0" Grid.Row="2" Grid.Column="0">
                     <StackPanel>
-                        <TextBlock FontSize="14"><Bold>Sô điện thoại</Bold></TextBlock>
+                        <TextBlock FontSize="14"><Bold>Số điện thoại</Bold></TextBlock>
                         <TextBox
 x:Name="txtSuaSoDienThoaiNhaPhanPhoi"
                             HorizontalAlignment="Left"
@@ -128,13 +128,13 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
 
 
             </Grid>
-            <Grid Margin="10" Grid.Row="2">
+            <Grid Margin="20 10 0 0" Grid.Row="2">
                 <StackPanel>
                     <TextBlock FontSize="14"><Bold>Địa chỉ</Bold></TextBlock>
                     <TextBox
                         HorizontalAlignment="Left"
 x:Name="txtSuaDiaChiNhaPhanPhoi"
-Width="820"
+Width="810"
 Background="White"
 Height="49.96"
 VerticalAlignment="Top"
@@ -143,13 +143,16 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="3" Margin="10">
+            <Grid Grid.Row="3" Margin="0 20 0 0">
                 <Button
 Click="btnSuaNhaPhanPhoi_Sua"
 HorizontalAlignment="Right"
-Width="100"
-Margin="0 0 130 0"
+Width="90"
+Margin="0 0 120 0"
 VerticalAlignment="Center" 
+                    Background="ForestGreen"
+                    BorderBrush="ForestGreen"
+                    Foreground="White"
 Height="35" 
 materialDesign:ButtonAssist.CornerRadius="10"
 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"  
@@ -163,10 +166,11 @@ ToolTip="MaterialDesignRaisedButton with Round Corners">
                 <Button
                     BorderBrush="OrangeRed"
 Click="btnSuaNhaPhanPhoi_Thoat"
-Width="100"
+Width="90"
 Margin="0 0 20 0"
 HorizontalAlignment="Right"
 Background="OrangeRed"
+                    Foreground="White"
 Height="35"
 materialDesign:ButtonAssist.CornerRadius="10"
 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"

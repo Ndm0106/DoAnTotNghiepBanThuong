@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="1300">
-    <Border Background="#fffde7" CornerRadius="20 20 20 20">
+    <Border Background="AliceBlue" CornerRadius="20 20 20 20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -15,7 +15,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="20 20 0 0">
-                <TextBlock FontSize="30"><Bold>Hoá Đơn Bán Hàng</Bold></TextBlock>
+                <TextBlock FontSize="40"><Bold>BÁN HÀNG</Bold></TextBlock>
             </Grid>
 
             <Grid Grid.Row="1" Margin="10 10 20 5" >
@@ -59,7 +59,7 @@
                 </Grid>
 
                 <Grid Grid.Column="4" Margin="15 0 0 0">
-                    <Button x:Name="ThemPhieuXuatWindow"  Click="ThemPhieuXuatWindow_Click" Width="180" Height="49.96">
+                    <Button x:Name="ThemPhieuXuatWindow" Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10"  Click="ThemPhieuXuatWindow_Click" Width="180" Height="49.96">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="Plus"/>
                             <TextBlock FontSize="14" VerticalAlignment="Center" Text="Thêm đơn hàng mới"/>
@@ -67,14 +67,14 @@
                     </Button>
                 </Grid>
                 <Grid Grid.Column="5" Margin="15 0 0 0">
-                    <Button Width="49.96" Height="49.96">
+                    <Button Width="49.96" x:Name="btnPhieuXuat_Reload" Click="btnPhieuXuat_Reload_Click" Height="49.96" Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="Reload"/>
                         </StackPanel>
                     </Button>
                 </Grid>
-                <Grid Grid.Column="6" Margin="15 0 0 0">
-                    <Button Width="49.96" Height="49.96">
+                <Grid Grid.Column="6"  Margin="15 0 0 0">
+                    <Button Width="49.96" Height="49.96" Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="TrayArrowDown"/>
                         </StackPanel>
@@ -84,12 +84,26 @@
 
 
             </Grid>
-            <Border Margin="10 20 10 20" BorderThickness="1" CornerRadius="5" Grid.Row="2" Background="White">
+            <Border Margin="20 10 20 10" BorderThickness="1" CornerRadius="20" Grid.Row="2" Background="White" >
                 <Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
-                        <ListView x:Name="listViewPhieuXuat" materialDesign:ListViewAssist.HeaderRowBackground="AliceBlue">
+                        <ListView x:Name="listViewPhieuXuat" >
                             <ListView.View>
                                 <GridView>
+                                    <GridViewColumn Header="Hành động">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button x:Name="SuaPhieuXuatWindow" BorderBrush="Transparent" Foreground="White" Background="ForestGreen" Click="SuaPhieuXuatWindow_Click">
+                                                        <materialDesign:PackIcon Kind="Pencil"/>
+                                                    </Button>
+                                                    <Button x:Name="XoaPhieuXuat" BorderBrush="Transparent" Foreground="White" Click="XoaPhieuXuat_Click" Background="OrangeRed" Margin="5 0 0 0">
+                                                        <materialDesign:PackIcon Kind="Close"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                     <GridViewColumn Header="Số phiếu">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -121,7 +135,7 @@
                                     <GridViewColumn Header="Thành tiền">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding TongTienDonBanHang}" Padding="20 10 0 0"/>
+                                                <TextBlock Text="{Binding TongTienDonBanHang,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -132,20 +146,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Hành động">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button x:Name="SuaPhieuXuatWindow" BorderBrush="Black" Background="Transparent" Click="SuaPhieuXuatWindow_Click">
-                                                        <materialDesign:PackIcon Kind="Pencil"/>
-                                                    </Button>
-                                                    <Button x:Name="XoaPhieuXuat" BorderBrush="Black" Click="XoaPhieuXuat_Click" Background="Transparent" Margin="10 0 0 0">
-                                                        <materialDesign:PackIcon Kind="Close"/>
-                                                    </Button>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                    
                                 </GridView>
                             </ListView.View>
                         </ListView>

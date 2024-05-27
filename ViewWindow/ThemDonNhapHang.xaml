@@ -6,19 +6,21 @@
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewWindow"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ThemDonNhapHang" Height="770" Width="1500">
-    <Border Background="#cfd8dc">
+        Title="ThemDonNhapHang" Height="680" Width="1300">
+    <Border Background="#cfd8dc" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="140"></RowDefinition>
-                <RowDefinition Height="140"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="300" ></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Border Margin="5" Background="AliceBlue" CornerRadius="20">
+            <Grid Grid.Row="0" Margin="20 20 20 0">
+                <Border  Background="AliceBlue" CornerRadius="20">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -34,26 +36,30 @@
                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Nhà phân phối</Bold></TextBlock>
-                                <ComboBox   
-    x:Name="txtThemDonNhapHang_NhaPhanPhoi"
-    DisplayMemberPath="TenNhaPhanPhoi"
-    SelectedValuePath="IdNhaPhanPhoi"
-    Style="{StaticResource MaterialDesignOutlinedComboBox}"
-    Background="White"
-    Margin="0 0 0 0"
-    Width="330"
-    IsEditable="True"
-    TextSearch.TextPath="TenNhaPhanPhoi"
-    IsTextSearchEnabled="True"
-    materialDesign:HintAssist.Hint="Chọn nhà phân phối">
-                                </ComboBox>
+                                <StackPanel>
+                                    <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Nhà phân phối</Bold></TextBlock>
+                                    <ComboBox   
+x:Name="txtThemDonNhapHang_NhaPhanPhoi"
+DisplayMemberPath="TenNhaPhanPhoi"
+SelectedValuePath="IdNhaPhanPhoi"
+Style="{StaticResource MaterialDesignOutlinedComboBox}"
+Background="White"
+Margin="0 0 0 0"
+Width="330"
+IsEditable="True"
+TextSearch.TextPath="TenNhaPhanPhoi"
+IsTextSearchEnabled="True"
+materialDesign:HintAssist.Hint="Chọn nhà phân phối">
+                                    </ComboBox>
+                                </StackPanel>
                             </Grid>
                             <Grid Grid.Column="1">
                                 <Button
     Click="btnThemDonNhapHang_NhaPhanPhoi"
-    
-    Margin="10 0 0 0"
+    Background="ForestGreen"
+                                    BorderBrush="ForestGreen"
+                                    Foreground="White"
+    Margin="10 20 0 0"
     Width="50"
     Height="45"
     Content="{materialDesign:PackIcon plus}"
@@ -62,47 +68,57 @@
 
                         </Grid>
                         <Grid Grid.Column="1" Margin="20 0 0 0">
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số hoá đơn</Bold></TextBlock>
-                            <TextBox
-                                x:Name="txtThemDonNhapHang_IdDonNhapHang"
-                                Background="White"
-                                Width="170"
-                                Height="49.96"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                materialDesign:HintAssist.Hint="Số hoá đơn"
-                                IsEnabled="False" />
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số hoá đơn</Bold></TextBlock>
+                                <TextBox
+     x:Name="txtThemDonNhapHang_IdDonNhapHang"
+     Background="White"
+     Width="170"
+     Height="49.96"
+     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+     materialDesign:HintAssist.Hint="Số hoá đơn"
+     IsEnabled="False" />
+                            </StackPanel>
                         </Grid>
                         <Grid Grid.Column="2" Margin="20 0 0 0">
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Ngày nhập</Bold></TextBlock>
-                            <TextBox
-                                x:Name="txtThemDonNhapHang_NgayNhap"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                Background="White"
-                                Width="170"
-                                Height="49.96"
-                                IsEnabled="False" />
-                        </Grid>
-                        <Grid Grid.Column="3" Margin="20 0 0 0" >
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Người nhập</Bold></TextBlock>
-                            <TextBox
-    x:Name="txtThemDonNhapHang_NhanVien"
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Ngày nhập</Bold></TextBlock>
+                                <TextBox
+    x:Name="txtThemDonNhapHang_NgayNhap"
     Style="{StaticResource MaterialDesignOutlinedTextBox}"
     Background="White"
     Width="170"
     Height="49.96"
     IsEnabled="False" />
+                            </StackPanel>
                         </Grid>
-                        <Grid Grid.Column="4" Margin="20 0 0 0" >
+                        <Grid Grid.Column="3" Margin="20 0 0 0" >
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Người nhập</Bold></TextBlock>
+                                <TextBox
+x:Name="txtThemDonNhapHang_NhanVien"
+Style="{StaticResource MaterialDesignOutlinedTextBox}"
+Background="White"
+Width="170"
+Height="49.96"
+IsEnabled="False" />
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Column="4" Margin="20 15 0 0" >
                             <Button
                                 x:Name="btnThemDonHangHoa_ThemSanPhamMoi"
                                 Click="btnThemDonHangHoa_ThemSanPhamMoi_Click"
                                 Background="#66bb6a"
+                                BorderBrush="#66bb6a"
                                 Height="49.96"
                                 materialDesign:ButtonAssist.CornerRadius="10"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 ToolTip="MaterialDesignRaisedButton with Round Corners">
-                                <TextBlock Text="Thêm sản phẩm mới" />
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Plus"/>
+                                    <TextBlock VerticalAlignment="Center" Text="Thêm sản phẩm mới" />
+                                </StackPanel>
                             </Button>
                         </Grid>
                         <Grid Grid.Column="5" Margin="20 0 0 0" >
@@ -111,8 +127,8 @@
                     </Grid>
                 </Border>
             </Grid>
-            <Grid Grid.Row="1">
-                <Border Margin="5" Background="AliceBlue" CornerRadius="20">
+            <Grid Grid.Row="1" Margin="20 0 20 0">
+                <Border Background="AliceBlue" CornerRadius="20">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -124,91 +140,91 @@
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="20 0 0 0">
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Tìm kiếm sản phẩm</Bold></TextBlock>
-                            <TextBox
-                                x:Name="txtThemDonNhapHang_TimKiemSanPham"
-                                Background="White"
-                                Width="256"
-                                Height="49.96"
-                                TextChanged="txtThemDonNhapHang_TimKiemSanPham_TextChanged"
-                                materialDesign:HintAssist.Hint="Tìm kiếm sản phẩm"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}">
-                            </TextBox>
-                            <Popup  x:Name="searchPopup" IsOpen="False" PlacementTarget="{Binding ElementName=txtThemDonNhapHang_TimKiemSanPham}" Placement="Bottom">
-                                <Grid Background="White" VerticalAlignment="Center" Width="200" Height="200">
-                                    <ListBox x:Name="searchListBox" SelectionChanged="searchListBox_SelectionChanged">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding TenSanPham}" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </Grid>
-                            </Popup>
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Tìm kiếm sản phẩm</Bold></TextBlock>
+                                <TextBox
+     x:Name="txtThemDonNhapHang_TimKiemSanPham"
+     Background="White"
+     Width="256"
+     Height="49.96"
+     TextChanged="txtThemDonNhapHang_TimKiemSanPham_TextChanged"
+     materialDesign:HintAssist.Hint="Tìm kiếm sản phẩm"
+     Style="{StaticResource MaterialDesignOutlinedTextBox}">
+                                </TextBox>
+                                <Popup  x:Name="searchPopup" IsOpen="False" PlacementTarget="{Binding ElementName=txtThemDonNhapHang_TimKiemSanPham}" Placement="Bottom">
+                                    <Grid Background="White" VerticalAlignment="Center" Width="200" Height="200">
+                                        <ListBox x:Name="searchListBox" SelectionChanged="searchListBox_SelectionChanged">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding TenSanPham}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </Grid>
+                                </Popup>
+                            </StackPanel>
                         </Grid>
                         <Grid Grid.Column="1" Margin="20 0 0 0">
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Đơn vị tính</Bold></TextBlock>
-                            <ComboBox   
-                                x:Name="txtThemDonNhapHang_DonViTinh"
-                                Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                Background="White"
-                                Margin="0 0 0 0"
-                                HorizontalAlignment="Left"
-                                Width="170"
-                                DisplayMemberPath="TenDonVi"
-                                SelectedValuePath="IdDonVi"
-                                materialDesign:HintAssist.Hint="Chọn đơn vị tính">
-                            </ComboBox>
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Đơn vị tính</Bold></TextBlock>
+                                <ComboBox   
+    x:Name="txtThemDonNhapHang_DonViTinh"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+    Background="White"
+    Margin="0 0 0 0"
+    HorizontalAlignment="Left"
+    Width="170"
+    DisplayMemberPath="TenDonVi"
+    SelectedValuePath="IdDonVi"
+    materialDesign:HintAssist.Hint="Chọn đơn vị tính">
+                                </ComboBox>
+                            </StackPanel>
                         </Grid>
                         <Grid Grid.Column="3" Margin="20 0 0 0">
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Hạn sử dụng</Bold></TextBlock>
-                            <DatePicker
-                                x:Name="txtThemDonNhapHang_HanSuDung"
-                                Width="140"                  
-                                Background="White"                 
-                                materialDesign:HintAssist.Hint="Hạn sử dụng"                 
-                                Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                        </Grid>
-                        <Grid Grid.Column="2" Margin="20 0 0 0" >
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lô</Bold></TextBlock>
-                            <TextBox 
-                                x:Name="txtThemDonNhapHang_SoLo"
-                                Background="White"
-                                HorizontalAlignment="Left"
-                                materialDesign:HintAssist.Hint="Số lô"
-                                Width="170"
-                                Height="49.96"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Hạn sử dụng</Bold></TextBlock>
+                                <DatePicker
+    x:Name="txtThemDonNhapHang_HanSuDung"
+    Width="140"                  
+    Background="White"                 
+    materialDesign:HintAssist.Hint="Hạn sử dụng"                 
+    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                            </StackPanel>
                         </Grid>
                         <Grid Grid.Column="4" Margin="20 0 0 0" >
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lượng</Bold></TextBlock>
-                            <TextBox    
-                                x:Name="txtThemDonNhapHang_SoLuong"
-                                Background="White"     
-                                HorizontalAlignment="Left"      
-                                materialDesign:HintAssist.Hint="Số lượng"            
-                                Width="170"       
-                                Height="49.96"       
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lượng nhập</Bold></TextBlock>
+                                <TextBox    
+    x:Name="txtThemDonNhapHang_SoLuongNhap"
+    Background="White"     
+    HorizontalAlignment="Left"      
+    materialDesign:HintAssist.Hint="Số lượng nhập"            
+    Width="170"       
+    Height="49.96"       
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            </StackPanel>
                         </Grid>
                         <Grid Grid.Column="5" Margin="20 0 0 0" >
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Giá nhập</Bold></TextBlock>
-                            <TextBox 
-                                x:Name="txtThemDonNhapHang_GiaNhap"
-                                Background="White"
-                                HorizontalAlignment="Left"
-                                materialDesign:HintAssist.Hint="Giá nhập"
-                                Width="170"
-                                Height="49.96"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            <StackPanel>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Giá nhập</Bold></TextBlock>
+                                <TextBox 
+    x:Name="txtThemDonNhapHang_GiaNhap"
+    Background="White"
+    HorizontalAlignment="Left"
+    materialDesign:HintAssist.Hint="Giá nhập"
+    Width="170"
+    Height="49.96"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            </StackPanel>
                         </Grid>
                         <Grid Grid.Column="6" Margin="20 0 0 0" >
                             <Button
                                  x:Name="btnThemDonNhapHang_Them"  
                                 Click="btnThemDonNhapHang_Them_Click"
                                 Background="#66bb6a"
+                                BorderBrush="#66bb6a"
                                 Height="49.96"
                                 materialDesign:ButtonAssist.CornerRadius="10"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
@@ -223,8 +239,8 @@
                     </Grid>
                 </Border>
             </Grid>
-            <Grid Grid.Row="2">
-                <Border Margin="5" Background="AliceBlue" CornerRadius="20">
+            <Grid Grid.Row="2" Margin="20 0 20 0">
+                <Border  Background="White" CornerRadius="20">
                     <Grid>
                         <ScrollViewer>
                             <ListView x:Name="listViewThemDonNhapHang">
@@ -259,13 +275,6 @@
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding TenDonVi}" Padding="20 10 0 0"/>
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="Số lô">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding SoLo}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -309,7 +318,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="20">
                     <StackPanel>
@@ -317,18 +326,43 @@
                         <TextBox Background="White" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignOutlinedTextBox}" x:Name="txtTongTienDonNhapHang" Width="200"/>
                     </StackPanel>
                 </Grid>
-                <Button    
-                    Grid.Column="3"
-                    x:Name="btnThemDonNhapHang_Luu"
-                    Click="btnThemDonNhapHang_Luu_Click"
-                    Background="#66bb6a"
-                    Width="150"
-                    Height="49.96"
-                    materialDesign:ButtonAssist.CornerRadius="10"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    ToolTip="MaterialDesignRaisedButton with Round Corners">
-                    <TextBlock Text="Lưu Đơn" />
-                </Button>
+                <Grid Grid.Column="3" Margin="0 0 20 0">
+                    <Button                   
+                x:Name="btnThemDonNhapHang_Luu"
+                Click="btnThemDonNhapHang_Luu_Click"
+                Background="ForestGreen"
+                BorderBrush="ForestGreen"
+                        Foreground="White"
+                Width="150"
+                Height="49.96"
+                        Margin="0 0 170 0"
+                        HorizontalAlignment="Right"
+                materialDesign:ButtonAssist.CornerRadius="10"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="MaterialDesignRaisedButton with Round Corners">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon VerticalAlignment="Center" Kind="Tick"/>
+                            <TextBlock VerticalAlignment="Center" Text="Lưu Đơn" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+x:Name="btnThemDonNhapHang_Thoat"
+Click="btnThemDonNhapHang_Thoat_Click"
+Background="OrangeRed"
+BorderBrush="OrangeRed"
+                        Foreground="White"
+Width="150"
+Height="49.96"
+                        HorizontalAlignment="Right"
+materialDesign:ButtonAssist.CornerRadius="10"
+Style="{StaticResource MaterialDesignRaisedButton}"
+ToolTip="MaterialDesignRaisedButton with Round Corners">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon VerticalAlignment="Center" Kind="Close"/>
+                            <TextBlock VerticalAlignment="Center" Text="Thoát" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Grid>
         </Grid>
     </Border>

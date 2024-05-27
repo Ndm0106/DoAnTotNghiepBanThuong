@@ -6,18 +6,28 @@
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewWindow"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStyle="None"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="SuaDonNhapHang" Height="770" Width="1500">
-    <Border Background="#cfd8dc">
+    <Border Background="#cfd8dc" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="140"></RowDefinition>
                 <RowDefinition Height="140"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
-
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Click="MinimizeButton_Click" Content="{materialDesign:PackIcon WindowMinimize}" BorderBrush="Transparent" Background="Transparent"/>
+                    <Button Click="MaximizeButton_Click" Content="{materialDesign:PackIcon WindowMaximize}" BorderBrush="Transparent" Background="Transparent"/>
+                    <Button Click="CloseButton_Click" Content="{materialDesign:PackIcon WindowClose}" BorderBrush="Transparent" Background="Transparent"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Margin="20 5 20 0">
                 <Border Margin="5" Background="AliceBlue" CornerRadius="20">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -49,14 +59,6 @@ materialDesign:HintAssist.Hint="Chọn nhà phân phối">
                                 </TextBox>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Button
-
-x:Name="btnSuaDonNhapHang_ThemNhaPhanPhoi"
-Margin="10 0 0 0"
-Width="50"
-Height="45"
-Content="{materialDesign:PackIcon plus}"
-ToolTip="Icon"/>
                             </Grid>
                         </Grid>
                         <Grid Grid.Column="1" Margin="20 0 0 0">
@@ -93,22 +95,11 @@ materialDesign:HintAssist.Hint="Tên Hiển Thị"
 IsEnabled="False" />
                         </Grid>
                         <Grid Grid.Column="4" Margin="20 0 0 0" >
-                            <Button
-                                x:Name="txtSuaDonNhapHang_ThemSanPhamMoi"
-                                Background="#66bb6a"
-                                BorderBrush="#66bb6a"
-                                Height="49.96"
-                                materialDesign:ButtonAssist.CornerRadius="10"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                Style="{StaticResource MaterialDesignRaisedButton}"
-                                ToolTip="MaterialDesignRaisedButton with Round Corners">
-                                <TextBlock Text="Thêm sản phẩm mới" />
-                            </Button>
                         </Grid>
                     </Grid>
                 </Border>
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2" Margin="20 0 20 0">
                 <Border Margin="5" Background="AliceBlue" CornerRadius="20">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -128,7 +119,6 @@ IsEnabled="False" />
                                 HorizontalAlignment="Left"
                                 materialDesign:HintAssist.Hint="Tìm kiếm sản phẩm"
                                 Width="170"
-                                TextChanged="txtSuaDonNhapHang_TimKiemSanPham_TextChanged"
                                 Height="49.96"
                                 IsEnabled="False"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -143,23 +133,15 @@ IsEnabled="False" />
                     Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                         </Grid>
                         <Grid Grid.Column="2" Margin="20 0 0 0" >
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lô</Bold></TextBlock>
-                            <TextBox 
-                                x:Name="txtSuaDonNhapHang_SuaSoLo"
-                                Background="White"
-                                HorizontalAlignment="Left"
-                                materialDesign:HintAssist.Hint="Số lô"
-                                Width="170"
-                                Height="49.96"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            
                         </Grid>
                         <Grid Grid.Column="3" Margin="20 0 0 0" >
-                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lượng</Bold></TextBlock>
+                            <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lượng nhập</Bold></TextBlock>
                             <TextBox 
                                 x:Name="txtSuaDonNhapHang_SuaSoLuong"
         Background="White"
         HorizontalAlignment="Left"
-        materialDesign:HintAssist.Hint="Số lượng"
+        materialDesign:HintAssist.Hint="Số lượng nhập"
         Width="170"
         Height="49.96"
         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -182,32 +164,36 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                 HorizontalAlignment="Left"
                                 Click="btnSuaDonNhapHang_SuaThongTinSanPham_Click"
                                 
-Background="#66bb6a"
-                                BorderBrush="#66bb6a"
-               Width="60"
+Background="ForestGreen"
+                                BorderBrush="ForestGreen"
+                                Foreground="White"
+               Width="72"
 Height="49.96"
 materialDesign:ButtonAssist.CornerRadius="10"
 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
 Style="{StaticResource MaterialDesignRaisedButton}"
 ToolTip="MaterialDesignRaisedButton with Round Corners" Margin="81,40,-81,40">
-                                <TextBlock Text="Sửa" />
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="Pencil"/>
+                                    <TextBlock VerticalAlignment="Center" Text="Sửa" />
+                                </StackPanel>
                             </Button>
                         </Grid>
                     </Grid>
                 </Border>
             </Grid>
-            <Grid Grid.Row="2">
-                <Border Margin="5" Background="AliceBlue" CornerRadius="20">
+            <Grid Grid.Row="3" Margin="20 0 20 0">
+                <Border Margin="5" Background="White" CornerRadius="20">
                     <Grid>
                         <ScrollViewer>
-                            <ListView x:Name="listViewSuaDonNhapHang" SelectionChanged="listViewSuaDonNhapHang_SelectionChanged">
+                            <ListView x:Name="listViewSuaDonNhapHang"  SelectionChanged="listViewSuaDonNhapHang_SelectionChanged">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Hành động">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
-                                                        <Button x:Name="btnSuaDonNhapHang_Xoa" Background="White" BorderBrush="Black">
+                                                        <Button x:Name="btnSuaDonNhapHang_Xoa" Click="btnSuaDonNhapHang_Xoa_Click" Background="OrangeRed" Foreground="White" BorderBrush="Transparent">
                                                             <StackPanel>
                                                                 <materialDesign:PackIcon Kind="Close"/>
                                                             </StackPanel>
@@ -234,13 +220,6 @@ ToolTip="MaterialDesignRaisedButton with Round Corners" Margin="81,40,-81,40">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding TenDonVi}" Padding="20 10 0 0"/>
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="Số lô">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding SoLo}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -279,12 +258,12 @@ ToolTip="MaterialDesignRaisedButton with Round Corners" Margin="81,40,-81,40">
                     </Grid>
                 </Border>
             </Grid>
-            <Grid Grid.Row="3" Margin="0 20 30 20">
+            <Grid Grid.Row="4" Margin="0 20 30 20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="20 0 0 0">
                     <StackPanel>
@@ -296,15 +275,34 @@ ToolTip="MaterialDesignRaisedButton with Round Corners" Margin="81,40,-81,40">
                         x:Name="btnSuaDonNhapHang_Luu"
                         Click="btnSuaDonNhapHang_Luu_Click"
                     HorizontalAlignment="Right"
-     Background="#66bb6a"
-                    BorderBrush="#66bb6a"
-                    Width="150"
+     Background="ForestGreen"
+                    BorderBrush="ForestGreen"
+                        Foreground="White"
+                        Margin="0 0 120 0"
+                    Width="100"
      Height="49.96"
      materialDesign:ButtonAssist.CornerRadius="10"
-     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-     Style="{StaticResource MaterialDesignRaisedButton}"
-     ToolTip="MaterialDesignRaisedButton with Round Corners">
-                    <TextBlock Text="Lưu Đơn" />
+     Style="{StaticResource MaterialDesignRaisedButton}" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Tick"/>
+                        <TextBlock VerticalAlignment="Center" Text="Lưu" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="2"
+                   x:Name="btnSuaDonNhapHang_Thoat"
+                   Click="btnSuaDonNhapHang_Thoat_Click"
+               HorizontalAlignment="Right"
+Background="OrangeRed"
+                        Foreground="White"
+               BorderBrush="OrangeRed"
+               Width="100"
+Height="49.96"
+materialDesign:ButtonAssist.CornerRadius="10"
+Style="{StaticResource MaterialDesignRaisedButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Close"/>
+                        <TextBlock VerticalAlignment="Center" Text="Thoát" />
+                    </StackPanel>
                 </Button>
             </Grid>
         </Grid>

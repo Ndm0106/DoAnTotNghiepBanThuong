@@ -16,8 +16,8 @@ namespace DoAnTotNghiepBanThuong.ModelListView
         public decimal? GiaNhap { get; set; }
         public decimal? GiaBanLe { get; set; }
         public string? BarCode { get; set; }
-        public string? SoLo { get; set; }
-        public DateTime? NgaySanXuat { get; set; }
+        public string? ThanhPhan { get; set; }
+        public string? HamLuong { get; set; }
         public DateTime? HanSuDung { get; set; }
         public string? GhiChu { get; set; }
         public string IdDonVi { get; set; } = null!;
@@ -27,5 +27,6 @@ namespace DoAnTotNghiepBanThuong.ModelListView
         public string TenNhaSanXuat { get; set; } = null!;
         public string TenNhomSanPham { get; set; } = null!;
         public decimal? TongTienSanPham { get; set; }
+        public decimal? ChietKhau { get; set; }
     }
 }

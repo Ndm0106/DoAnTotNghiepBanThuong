@@ -1,8 +1,10 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using XAct.Library.Settings;
+using XAct.Users;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
 {
@@ -22,11 +26,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class ThemKhachHang : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
+        private QLQuayThuocBanThuongContext db;
         public ThemKhachHang(QLQuayThuocBanThuongContext _db)
         {
             InitializeComponent();
-            _dbContext = _db;
+            db = _db;
             // Sinh GUID mới
             Guid guid = Guid.NewGuid();
 
@@ -37,7 +41,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string randomDigits = random.Next(0, 1000).ToString("D3");
 
             // Kết hợp chuỗi "SP000" với chuỗi số ngẫu nhiên
-            string result = $"SP000{randomDigits}";
+            string result = $"KH000{randomDigits}";
 
             txtThemIdKhachHang.Text = result;
         }
@@ -45,10 +49,9 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         {
             string tenKH = txtThemTenKhachHang.Text.Trim();
             string diachiKH = txtThemDiaChiKhachHang.Text.Trim();
-
             string sodienthoaiKH = txtThemSoDienThoaiKhachHang.Text.Trim();
             string emailKH = txtThemEmailKhachHang.Text.Trim();
-            var TENKH = _dbContext.KhachHangs.Any(x => x.TenKhachHang == tenKH);
+            var TENKH = db.KhachHangs.Any(x => x.TenKhachHang == tenKH);
             if (string.IsNullOrEmpty(tenKH))
             {
                 MessageBox.Show("Tên khách hàng không đc để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -59,19 +62,43 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 MessageBox.Show("Đã tồn tại khách hàng này", "Thông báo", MessageBoxButton.OK);
                 return;
             }
+            if(!IsNumericString(sodienthoaiKH))
+            {
+                MessageBox.Show("Số điện thoại phải hợp lệ", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
+            if (!IsValidEmail(emailKH))
+            {
+                MessageBox.Show("Emai phải đúng định dạng", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
             KhachHang khachhang = new KhachHang
             {
+                IdKhachHang = txtThemIdKhachHang.Text,
                 TenKhachHang = tenKH,
                 DiaChi = diachiKH,
-
                 SoDienThoai = sodienthoaiKH,
                 Email = emailKH
             };
-            _dbContext.KhachHangs.Add(khachhang);
-            _dbContext.SaveChanges();
-            KhachHangUC.listView.ItemsSource = _dbContext.KhachHangs.ToList();
+            db.KhachHangs.Add(khachhang);
+            db.SaveChanges();
+            LoadDataKhachHang();
             MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButton.OK);
             this.Close();
+        }
+        private void LoadDataKhachHang()
+        {
+            var query = (from kh in db.KhachHangs
+                         select new KhachHang_MLV
+                         {
+                             IdKhachHang = kh.IdKhachHang,
+                             TenKhachHang = kh.TenKhachHang,
+                             DiaChi = kh.DiaChi,
+                             SoDienThoai = kh.SoDienThoai,
+                             Email = kh.Email,
+                         }).ToList();
+            KhachHangUC.listView.ItemsSource = query;
+            
         }
         private void btnThemKhachHang_Thoat(object sender, RoutedEventArgs e)
         {
@@ -79,5 +106,57 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             if (thongbao == MessageBoxResult.OK)
                 this.Close();
         }
+        private bool IsNumericString(string s)
+        {
+            if (txtThemSoDienThoaiKhachHang.Text.Length != 10)
+            {
+                return false;
+            }
+            foreach (char c in s)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    return false; // Nếu có ký tự khoảng trắng, trả về false
+                }
+            }
+            char firstText = s[0];
+            if(firstText != '0')
+            {
+                return false;
+            }    
+            if(s == null)
+            {
+                return false;
+            }    
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static bool IsValidEmail(string email)
+        {
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
     }
+
+
+
+
 }

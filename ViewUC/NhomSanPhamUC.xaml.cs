@@ -1,4 +1,5 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewWindow;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,15 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         }
         private void LoadDataNhomSanPham()
         {
-            listViewNhomSanPham.ItemsSource = _db.NhomSanPhams.ToList();
+            var query = (from nsp in _db.NhomSanPhams
+                         select new NhomSanPham_MLV
+                         {
+                             IdNhomSanPham = nsp.IdNhomSanPham,
+                             TenNhomSanPham = nsp.TenNhomSanPham,
+                             GhiChu = nsp.GhiChu,
+
+                         }).ToList();
+            listViewNhomSanPham.ItemsSource = query;
             listView = listViewNhomSanPham;
         }
         private void ThemNhomSanPhamWindow_Click(object sender, RoutedEventArgs e)
@@ -46,7 +55,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             var button = sender as System.Windows.Controls.Button;
             if (button != null)
             {
-                var nhomsanpham = (NhomSanPham)button.DataContext;
+                var nhomsanpham = (NhomSanPham_MLV)button.DataContext;
                 var suaNhomSanPham = new SuaNhomSanPham(_db, nhomsanpham);
                 suaNhomSanPham.Show();
                 LoadDataNhomSanPham();
@@ -58,7 +67,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             var button = sender as System.Windows.Controls.Button;
             if (button != null)
             {
-                var nhomsanpham = (NhomSanPham)button.DataContext;
+                var nhomsanpham = (NhomSanPham_MLV)button.DataContext;
                 if (nhomsanpham != null)
                 {
                     bool isUsedInProducts = _db.SanPhams.Any(s => s.IdNhomSanPham == nhomsanpham.IdNhomSanPham);
@@ -71,13 +80,47 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                         MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có muốn xoá nhóm sản phẩm này ?", "Xác nhận xoá", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (messageBoxResult == MessageBoxResult.Yes)
                         {
-                            _db.NhomSanPhams.Remove(nhomsanpham);
-                            _db.SaveChanges();
-                            LoadDataNhomSanPham();
+                            var itemToRemove = _db.NhomSanPhams.FirstOrDefault(s => s.IdNhomSanPham == nhomsanpham.IdNhomSanPham);
+                            if (itemToRemove != null)
+                            {
+                                _db.NhomSanPhams.Remove(itemToRemove);
+                                _db.SaveChanges();
+                                LoadDataNhomSanPham();
+                            }    
                         }
                     }
                 }
 
+            }
+        }
+
+        private void txtNhomSanPham_TimKiem_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = txtNhomSanPham_TimKiem.Text.Trim().ToLower();
+
+            // Nếu không có ký tự nào trong ô tìm kiếm, hiển thị tất cả các đơn vị
+            if (string.IsNullOrEmpty(searchText))
+            {
+                listViewNhomSanPham.ItemsSource = _db.NhomSanPhams.Select(nhomSanPham => new NhomSanPham_MLV
+                {
+                    IdNhomSanPham = nhomSanPham.IdNhomSanPham,
+                    TenNhomSanPham = nhomSanPham.TenNhomSanPham,
+                    GhiChu = nhomSanPham.GhiChu,
+                }).ToList();
+            }
+            else
+            {
+                // Lọc danh sách các đơn vị dựa trên từ khóa tìm kiếm
+                var filteredDonViList = _db.NhomSanPhams.Where(nhomSanPham => nhomSanPham.TenNhomSanPham.ToLower().Contains(searchText))
+                                                   .Select(nhomSanPham => new NhomSanPham_MLV
+                                                   {
+                                                       IdNhomSanPham = nhomSanPham.IdNhomSanPham,
+                                                       TenNhomSanPham = nhomSanPham.TenNhomSanPham,
+                                                       GhiChu = nhomSanPham.GhiChu,
+                                                   }).ToList();
+
+                // Hiển thị danh sách các đơn vị được lọc
+                listViewNhomSanPham.ItemsSource = filteredDonViList;
             }
         }
     }

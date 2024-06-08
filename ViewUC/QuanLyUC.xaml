@@ -7,19 +7,19 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="AliceBlue" CornerRadius="20">
+    <Border Background="#80deea" CornerRadius="20">
         <Grid>
             <TabControl>
-                <TabItem Header="Nhân phân phối">
+                <TabItem  Header="Nhân phân phối">
                     <local:NhaPhanPhoiUC/>
                 </TabItem>
                 <TabItem Header="Nhà sản xuất">
                     <local:NhaSanXuatUC/>
                 </TabItem>
-                <TabItem Header="Nhóm sản phẩm">
+                <TabItem  Header="Nhóm sản phẩm">
                     <local:NhomSanPhamUC/>
                 </TabItem>
-                <TabItem Header="Đơn vị tính">
+                <TabItem  Header="Đơn vị tính">
                     <local:DonViTinhUC/>
                 </TabItem>
 

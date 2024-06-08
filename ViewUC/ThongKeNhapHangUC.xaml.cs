@@ -1,5 +1,6 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
 using DoAnTotNghiepBanThuong.ModelListView;
+using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
@@ -17,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using XAct.Library.Settings;
 
 namespace DoAnTotNghiepBanThuong.ViewUC
 {
@@ -29,6 +31,20 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         {
             InitializeComponent();
             LoadDataThongKeNhapHang();
+            LoadComboBox();
+        }
+        private void LoadComboBox()
+        {
+            using(var db = new QLQuayThuocBanThuongContext())
+            {
+                cbxThongKeNhapHang_NhaPhanPhoi.ItemsSource = db.NhaPhanPhois.ToList();
+                cbxThongKeNhapHang_NhaPhanPhoi.DisplayMemberPath = "TenNhaPhanPhoi";
+                cbxThongKeNhapHang_NhaPhanPhoi.SelectedValuePath = "IdNhaPhanPhoi";
+
+                cbxThongKeNhapHang_NhanVien.ItemsSource = db.NhanViens.ToList();
+                cbxThongKeNhapHang_NhanVien.DisplayMemberPath = "TenHienThi";
+                cbxThongKeNhapHang_NhanVien.SelectedValuePath = "IdNhanVien";
+            }    
         }
         private void LoadDataThongKeNhapHang()
         {
@@ -53,8 +69,8 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                 {
                     TenSanPham = sp.TenSanPham,
                     SoLuongNhap = ctdnh.SoLuongNhap,
-                    DonGiaNhap = ctdnh.SoLuongNhap * sp.GiaNhap,
-                    GiaNhap = sp.GiaNhap,
+                    DonGiaNhap = ctdnh.DonGiaNhap,
+                    GiaNhap = ctdnh.DonGiaNhap/ ctdnh.SoLuongNhap,
                     TenDonVi = dv.TenDonVi,
                 }
             ).ToList()
@@ -71,23 +87,28 @@ namespace DoAnTotNghiepBanThuong.ViewUC
 
                     }
                     item.TongTienDonNhapHang = totalAmount;
-                    // Thêm tổng số lượng và tổng tiền vào mỗi mục chi tiết phiếu nhập
-
                 }
-                listViewThongKeNhapHang.ItemsSource = query.ToList();
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewThongKeNhapHang.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChiTietDonNhapHang_MLV");
-                view.GroupDescriptions.Add(groupDescription);
-
+                UpdateListView(query);
             }
         }
+
+        private void UpdateListView(List<DonNhapHang_MLV> data)
+        {
+            listViewThongKeNhapHang.ItemsSource = data;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewThongKeNhapHang.ItemsSource);
+            view.GroupDescriptions.Clear();
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChiTietDonNhapHang_MLV");
+            view.GroupDescriptions.Add(groupDescription);
+        }
+
 
         private void btnThongKeNhapHang_XuatFile_Click(object sender, RoutedEventArgs e)
         {
             var saveFileDialog = new Microsoft.Win32.SaveFileDialog
             {
                 Filter = "Excel Files|*.xlsx",
-                Title = "Lưu tệp Excel"
+                Title = "Lưu tệp Excel",
+                FileName = "BaoCaoChiTietThongKeNhapHang.xlsx"
             };
 
             if (saveFileDialog.ShowDialog() == true)
@@ -102,12 +123,12 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             {
                 using (ExcelPackage excelPackage = new ExcelPackage())
                 {
-                    ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Data");
+                    ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("ThongKeDonNhapHang");
 
                     // Đặt tiêu đề cho các cột
                     worksheet.Cells[1, 1].Value = "Mã phiếu";
                     worksheet.Cells[1, 2].Value = "Ngày nhập";
-                    worksheet.Cells[1, 3].Value = "TênNCC";
+                    worksheet.Cells[1, 3].Value = "Tên nhà cung cấp";
                     worksheet.Cells[1, 4].Value = "Người thực hiện";
                     worksheet.Cells[1, 5].Value = "Tổng tiền";
 
@@ -156,7 +177,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                             row++;
                         }
                     }
-
+                    worksheet.Cells.AutoFitColumns();
                     FileInfo excelFile = new FileInfo(filePath);
                     excelPackage.SaveAs(excelFile);
                 }
@@ -167,6 +188,72 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             {
                 MessageBox.Show($"Đã xảy ra lỗi khi xuất dữ liệu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnThongKeNhapHang_TimKiem_Click(object sender, RoutedEventArgs e)
+        {
+            using(var _db = new QLQuayThuocBanThuongContext())
+            {
+                DateTime? startDate = datePickerThongKeNhapHang_TuNgay.SelectedDate;
+                DateTime? endDate = datePickerThongKeNhapHang_DenNgay.SelectedDate;
+
+                string selectedNhaPhanPhoiId = null;
+                string selectedNhanVienId = null;
+
+                if (cbxThongKeNhapHang_NhaPhanPhoi.SelectedItem != null)
+                {
+                    selectedNhaPhanPhoiId = (cbxThongKeNhapHang_NhaPhanPhoi.SelectedItem as NhaPhanPhoi).IdNhaPhanPhoi;
+                }
+
+                if (cbxThongKeNhapHang_NhanVien.SelectedItem != null)
+                {
+                    selectedNhanVienId = (cbxThongKeNhapHang_NhanVien.SelectedItem as NhanVien).IdNhanVien;
+                }
+
+                // Thực hiện truy vấn LINQ
+                var query = from dnh in _db.DonNhapHangs
+                            join npp in _db.NhaPhanPhois on dnh.IdNhaPhanPhoi equals npp.IdNhaPhanPhoi
+                            join nv in _db.NhanViens on dnh.IdNhanVien equals nv.IdNhanVien
+                            where (string.IsNullOrEmpty(selectedNhaPhanPhoiId) || dnh.IdNhaPhanPhoi == selectedNhaPhanPhoiId)
+                               && (string.IsNullOrEmpty(selectedNhanVienId) || dnh.IdNhanVien == selectedNhanVienId)
+                               && (!startDate.HasValue || dnh.NgayNhap >= startDate.Value)
+                               && (!endDate.HasValue || dnh.NgayNhap <= endDate.Value)
+                            select new DonNhapHang_MLV
+                            {
+                                IdDonNhapHang = dnh.IdDonNhapHang,
+                                NgayNhap = dnh.NgayNhap,
+                                TenNhaPhanPhoi = npp.TenNhaPhanPhoi,
+                                TenHienThi = nv.TenHienThi,
+                                TongTienDonNhapHang = _db.ChiTietDonNhapHangs
+                            .Where(ctdnh => ctdnh.IdDonNhapHang == dnh.IdDonNhapHang)
+                            .Sum(ctdnh => ctdnh.SoLuongNhap * ctdnh.IdSanPhamNavigation.GiaNhap),
+                                chiTietDonNhapHang_MLVs = (from ctdnh in _db.ChiTietDonNhapHangs
+                                                           join sp in _db.SanPhams on ctdnh.IdSanPham equals sp.IdSanPham
+                                                           join dv in _db.DonVis on sp.IdDonVi equals dv.IdDonVi
+                                                           where ctdnh.IdDonNhapHang == dnh.IdDonNhapHang
+                                                           select new ChiTietDonNhapHang_MLV
+                                                           {
+                                                               TenSanPham = sp.TenSanPham,
+                                                               SoLuongNhap = ctdnh.SoLuongNhap,
+                                                               DonGiaNhap = ctdnh.SoLuongNhap * sp.GiaNhap,
+                                                               GiaNhap = sp.GiaNhap,
+                                                               TenDonVi = dv.TenDonVi,
+                                                           }).ToList()
+                            };
+
+                // Thực hiện truy vấn và chuyển kết quả sang danh sách
+                var result = query.ToList();
+
+                // Kiểm tra nếu không có kết quả
+                if (!result.Any())
+                {
+                    MessageBox.Show("Không có đơn nhập hàng nào cho lựa chọn này.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                // Hiển thị kết quả
+                UpdateListView(result);
+            }    
         }
     }
 }

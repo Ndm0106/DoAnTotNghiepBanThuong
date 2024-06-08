@@ -30,34 +30,52 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         private void CkbCanDate_Checked(object sender, RoutedEventArgs e)
         {
             CkbHetHan.IsChecked = false; // Bỏ tick CheckBox "Hàng hết hạn"
+            cbxThoiGianCanDate.Visibility = Visibility.Visible;
             UpdateListView();
         }
 
         private void CkbCanDate_Unchecked(object sender, RoutedEventArgs e)
         {
             UpdateListView();
+            cbxThoiGianCanDate.Visibility = Visibility.Hidden;
         }
 
         private void CkbHetHan_Checked(object sender, RoutedEventArgs e)
         {
             CkbCanDate.IsChecked = false; // Bỏ tick CheckBox "Hàng cận date"
             UpdateListView();
+            cbxThoiGianCanDate.Visibility = Visibility.Hidden;
         }
 
         private void CkbHetHan_Unchecked(object sender, RoutedEventArgs e)
         {
             UpdateListView();
+            cbxThoiGianCanDate.Visibility = Visibility.Hidden;
         }
 
         private void UpdateListView()
         {
             var allProducts = GetSanPham();
             List<SanPham_MLV> filteredProducts = new List<SanPham_MLV>();
-
+            ComboBoxItem? selectedItem = cbxThoiGianCanDate.SelectedItem as ComboBoxItem;    
+            string? selectedCanDate = selectedItem?.Content.ToString();
             if (CkbCanDate.IsChecked == true)
             {
-                var canDateThreshold = DateTime.Now.AddMonths(1); // Cận date trong vòng 1 tháng
-                filteredProducts = allProducts.Where(p => p.HanSuDung <= canDateThreshold && p.HanSuDung > DateTime.Now).ToList();
+                if(selectedCanDate == "30 ngày")
+                {
+                    var canDateThreshold = DateTime.Now.AddMonths(1); // Cận date trong vòng 1 tháng
+                    filteredProducts = allProducts.Where(p => p.HanSuDung <= canDateThreshold && p.HanSuDung > DateTime.Now).ToList();
+                }  
+                else if (selectedCanDate == "15 ngày")
+                {
+                    var canDateThreshold = DateTime.Now.AddDays(15); // Cận date trong vòng 15 ngày
+                    filteredProducts = allProducts.Where(p => p.HanSuDung <= canDateThreshold && p.HanSuDung > DateTime.Now).ToList();
+                }
+                else if (selectedCanDate == "7 ngày")
+                {
+                    var canDateThreshold = DateTime.Now.AddDays(7); // Cận date trong vòng 15 ngày
+                    filteredProducts = allProducts.Where(p => p.HanSuDung <= canDateThreshold && p.HanSuDung > DateTime.Now).ToList();
+                } 
             }
             else if (CkbHetHan.IsChecked == true)
             {
@@ -79,7 +97,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                                 IdSanPham = sp.IdSanPham,
                                 TenSanPham = sp.TenSanPham,
                                 TenDonVi = sp.IdDonViNavigation.TenDonVi,
-                                GiaBanLe = sp.GiaBan,
+                                GiaBan = sp.GiaBan,
                                 HanSuDung = sp.HanSuDung
                             }).ToList();
             }
@@ -87,6 +105,15 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             return sanPhams;
         }
 
-        
+        private void cbxThoiGianCanDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateListView();
+
+        }
+
+        private void btnThongKeHangCanDate_Xoa_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

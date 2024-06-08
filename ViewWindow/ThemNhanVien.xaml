@@ -10,8 +10,8 @@
         Background="Transparent"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Title="ThemNhanVien" Height="290" Width="680">
-    <Border Background="#f1f8e9" CornerRadius="20">
+        Title="ThemNhanVien" Height="310" Width="680">
+    <Border Background="#f1f8e9" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -62,7 +62,7 @@
                     Width="200"
                     Height="49.96"
                     x:Name="txtThemMatKhau_NhanVien"
-materialDesign:HintAssist.Hint="Password"
+materialDesign:HintAssist.Hint="Mật khẩu"
 materialDesign:TextFieldAssist.HasClearButton="True"
 Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
 VerticalContentAlignment="Bottom" />
@@ -97,7 +97,7 @@ x:Name="txtThemEmail_NhanVien"
 HorizontalAlignment="Left"
 Width="200"
 Height="49.96"
-materialDesign:HintAssist.Hint="Số điện thoại"
+materialDesign:HintAssist.Hint="Email"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                     </StackPanel>
                 </Grid>
@@ -113,7 +113,7 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                             IsEditable="True" IsTextSearchEnabled="True"
                   TextSearch.TextPath="TenChucVu"
   Width="200"
-  materialDesign:HintAssist.Hint="chức vụ"
+  materialDesign:HintAssist.Hint="Chức vụ"
   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
                     </StackPanel>

@@ -14,7 +14,7 @@ namespace DoAnTotNghiepBanThuong.ModelListView
         public int? SoLuongNhap { get; set; }
         public int? SoLuongBan { get; set; }
         public decimal? GiaNhap { get; set; }
-        public decimal? GiaBanLe { get; set; }
+        public decimal? GiaBan { get; set; }
         public string? BarCode { get; set; }
         public string? ThanhPhan { get; set; }
         public string? HamLuong { get; set; }
@@ -28,5 +28,6 @@ namespace DoAnTotNghiepBanThuong.ModelListView
         public string TenNhomSanPham { get; set; } = null!;
         public decimal? TongTienSanPham { get; set; }
         public decimal? ChietKhau { get; set; }
+        public bool isEditing { get; set; }
     }
 }

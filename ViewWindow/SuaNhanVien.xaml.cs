@@ -4,6 +4,7 @@ using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,20 +24,20 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class SuaNhanVien : Window
     {
-        private NhanVien_MLV? _nhanvien;
-        public int suaIdChucVu = 0;
-        public SuaNhanVien(NhanVien_MLV nhanvien)
+        public NhanVien_MLV? nhanvien;
+        
+        public SuaNhanVien(NhanVien_MLV _nhanvien)
         {
             InitializeComponent();
-            _nhanvien = nhanvien;
+            nhanvien = _nhanvien;
             LoadComboBox();
-            txtSuaTen_NhanVien.Text = _nhanvien.TenHienThi;
+            txtSuaTen_NhanVien.Text = nhanvien.TenHienThi;
 
-            txtSuaSoDienThoai_NhanVien.Text = _nhanvien.SoDienThoai;
+            txtSuaSoDienThoai_NhanVien.Text = nhanvien.SoDienThoai;
 
-            txtSuaEmail_NhanVien.Text = _nhanvien.Email;
-
-            txtSuaChucVu_NhanVien.Text = _nhanvien.TenChucVu;
+            txtSuaEmail_NhanVien.Text = nhanvien.Email;
+            //txtSuaChucVu_NhanVien.Text = nhanvien.TenChucVu;
+            txtSuaChucVu_NhanVien.SelectedValue = nhanvien.IdChucVu;
         }
         private void LoadComboBox()
         {
@@ -45,7 +46,6 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 txtSuaChucVu_NhanVien.ItemsSource = _dbContext.ChucVus.ToList();
                 txtSuaChucVu_NhanVien.DisplayMemberPath = "TenChucVu";
                 txtSuaChucVu_NhanVien.SelectedValuePath = "IdChucVu";
-
             }
         }
         private void LoadListView()
@@ -53,9 +53,10 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             using (var db = new QLQuayThuocBanThuongContext())
             {
                 var queryDATA = (from nv in db.NhanViens
-                                 join cv in db.ChucVus on nv.IdChucVu equals cv.IdChucVu
                                  select new NhanVien_MLV
                                  {
+                                     IdNhanVien = nv.IdNhanVien,
+                                     IdChucVu = nv.IdChucVu,
                                      TenHienThi = nv.TenHienThi,
                                      TenChucVu = nv.IdChucVuNavigation.TenChucVu,
                                      TaiKhoan = nv.TaiKhoan,
@@ -70,6 +71,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string suaTenNV = txtSuaTen_NhanVien.Text;
             string suaEmailNV = txtSuaEmail_NhanVien.Text;
             string suaSoDienThoaiNV = txtSuaSoDienThoai_NhanVien.Text;
+            int suaIdChucVu = 0;
             using (var db = new QLQuayThuocBanThuongContext())
             {
 
@@ -83,23 +85,34 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     MessageBox.Show("Không được bỏ trống thông tin chức vụ", "Thông tin", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                var updateHopLe = db.NhanViens.Any(x => x.TenHienThi == suaTenNV && x.TenHienThi != _nhanvien.TenHienThi);
+                var updateHopLe = db.NhanViens.Any(x => x.TenHienThi == suaTenNV && x.TenHienThi != nhanvien.TenHienThi);
                 if (updateHopLe)
                 {
                     MessageBox.Show("Đã tồn tại người này trong danh sách", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                var suaNhanVien = db.NhanViens.FirstOrDefault(x => x.IdNhanVien == _nhanvien.IdNhanVien && x.TenHienThi == suaTenNV);
+                if(!IsNumericString(suaSoDienThoaiNV))
+                {
+                    MessageBox.Show("Số điện thoại đúng định dạng", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (!IsValidEmail(suaEmailNV))
+                {
+                    MessageBox.Show("Email phải đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                var suaNhanVien = db.NhanViens.FirstOrDefault(x => x.IdNhanVien == nhanvien.IdNhanVien && x.TenHienThi == suaTenNV);
                 {
                     if (suaNhanVien != null)
                     {
-                        suaNhanVien.TenHienThi = txtSuaTen_NhanVien.Text;
-                        suaNhanVien.SoDienThoai = txtSuaSoDienThoai_NhanVien.Text;
-                        suaNhanVien.Email = txtSuaEmail_NhanVien.Text;
-
+                        suaNhanVien.TenHienThi = suaTenNV;
+                        suaNhanVien.SoDienThoai = suaSoDienThoaiNV;
+                        suaNhanVien.Email = suaEmailNV;
+                        suaNhanVien.IdChucVu = suaIdChucVu;
                         db.SaveChanges();
                         LoadListView();
                         MessageBox.Show("Thông tin tài khoản đã được cập nhật.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        this.Close();
                     }
                     else
                     {
@@ -114,23 +127,39 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             if (thongbao == MessageBoxResult.OK)
                 this.Close();
         }
-        public static string Base64Encode(string plainText)
-        {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
-        }
-        public static string MD5Hash(string input)
-        {
-            StringBuilder hash = new StringBuilder();
-            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
-            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
 
-            for (int i = 0; i < bytes.Length; i++)
+        private bool IsNumericString(string s)
+        {
+            if (txtSuaSoDienThoai_NhanVien.Text.Length != 10)
             {
-                hash.Append(bytes[i].ToString("x2"));
+                return false;
             }
-            return hash.ToString();
-        }
 
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static bool IsValidEmail(string email)
+        {
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
     }
 }

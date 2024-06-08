@@ -8,7 +8,7 @@
              Background="Transparent"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="AliceBlue" CornerRadius="10">
+    <Border Background="#80deea" CornerRadius="20">
         <Grid>
             <TabControl>
                 <TabItem Header="Tồn kho">
@@ -25,6 +25,9 @@
                 </TabItem>
                 <TabItem Header="Hàng cận date">
                     <local:ThongKeHangCanDateUC/>
+                </TabItem>
+                <TabItem Header="Hàng đã bán">
+                    <local:ThongKeThuocDaBanUC/>
                 </TabItem>
             </TabControl>
         </Grid>

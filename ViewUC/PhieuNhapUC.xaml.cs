@@ -35,6 +35,16 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             LoadDataPhieuNhap();
             this.idNhanVien = idNhanVien;
             this.nameNhanVien = nameNhanVien;
+            LoadComboBox();
+        }
+        private void LoadComboBox()
+        {
+            using (var db = new QLQuayThuocBanThuongContext())
+            {
+                cbxPhieuNhap_NhanVien.ItemsSource = db.NhanViens.ToList();
+                cbxPhieuNhap_NhanVien.DisplayMemberPath = "TenHienThi";
+                cbxPhieuNhap_NhanVien.SelectedValuePath = "IdNhanVien";
+            }
         }
         private void LoadDataPhieuNhap()
         {
@@ -51,9 +61,11 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                     TongTienDonNhapHang = dnh.TongTienDonNhapHang
                 }).ToList();
 
-                listViewPhieuNhap.ItemsSource = queryDATA;
+                //listViewPhieuNhap.ItemsSource = queryDATA;
                 //listView = listViewPhieuNhap;
+                UpdateListView(queryDATA);
             }
+            
         }
         private void ThemPhieuNhapWindow_Click(object sender, RoutedEventArgs e)
         {
@@ -107,10 +119,60 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                 }
             }
         }
-
-        private void btnPhieuNhap_Reload_Click(object sender, RoutedEventArgs e)
+        private void UpdateListView(List<DonNhapHang_MLV> data)
         {
-            LoadDataPhieuNhap();
+            listViewPhieuNhap.ItemsSource = data;
+            listView = listViewPhieuNhap;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewPhieuNhap.ItemsSource);
+            view.GroupDescriptions.Clear();
+            //PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChiTietDonNhapHang_MLV");
+            //view.GroupDescriptions.Add(groupDescription);
+        }
+        private void btnPhieuNhap_TimKiem_Click(object sender, RoutedEventArgs e)
+        {
+            using (var _db = new QLQuayThuocBanThuongContext())
+            {
+                DateTime? startDate = datePickerPhieuNhap_TuNgay.SelectedDate;
+                DateTime? endDate = datePickerPhieuNhap_DenNgay.SelectedDate;
+
+                
+                string selectedNhanVienId = null;
+
+               
+                if (cbxPhieuNhap_NhanVien.SelectedItem != null)
+                {
+                    selectedNhanVienId = (cbxPhieuNhap_NhanVien.SelectedItem as NhanVien).IdNhanVien;
+                }
+
+                // Thực hiện truy vấn LINQ
+                var query = from dnh in _db.DonNhapHangs
+                            join npp in _db.NhaPhanPhois on dnh.IdNhaPhanPhoi equals npp.IdNhaPhanPhoi
+                            join nv in _db.NhanViens on dnh.IdNhanVien equals nv.IdNhanVien
+                            where (string.IsNullOrEmpty(selectedNhanVienId) || dnh.IdNhanVien == selectedNhanVienId)
+                               && (!startDate.HasValue || dnh.NgayNhap >= startDate.Value)
+                               && (!endDate.HasValue || dnh.NgayNhap <= endDate.Value)
+                            select new DonNhapHang_MLV
+                            {
+                                IdDonNhapHang = dnh.IdDonNhapHang,
+                                NgayNhap = dnh.NgayNhap,
+                                TenNhaPhanPhoi = npp.TenNhaPhanPhoi,
+                                TenHienThi = nv.TenHienThi,
+                                TongTienDonNhapHang = dnh.TongTienDonNhapHang
+                            };
+
+                // Thực hiện truy vấn và chuyển kết quả sang danh sách
+                var result = query.ToList();
+
+                // Kiểm tra nếu không có kết quả
+                if (!result.Any())
+                {
+                    MessageBox.Show("Không có đơn nhập hàng nào cho lựa chọn này.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                // Hiển thị kết quả
+                UpdateListView(result);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
 using DoAnTotNghiepBanThuong.ModelListView;
+using DoAnTotNghiepBanThuong.ViewUC;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
 {
@@ -27,6 +29,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         public DonBanHang_MLV selectedDBH_MLV;
         public List<SanPham> sanPhamList;
         private ObservableCollection<ChiTietDonBanHang_MLV> chiTietDonBanHangs;
+        QLQuayThuocBanThuongContext db = new QLQuayThuocBanThuongContext();
         private string idSanPham;
         private SanPham_MLV selectedSanPham;
         decimal tongtienChietKhau;
@@ -74,11 +77,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                                            IdSanPham = ctdbh.IdSanPham,
                                            TenSanPham = ctdbh.IdSanPhamNavigation.TenSanPham,
                                            TenDonVi = sp.IdDonViNavigation.TenDonVi,
-                                           GiaBan = ctdbh.IdSanPhamNavigation.GiaBan,
+                                           GiaBan = ctdbh.DonGiaBan/ ctdbh.SoLuongBan,
                                            HanSuDung = ctdbh.IdSanPhamNavigation.HanSuDung,
                                            ChietKhau = ctdbh.ChietKhau,
                                            SoLuongBan = ctdbh.SoLuongBan,
-                                           DonGiaBan = ctdbh.SoLuongBan * sp.GiaBan
+                                           DonGiaBan = ctdbh.DonGiaBan
                                        }).ToList();
             }
             return chiTietDonBanHangs;
@@ -87,31 +90,67 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
 
         private void btnSuaDonBanHang_Luu_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new QLQuayThuocBanThuongContext())
+            if (selectedDBH_MLV != null)
             {
-                if (selectedDBH_MLV != null)
+                if (chiTietDonBanHangs.Count == 0)
                 {
-                    // Cập nhật tổng tiền đơn nhập hàng trong đối tượng selectedDNH_MLV
-                    selectedDBH_MLV.TongTienDonBanHang = decimal.Parse(txtTongTienDonBanHang.Text.Replace("₫", "").Replace(",", "").Trim());
-
-                    // Cập nhật tổng tiền đơn nhập hàng trong cơ sở dữ liệu
-                    // Cập nhật tổng tiền đơn nhập hàng trong đối tượng selectedDNH_MLV
-
-
-                    // Lưu các thay đổi vào cơ sở dữ liệu
-                    db.SaveChanges();
-
-
-                    MessageBox.Show("Đã cập nhật thông tin chi tiết đơn bán hàng và tổng tiền đơn bán hàng thành công!");
-                    this.Close();
+                    // Xóa đơn nhập hàng nếu không còn chi tiết
+                    var query = db.DonBanHangs.FirstOrDefault(x => x.IdDonBanHang == selectedDBH_MLV.IdDonBanHang);
+                    if (query != null)
+                    {
+                        // Cập nhật số lượng sản phẩm trước khi xóa chi tiết đơn nhập hàng
+                        var chiTietDonBanHangList = db.ChiTietDonBanHangs.Where(ctdnh => ctdnh.IdDonBanHang == selectedDBH_MLV.IdDonBanHang).ToList();
+                        foreach (var chiTiet in chiTietDonBanHangList)
+                        {
+                            var sanPham = db.SanPhams.FirstOrDefault(sp => sp.IdSanPham == chiTiet.IdSanPham);
+                            if (sanPham != null)
+                            {
+                                sanPham.SoLuongTon -= chiTiet.SoLuongBan;
+                            }
+                        }
+                        db.ChiTietDonBanHangs.RemoveRange(chiTietDonBanHangList);
+                        db.DonBanHangs.Remove(query);
+                        db.SaveChanges();
+                        LoadDataPhieuXuat();
+                        MessageBox.Show("Đơn nhập hàng đã bị xóa vì không còn chi tiết nào.", "Thông báo", MessageBoxButton.OK);
+                        this.Close();
+                        return;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Không thể cập nhật");
+                    // Cập nhật tổng tiền đơn nhập hàng trong đối tượng selectedDNH_MLV
+                    selectedDBH_MLV.TongTienDonBanHang = decimal.Parse(txtTongTienDonBanHang.Text.Replace("₫", "").Replace(",", "").Trim());
+                    db.SaveChanges();
+                    LoadDataPhieuXuat();
+                    MessageBox.Show("Đã cập nhật thông tin chi tiết đơn nhập hàng và tổng tiền đơn nhập hàng thành công!", "Thông báo", MessageBoxButton.OK);
+                    this.Close();
                 }
             }
+            else
+            {
+                MessageBox.Show("Không thể cập nhật");
+            }
         }
-
+        private void LoadDataPhieuXuat()
+        {
+            using (var db = new QLQuayThuocBanThuongContext())
+            {
+                var queryDATA = db.DonBanHangs.Select(dbh => new DonBanHang_MLV
+                {
+                    IdDonBanHang = dbh.IdDonBanHang,
+                    TenHienThi = dbh.IdNhanVienNavigation.TenHienThi,
+                    NgayBan = dbh.NgayBan,
+                    IdKhachHang = dbh.IdKhachHang,
+                    SoDienThoai = dbh.IdKhachHangNavigation.SoDienThoai,
+                    IdNhanVien = dbh.IdNhanVien,
+                    TenKhachHang = dbh.IdKhachHangNavigation.TenKhachHang,
+                    TongTienDonBanHang = dbh.TongTienDonBanHang
+                }).ToList();
+                PhieuXuatUC.listView.ItemsSource = queryDATA;
+                
+            }
+        }
         private void btnSuaDonBanHang_Thoat_Click(object sender, RoutedEventArgs e)
         {
             var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
@@ -158,7 +197,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
 
                         // Cập nhật lại ListView
                         UpdateListView();
-                        UpdateDatabase(selectedProduct.IdSanPham, soLuong, giaBan, dateTime, chietKhau);
+                        UpdateDatabase(selectedProduct.IdSanPham, soLuong, giaBan, dateTime, chietKhau, tongTienDonBanHang);
                         ClearInputFields();
                         listViewSuaDonBanHang.ItemsSource = GetChiTietDonBanHang();
                     }
@@ -193,7 +232,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             // Xóa toàn bộ mục trong chiTietDonNhapHangs
             chiTietDonBanHangs.Clear();
         }
-        private void UpdateDatabase(string idSanPham, int soLuong, decimal giaBan, DateTime hanSuDung,decimal chietKhau)
+        private void UpdateDatabase(string idSanPham, int soLuong, decimal giaBan, DateTime hanSuDung,decimal chietKhau, decimal tongTienDonBanHang)
         {
             // Tìm chi tiết đơn nhập hàng tương ứng trong cơ sở dữ liệu
             using (var db = new QLQuayThuocBanThuongContext())
@@ -220,6 +259,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 chiTietDonBanHang.IdSanPhamNavigation.HanSuDung = hanSuDung;
                 chiTietDonBanHang.IdSanPhamNavigation.GiaBan = giaBan;
                 // Đánh dấu chi tiết đơn nhập hàng là đã thay đổi
+                var donBanHang = db.DonBanHangs.FirstOrDefault(sp => sp.IdDonBanHang == chiTietDonBanHang.IdDonBanHang);
+                donBanHang.TongTienDonBanHang = tongTienDonBanHang;
                 db.Entry(chiTietDonBanHang).State = EntityState.Modified;
 
                 // Lưu các thay đổi vào cơ sở dữ liệu
@@ -228,7 +269,20 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         }
         private void btnSuaDonBanHang_Xoa_Click(object sender, RoutedEventArgs e)    
         {
-            
+            var button = sender as System.Windows.Controls.Button;
+            if (button != null)
+            {
+                // Lấy sản phẩm được chọn từ ListView
+                var chiTietSanPham = (ChiTietDonBanHang_MLV)button.DataContext;
+                MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có muốn xoá sản phẩm này ?", "Xác nhận xoá", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    chiTietDonBanHangs.Remove(chiTietSanPham);
+                    listViewSuaDonBanHang.ItemsSource = chiTietDonBanHangs;
+                    decimal tongTienDonNhapHang = (decimal)chiTietDonBanHangs.Sum(item => item.DonGiaBan);
+                    txtTongTienDonBanHang.Text = $"{tongTienDonNhapHang:N0}";
+                }
+            }
         }
         private void listViewSuaDonBanHang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         { 
@@ -241,7 +295,6 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     txtSuaDonBanHang_ChietKhau.Text = selectedSanPham.ChietKhau.HasValue ? $"{selectedSanPham.ChietKhau.Value:F0}" : "N/A";
                 //txtSuaDonNhapHang_SuaSoLo.Text = selectedSanPham.SoLo;
                     txtSuaDonBanHang_HanSuDung.SelectedDate = selectedSanPham.HanSuDung;
-
             }
         }
 

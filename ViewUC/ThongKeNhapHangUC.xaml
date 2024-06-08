@@ -20,64 +20,62 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="10 20 0 0" HorizontalAlignment="Left">
+                <Grid Grid.Row="0" Margin="10 60 0 0" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btnThongKeNhapHang_XuatFile" Click="btnThongKeNhapHang_XuatFile_Click" materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea" Width="120" Height="49.96">
+                        <Button x:Name="btnThongKeNhapHang_TimKiem" Click="btnThongKeNhapHang_TimKiem_Click" materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea" Width="120" Height="49.96">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="TrayArrowDown" Height="20" Width="20"  VerticalAlignment="Center"/>
-                                <TextBlock VerticalAlignment="Center" Text="Xuất file"/>
+                                <materialDesign:PackIcon Kind="Search" Height="20" Width="20"  VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" Text="Tìm kiếm"/>
                             </StackPanel>
                         </Button>
-                        <Button materialDesign:ButtonAssist.CornerRadius="10" Margin="10" Background="#80deea" BorderBrush="#80deea" Width="49.96" Height="49.96">
+                        <Button x:Name="btnThongKeNhapHang_XuatFile" Margin="10 0 0 0" Click="btnThongKeNhapHang_XuatFile_Click" materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea" Width="49.96" Height="49.96">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Reload" Height="20" Width="20"  VerticalAlignment="Center"/>
+                                <materialDesign:PackIcon Kind="TrayArrowDown" Height="20" Width="20"  VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
-
-
                 </Grid>
-
                 <Grid Grid.Row="1" Margin="10 10 0 0" HorizontalAlignment="Left">
                     <DatePicker
+                        x:Name="datePickerThongKeNhapHang_TuNgay"
                         Background="White"
-Width="165"
-materialDesign:HintAssist.Hint="Ngày bắt đầu"
-Style="{StaticResource MaterialDesignFilledDatePicker}" />
+Width="180"
+materialDesign:HintAssist.Hint="Từ ngày"
+Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 </Grid>
 
                 <Grid Grid.Row="2" HorizontalAlignment="Left" Margin="10 10 0 0" >
                     <DatePicker
+                        x:Name="datePickerThongKeNhapHang_DenNgay"
                         Background="White"
-Width="165"
-materialDesign:HintAssist.Hint="Ngày kết thúc"
-Style="{StaticResource MaterialDesignFilledDatePicker}" />
+Width="180"
+materialDesign:HintAssist.Hint="Đến ngày"
+Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 </Grid>
 
                 <Grid Grid.Row="3" HorizontalAlignment="Left" Margin="10 10 0 0">
                     <ComboBox
+                        x:Name="cbxThongKeNhapHang_NhaPhanPhoi"
+DisplayMemberPath="TenNhaPhanPhoi"
+SelectedValuePath="IdNhaPhanPhoi"
+                        IsEditable="True" IsTextSearchEnabled="True"
+                  TextSearch.TextPath="TenNhaPhanPhoi"
                         Background="White"
-  Width="165"
-  materialDesign:HintAssist.Hint="Nhà cung cấp"
+  Width="180"
+  materialDesign:HintAssist.Hint="Nhà phân phối"
   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
                 </Grid>
-
-                <Grid Grid.Row="4" HorizontalAlignment="Left" Margin="10 10 0 0" >
-                    <TextBox 
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Width="165"
-                        Background="White"
-                        materialDesign:HintAssist.Hint="Tìm theo tên hoặc mã">
-                    </TextBox>
-                </Grid>
-
-                <Grid Grid.Row="5" HorizontalAlignment="Left" Margin="10 10 0 0">
+                <Grid Grid.Row="4" HorizontalAlignment="Left" Margin="10 10 0 0">
                     <ComboBox
+                        x:Name="cbxThongKeNhapHang_NhanVien"
+                        DisplayMemberPath="TenHienThi"
+                        SelectedValuePath="IdNhanVien"
+                        IsEditable="True" IsTextSearchEnabled="True"
+                        TextSearch.TextPath="TenHienThi"
                         Background="White"
-Width="165"
+Width="180"
 materialDesign:HintAssist.Hint="Người thực hiện"
 Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
@@ -112,14 +110,6 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                             </GroupStyle.HeaderTemplate>
                                         </GroupStyle>
                                     </ListView.GroupStyle>
-                                    <!--<ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="ID Phiếu Nhập" DisplayMemberBinding="{Binding IdDonNhapHang}"/>
-                                            <GridViewColumn Header="Ngày Nhập" DisplayMemberBinding="{Binding NgayNhap,StringFormat='dd/MM/yyyy'}" />
-                                            <GridViewColumn Header="Nhà Phân Phối" DisplayMemberBinding="{Binding TenNhaPhanPhoi}" />
-                                            <GridViewColumn Header="Nhân Viên Thực Hiện" DisplayMemberBinding="{Binding TenNhanVien}" />
-                                        </GridView>
-                                    </ListView.View>-->
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Expander>
@@ -133,7 +123,7 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                                             <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
                                                         <TextBlock Grid.Column="0" Margin="0 0 0 0" HorizontalAlignment="Left" Text="{Binding IdDonNhapHang}" />
-                                                        <TextBlock Grid.Column="1" Margin="20 0 0 0" HorizontalAlignment="Left" Text="{Binding NgayNhap}" />
+                                                        <TextBlock Grid.Column="1" Margin="20 0 0 0" HorizontalAlignment="Left" Text="{Binding NgayNhap,StringFormat='dd/MM/yyyy HH:mm:ss'}" />
                                                         <TextBlock Grid.Column="2" Margin="20 0 0 0" Width="250" HorizontalAlignment="Center" Text="{Binding TenNhaPhanPhoi}" />
                                                         <TextBlock Grid.Column="3" Margin="30 0 80 0" HorizontalAlignment="Right" Text="{Binding TenHienThi}" />
                                                         <TextBlock Grid.Column="4" Margin="35 0 00 0" HorizontalAlignment="right" Text="{Binding TongTienDonNhapHang,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" />

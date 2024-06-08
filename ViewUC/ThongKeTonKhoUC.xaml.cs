@@ -17,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using DoAnTotNghiepBanThuong.ModelListView;
+using XAct.Library.Settings;
 
 namespace DoAnTotNghiepBanThuong.ViewUC
 {
@@ -30,9 +32,6 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         {
             InitializeComponent();
             LoadDataTonKho();
-            
-
-            // Trong hàm Main hoặc hàm khởi tạo
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
         private void LoadDataTonKho()
@@ -49,7 +48,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         sp.TenSanPham,
         sp.SoLuongTon,
         TenDonVi = dv.TenDonVi,
-        TenNhomSanPham = nsp.TenNhomSanPham,
+        //TenNhomSanPham = nsp.TenNhomSanPham,
         GiaNhap = sp.GiaNhap,
         GiaBan = sp.GiaBan,
         SoLuongNhap = dbContext.ChiTietDonNhapHangs.Where(ctpn => ctpn.IdSanPham == sp.IdSanPham).Sum(ctpn => ctpn.SoLuongNhap),
@@ -60,9 +59,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         p.IdSanPham,
         p.TenSanPham,
         p.TenDonVi,
-        p.TenNhomSanPham,
-        SoLuongTonKho = p.SoLuongNhap + p.SoLuongTon  - p.SoLuongBan,
-       
+        SoLuongTonKho = p.SoLuongTon
     })
     .ToList();
 
@@ -94,12 +91,12 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                     // Thiết lập tiêu đề cột
                     worksheet.Cells[1, 1].Value = "Mã sản phẩm";
                     worksheet.Cells[1, 2].Value = "Tên sản phẩm";
-                    worksheet.Cells[1, 3].Value = "ĐVT";
+                    worksheet.Cells[1, 3].Value = "Đơn vị tính";
                     worksheet.Cells[1, 4].Value = "Tồn kho";
-                    worksheet.Cells[1, 5].Value = "Nhóm sản phẩm";
+                    //worksheet.Cells[1, 5].Value = "Nhóm sản phẩm";
 
                     // Định dạng tiêu đề cột
-                    using (var range = worksheet.Cells[1, 1, 1, 5])
+                    using (var range = worksheet.Cells[1, 1, 1, 4])
                     {
                         range.Style.Font.Bold = true;
                         range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
@@ -114,7 +111,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                         worksheet.Cells[i + 2, 2].Value = data[i].TenSanPham;
                         worksheet.Cells[i + 2, 3].Value = data[i].TenDonVi;
                         worksheet.Cells[i + 2, 4].Value = data[i].SoLuongTonKho;
-                        worksheet.Cells[i + 2, 5].Value = data[i].TenNhomSanPham;
+                        //worksheet.Cells[i + 2, 5].Value = data[i].TenNhomSanPham;
                     }
 
                     // Tự động điều chỉnh kích thước cột
@@ -126,6 +123,43 @@ namespace DoAnTotNghiepBanThuong.ViewUC
 
                     MessageBox.Show("Xuất báo cáo tồn kho thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+            }
+        }
+
+        private void txtTonKho_TimKiem_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = txtTonKho_TimKiem.Text.Trim().ToLower();
+
+            using (var dbContext = new QLQuayThuocBanThuongContext())
+            {
+                var productInventory = (
+                    from sp in dbContext.SanPhams
+                    join dv in dbContext.DonVis on sp.IdDonVi equals dv.IdDonVi
+                    join nsp in dbContext.NhomSanPhams on sp.IdNhomSanPham equals nsp.IdNhomSanPham
+                    select new
+                    {
+                        sp.IdSanPham,
+                        sp.TenSanPham,
+                        sp.SoLuongTon,
+                        TenDonVi = dv.TenDonVi,
+                        GiaNhap = sp.GiaNhap,
+                        GiaBan = sp.GiaBan,
+                        SoLuongNhap = dbContext.ChiTietDonNhapHangs.Where(ctpn => ctpn.IdSanPham == sp.IdSanPham).Sum(ctpn => ctpn.SoLuongNhap),
+                        SoLuongBan = dbContext.ChiTietDonBanHangs.Where(ctdb => ctdb.IdSanPham == sp.IdSanPham).Sum(ctdb => ctdb.SoLuongBan)
+                    })
+                    .Select(p => new
+                    {
+                        p.IdSanPham,
+                        p.TenSanPham,
+                        p.TenDonVi,
+                        SoLuongTonKho = p.SoLuongNhap + p.SoLuongTon - p.SoLuongBan,
+                    });
+
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    productInventory = productInventory.Where(p => p.TenSanPham.ToLower().Contains(searchText));
+                }
+                listViewThongKeTonKho.ItemsSource = productInventory.ToList();
             }
         }
     }

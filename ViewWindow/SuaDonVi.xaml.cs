@@ -1,4 +1,5 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,12 +24,12 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class SuaDonVi : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
-        private DonVi _DonVi;
-        public SuaDonVi(QLQuayThuocBanThuongContext db, DonVi donvi)
+        private QLQuayThuocBanThuongContext db;
+        private DonVi_MLV _DonVi;
+        public SuaDonVi(QLQuayThuocBanThuongContext _db, DonVi_MLV donvi)
         {
             InitializeComponent();
-            _dbContext = db;
+            db = _db;
             _DonVi = donvi;
             txtSuaIdDonVi.Text = _DonVi.IdDonVi;
             txtSuaTenDonVi.Text = _DonVi.TenDonVi;
@@ -43,11 +44,29 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 MessageBox.Show("Không được để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            _DonVi.TenDonVi = suaTenDonVi;
-            _dbContext.SaveChanges();
-            DonViTinhUC.listView.ItemsSource = _dbContext.DonVis.ToList();
-            MessageBox.Show("Đã sửa thành công", "Thông báo", MessageBoxButton.OK);
-            this.Close();
+            var suaDonVi = db.DonVis.FirstOrDefault(x => x.IdDonVi == _DonVi.IdDonVi);
+            if (suaDonVi != null)
+            {
+                suaDonVi.TenDonVi = suaTenDonVi;
+                db.SaveChanges();
+                LoadDataDonVi();
+                //DonViTinhUC.listView.ItemsSource = db.DonVis.ToList();
+                MessageBox.Show("Đã sửa thành công", "Thông báo", MessageBoxButton.OK);
+                this.Close();
+            }
+            
+        }
+        private void LoadDataDonVi()
+        {
+            var query = (from dv in db.DonVis
+                         select new DonVi_MLV
+                         {
+                             IdDonVi = dv.IdDonVi,
+                             TenDonVi = dv.TenDonVi
+
+                         }).ToList();
+            DonViTinhUC.listView.ItemsSource = query;
+
         }
         private void btnSuaDonVi_Thoat(object sender, RoutedEventArgs e)
         {

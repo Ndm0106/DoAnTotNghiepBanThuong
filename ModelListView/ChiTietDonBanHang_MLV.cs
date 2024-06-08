@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAnTotNghiepBanThuong.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,7 @@ namespace DoAnTotNghiepBanThuong.ModelListView
         public string? TenDonVi { get; set; }
         public decimal? GiaBan { get; set; }
         public DateTime? HanSuDung { get; set; }
+
+        public virtual SanPham_MLV IdSanPhamNavigation { get; set; } = null!;
     }
 }

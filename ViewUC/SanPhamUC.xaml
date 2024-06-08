@@ -24,10 +24,12 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBox
+                    x:Name="txtTimKiemSanPham"
+                    TextChanged="txtTimKiemSanPham_TextChanged"
                     Grid.Column="0"
                     Width="150"
                     Background="White"
-                    Height="48"
+                    Height="49.96"
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Tìm kiếm"
                     AcceptsReturn="True"
@@ -35,7 +37,7 @@
                     TextWrapping="Wrap"/>
                 <Button Grid.Column="1" x:Name="ThemSanPhanMoiWindow" 
                         Click="ThemSanPhanMoiWindow_Click" 
-                        Width="180" Height="48" 
+                        Width="180" Height="49.96" 
                         Margin="10 0 0 0" 
                         materialDesign:ButtonAssist.CornerRadius="10"
                         Background="#80deea"
@@ -49,8 +51,8 @@
                 <Button
                     Margin="10 0 0 0"
                     Grid.Column="2"
-                    Height="48"
-                    Width="48"
+                    Height="49.96"
+                    Width="49.96"
                     Background="#80deea"
                     BorderBrush="#80deea"
                     materialDesign:ButtonAssist.CornerRadius="10"
@@ -71,7 +73,7 @@
                                                     <Button x:Name="SuaSanPhamWindow" BorderBrush="Transparent" Foreground="White" Background="ForestGreen" Click="SuaSanPhamWindow_Click">
                                                         <materialDesign:PackIcon Kind="Pencil"/>
                                                     </Button>
-                                                    <Button x:Name="XoaSanPham" BorderBrush="Transparent" Foreground="White" Background="OrangeRed" Click="XoaSanPham_Click" Margin="10 0 0 0">
+                                                    <Button x:Name="XoaSanPham" BorderBrush="Transparent" Foreground="White" Background="OrangeRed" Click="XoaSanPham_Click" Margin="5 0 0 0">
                                                         <materialDesign:PackIcon Kind="Close"/>
                                                     </Button>
                                                 </StackPanel>
@@ -99,7 +101,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Số lượng">
+                                    <GridViewColumn Header="Số lượng tồn đầu kì">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding SoLuongTon}" Padding="20 10 0 0"/>
@@ -116,7 +118,7 @@
                                     <GridViewColumn Header="Giá bán">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding GiaBanLe,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
+                                                <TextBlock Text="{Binding GiaBan,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="AliceBlue">
+    <Border Background="AliceBlue" CornerRadius="0 0 20 20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230"></ColumnDefinition>
@@ -20,69 +20,67 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="10 20 0 0" HorizontalAlignment="Left">
+                <Grid Grid.Row="0" Margin="10 60 0 0" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Button materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea" Width="120" Height="49.96">
+                        <Button x:Name="btnThongKeXuatHang_TimKiem" Click="btnThongKeXuatHang_TimKiem_Click"  materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea" Width="120" Height="49.96">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="TrayArrowDown" Height="20" Width="20"  VerticalAlignment="Center"/>
-                                <TextBlock VerticalAlignment="Center" Text="Xuất file"/>
+                                <materialDesign:PackIcon Kind="Search" Height="20" Width="20"  VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" Text="Tìm kiếm"/>
                             </StackPanel>
                         </Button>
-                        <Button materialDesign:ButtonAssist.CornerRadius="10" Margin="10" Background="#80deea" BorderBrush="#80deea" Width="49.96" Height="49.96">
+                        <Button x:Name="btnThongKeXuatHang_XuatFile" Click="btnThongKeXuatHang_XuatFile_Click" materialDesign:ButtonAssist.CornerRadius="10" Margin="10 0 0 0" Background="#80deea" BorderBrush="#80deea" Width="49.96" Height="49.96">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Reload" Height="20" Width="20"  VerticalAlignment="Center"/>
+                                <materialDesign:PackIcon Kind="TrayArrowDown" Height="20" Width="20"  VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
-
-
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="10 10 0 0" HorizontalAlignment="Left">
                     <DatePicker
                         Background="White"
-Width="165"
-materialDesign:HintAssist.Hint="Ngày bắt đầu"
-Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                        x:Name="datePickerThongKeXuatHang_TuNgay"
+Width="180"
+materialDesign:HintAssist.Hint="Từ ngày"
+Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 </Grid>
 
                 <Grid Grid.Row="2" HorizontalAlignment="Left" Margin="10 10 0 0" >
                     <DatePicker
+                        x:Name="datePickerThongKeXuatHang_DenNgay"
                         Background="White"
-Width="165"
-materialDesign:HintAssist.Hint="Ngày kết thúc"
-Style="{StaticResource MaterialDesignFilledDatePicker}" />
+Width="180"
+materialDesign:HintAssist.Hint="Đến ngày"
+Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 </Grid>
 
                 <Grid Grid.Row="3" HorizontalAlignment="Left" Margin="10 10 0 0">
                     <ComboBox
                         Background="White"
-  Width="165"
-  materialDesign:HintAssist.Hint="Nhà cung cấp"
+                        x:Name="cbxThongKeXuatHang_KhachHang"
+DisplayMemberPath="TenKhachHang"
+SelectedValuePath="IdKhachHang"
+                        IsEditable="True" IsTextSearchEnabled="True"
+                        TextSearch.TextPath="TenKhachHang"
+  Width="180"
+  materialDesign:HintAssist.Hint="Khách hàng"
   Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
                 </Grid>
-
-                <Grid Grid.Row="4" HorizontalAlignment="Left" Margin="10 10 0 0" >
-                    <TextBox 
-                        Background="White"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        Width="165"
-                        materialDesign:HintAssist.Hint="Tìm theo tên hoặc mã">
-                    </TextBox>
-                </Grid>
-
-                <Grid Grid.Row="5" HorizontalAlignment="Left" Margin="10 10 0 0">
+                <Grid Grid.Row="4" HorizontalAlignment="Left" Margin="10 10 0 0">
                     <ComboBox
                         Background="White"
-Width="165"
+                        x:Name="cbxThongKeXuatHang_NhanVien"
+DisplayMemberPath="TenHienThi"
+SelectedValuePath="IdNhanVien"
+IsEditable="True" IsTextSearchEnabled="True"
+TextSearch.TextPath="TenHienThi"
+Width="180"
 materialDesign:HintAssist.Hint="Người thực hiện"
 Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     </ComboBox>
                 </Grid>
-
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -112,14 +110,6 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                             </GroupStyle.HeaderTemplate>
                                         </GroupStyle>
                                     </ListView.GroupStyle>
-                                    <!--<ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="ID Phiếu Xuất" DisplayMemberBinding="{Binding IdDonBanHang}"/>
-                                            <GridViewColumn Header="Ngày Xuất" DisplayMemberBinding="{Binding NgayBan}" />
-                                            <GridViewColumn Header="Khách hàng" DisplayMemberBinding="{Binding TenKhachHang}" />
-                                            <GridViewColumn Header="Nhân Viên Thực Hiện" DisplayMemberBinding="{Binding TenNhanVien}" />
-                                        </GridView>
-                                    </ListView.View>-->
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Expander>
@@ -132,7 +122,7 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                                             <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
                                                         <TextBlock Grid.Column="0" Margin="10 0 0 0" HorizontalAlignment="Left" Text="{Binding IdDonBanHang}" />
-                                                        <TextBlock Grid.Column="1" Margin="30 0 0 0" HorizontalAlignment="Left" Text="{Binding NgayBan}" />
+                                                        <TextBlock Grid.Column="1" Margin="30 0 0 0" HorizontalAlignment="Left" Text="{Binding NgayBan,StringFormat='dd/MM/yyyy HH:mm:ss'}" />
                                                         <TextBlock Grid.Column="2" Margin="70 0 0 0" HorizontalAlignment="Center" Text="{Binding TenKhachHang}" />
                                                         <TextBlock Grid.Column="3" Margin="120 0 0 0" HorizontalAlignment="Left" Text="{Binding TenHienThi}" />
                                                         <TextBlock Grid.Column="4" Margin="300 0 0 0" HorizontalAlignment="Left" Text="{Binding TongTienDonBanHang,StringFormat={}{0:N0}, ConverterCulture=vi-VN}"/>
@@ -165,14 +155,21 @@ Style="{StaticResource MaterialDesignOutlinedComboBox}">
                                                             <GridViewColumn Header="Giá bán">
                                                                 <GridViewColumn.CellTemplate>
                                                                     <DataTemplate>
-                                                                        <TextBlock Text="{Binding GiaBan,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                                        <TextBlock Text="{Binding GiaBan,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
+                                                                    </DataTemplate>
+                                                                </GridViewColumn.CellTemplate>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn Header="Chiết khấu">
+                                                                <GridViewColumn.CellTemplate>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="{Binding ChietKhau,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                                                     </DataTemplate>
                                                                 </GridViewColumn.CellTemplate>
                                                             </GridViewColumn>
                                                             <GridViewColumn Header="Thành tiền bán">
                                                                 <GridViewColumn.CellTemplate>
                                                                     <DataTemplate>
-                                                                        <TextBlock Text="{Binding DonGiaBan,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                                        <TextBlock Text="{Binding DonGiaBan,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                                                     </DataTemplate>
                                                                 </GridViewColumn.CellTemplate>
                                                             </GridViewColumn>

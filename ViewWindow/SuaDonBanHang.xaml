@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="SuaDonBanHang" Height="700" Width="1130">
-    <Border Background="#cfd8dc" CornerRadius="20">
+    <Border Background="#cfd8dc" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -214,7 +214,7 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                                 <DataTemplate>
                                                     <Button x:Name="btnSuaDonBanHang_Xoa" Click="btnSuaDonBanHang_Xoa_Click" Background="OrangeRed" Foreground="White" BorderBrush="Transparent">
                                                         <StackPanel>
-                                                            <materialDesign:PackIcon Kind="Close"/>
+                                                            <materialDesign:PackIcon Kind="DeleteForever"/>
                                                         </StackPanel>
                                                     </Button>
                                                 </DataTemplate>

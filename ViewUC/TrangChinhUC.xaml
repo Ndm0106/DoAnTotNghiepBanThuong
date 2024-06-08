@@ -7,69 +7,115 @@
              mc:Ignorable="d" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Border Height="100"  Margin="5" Background="White" CornerRadius="5" Grid.Column="0">
-                <Grid>
-                    <TextBlock VerticalAlignment="Top" Margin="10" FontSize="16">
-                    <Bold>Hoá đơn - Ngày</Bold>
-                    </TextBlock>
-                    <TextBlock Margin="10" VerticalAlignment="Center" Text="0" FontSize="16" Foreground="Blue"/>
-                    <TextBlock Margin="10" VerticalAlignment="Bottom" Text="0 - Trả lại" FontSize="13"/>
+    <Border CornerRadius="20 20 20 20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Height="100"  Margin="10" Background="LightSalmon" CornerRadius="20" Grid.Column="0">
+                    <Grid>
+                        <TextBlock Foreground="White" VerticalAlignment="Top" Margin="10" FontSize="14">
+                 <Bold>DOANH THU</Bold>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 0 0" >
+                            <TextBlock  VerticalAlignment="Center" Text="Tháng trước:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblDoanhSoThangTruoc" VerticalAlignment="Center"   Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="đồng" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 50 0 0">
+                            <TextBlock VerticalAlignment="Center" Text="Tháng này:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblDoanhSoThangNay" VerticalAlignment="Center" Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="đồng" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Margin="10" Background="Green" CornerRadius="20" Grid.Column="1">
+                    <Grid>
+                        <TextBlock Foreground="White" VerticalAlignment="Top" Margin="10" FontSize="14">
+                     <Bold>ĐƠN NHẬP</Bold>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 0 0" >
+                            <TextBlock  VerticalAlignment="Center" Text="Tháng trước:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblNhapHangThangTruoc" VerticalAlignment="Center" Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="đơn" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 50 0 0">
+                            <TextBlock VerticalAlignment="Center" Text="Tháng này:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblNhapHangThangNay" VerticalAlignment="Center" Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="đơn" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Margin="10" Background="LightBlue" CornerRadius="20" Grid.Column="2">
+                    <Grid>
+                        <TextBlock Foreground="White" VerticalAlignment="Top" Margin="10" FontSize="14">        
+                     <Bold>ĐƠN BÁN</Bold>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 0 0" >
+                            <TextBlock  VerticalAlignment="Center" Text="Tháng trước:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblBanHangThangTruoc" VerticalAlignment="Center"  Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="đơn" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 50 0 0">
+                            <TextBlock VerticalAlignment="Center" Text="Tháng này:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblBanHangThangNay" VerticalAlignment="Center" Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="đơn" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Margin="10" Background="OrangeRed" CornerRadius="20" Grid.Column="3">
+                    <Grid>
+                        <TextBlock Foreground="White" VerticalAlignment="Top" Margin="10" FontSize="14">
+                     <Bold>CHÚ Ý</Bold>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 0 0" >
+                            <TextBlock  VerticalAlignment="Center" Text="Sắp hết hạn:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblSapHetHan" VerticalAlignment="Center"  Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="sản phẩm" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="10 50 0 0">
+                            <TextBlock VerticalAlignment="Center" Text="Hết hạn:" FontSize="16" Foreground="White"/>
+                            <Label x:Name="lblHetHan" VerticalAlignment="Center" Content="0" FontSize="16" Foreground="White"></Label>
+                            <TextBlock  VerticalAlignment="Center" Text="sản phẩm" FontSize="16" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock FontSize="20" HorizontalAlignment="Center"><Bold>DOANH SỐ BÁN HÀNG THEO THÁNG</Bold></TextBlock>
                 </Grid>
-            </Border>
-            <Border Margin="5" Background="White" CornerRadius="5" Grid.Column="1">
-                <Grid>
-                    <TextBlock VerticalAlignment="Top" Margin="10" FontSize="16">
-                        <Bold>LT Nhập hàng - Tháng</Bold>
-                    </TextBlock>
-                    <TextBlock Margin="10" VerticalAlignment="Center" Text="0" FontSize="16" Foreground="Blue"/>
-                    <TextBlock Margin="10" VerticalAlignment="Bottom" Text="0 - Chưa liên thông" FontSize="13"/>
+                <Grid Grid.Row="1">
+                    <Border Margin="5" Background="White" CornerRadius="5">
+                        <Grid>
+                            <lvc:CartesianChart Name="SoLuongChart" LegendLocation="Right">
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Labels="{Binding Labels}"/>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Title="Số lượng" MinValue="0">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator Step="5"/>
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </Grid>
+                    </Border>
                 </Grid>
-            </Border>
-            <Border Margin="5" Background="White" CornerRadius="5" Grid.Column="2">
-                <Grid>
-                    <TextBlock VerticalAlignment="Top" Margin="10" FontSize="16">        
-                        <Bold>LT Hoá đơn - Tháng</Bold>
-                    </TextBlock>
-                    <TextBlock Margin="10" VerticalAlignment="Center" Text="0" FontSize="16" Foreground="Blue"/>
-                    <TextBlock Margin="10" VerticalAlignment="Bottom" Text="0 - Chưa liên thông" FontSize="13"/>
-                </Grid>
-            </Border>
-            <Border Margin="5" Background="White" CornerRadius="5" Grid.Column="3">
-                <Grid>
-                    <TextBlock VerticalAlignment="Top" Margin="10" FontSize="16">
-                        <Bold>Hàng cận date</Bold>
-                    </TextBlock>
-                    <TextBlock Margin="10" VerticalAlignment="Center" Text="0" FontSize="16" Foreground="Blue"/>
-                    <TextBlock Margin="10" VerticalAlignment="Bottom" Text="0 - Đã hết hạn" FontSize="13"/>
-                </Grid>
-            </Border>
+            </Grid>
         </Grid>
-        <Grid Grid.Row="1">
-            <Border Margin="5" Background="White" CornerRadius="5">
-                <Grid>
-                    <lvc:CartesianChart Series="{Binding ChartSeries}" 
-                        LegendLocation="Right">
-                        <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Title="X Axis"/>
-                        </lvc:CartesianChart.AxisX>
-                        <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Title="Y Axis"/>
-                        </lvc:CartesianChart.AxisY>
-                    </lvc:CartesianChart>
-                </Grid>
-            </Border>
-        </Grid>
-    </Grid>
+    </Border>
 </UserControl>

@@ -1,8 +1,10 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,12 +24,12 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class SuaNhaSanXuat : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
-        private NhaSanXuat _NhaSanXuat;
-        public SuaNhaSanXuat(QLQuayThuocBanThuongContext db, NhaSanXuat NhaSanXuat)
+        private QLQuayThuocBanThuongContext db;
+        private NhaSanXuat_MLV _NhaSanXuat;
+        public SuaNhaSanXuat(QLQuayThuocBanThuongContext _db, NhaSanXuat_MLV NhaSanXuat)
         {
             InitializeComponent();
-            _dbContext = db;
+            db = _db;
             _NhaSanXuat = NhaSanXuat;
             txtSuaIdNhaSanXuat.Text = _NhaSanXuat.IdNhaSanXuat;
             txtSuaTenNhaSanXuat.Text = _NhaSanXuat.TenNhaSanXuat;
@@ -49,21 +51,89 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 MessageBox.Show("Không được để trống tên nhà cung cấp", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            _NhaSanXuat.TenNhaSanXuat = suaTenNCC;
-            _NhaSanXuat.DiaChi = suaDiaChiNCC;
-            _NhaSanXuat.SoDienThoai = suaSoDienThoaiNCC;
-            _NhaSanXuat.Fax = suaSoFaxNCC;
-            _NhaSanXuat.Email = suaEmailNCC;
-            _dbContext.SaveChanges();
-            NhaSanXuatUC.listView.ItemsSource = _dbContext.NhaSanXuats.ToList();
-            MessageBox.Show("Sửa thành công", "Thông báo");
-            this.Close();
+            if (!IsNumericString(suaSoDienThoaiNCC))
+            {
+                MessageBox.Show("Số điện thoại đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!IsValidEmail(suaEmailNCC))
+            {
+                MessageBox.Show("Email phải đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var suaNhaSanXuat = db.NhaSanXuats.FirstOrDefault(x => x.IdNhaSanXuat == _NhaSanXuat.IdNhaSanXuat);
+            if (suaNhaSanXuat != null) {
+                suaNhaSanXuat.TenNhaSanXuat = suaTenNCC;
+                suaNhaSanXuat.DiaChi = suaDiaChiNCC;
+                suaNhaSanXuat.SoDienThoai = suaSoDienThoaiNCC;
+                suaNhaSanXuat.Fax = suaSoFaxNCC;
+                suaNhaSanXuat.Email = suaEmailNCC;
+                db.SaveChanges();
+                LoadDataNhaSanXuat();
+                MessageBox.Show("Sửa thành công", "Thông báo");
+                this.Close();
+            }
+        }
+        private void LoadDataNhaSanXuat()
+        {
+            var query = (from nsx in db.NhaSanXuats
+                         select new NhaSanXuat_MLV
+                         {
+                             IdNhaSanXuat = nsx.IdNhaSanXuat,
+                             TenNhaSanXuat = nsx.TenNhaSanXuat,
+                             DiaChi = nsx.DiaChi,
+                             Fax = nsx.Fax,
+                             SoDienThoai = nsx.SoDienThoai,
+                             Email = nsx.Email,
+
+                         }).ToList();
+            NhaSanXuatUC.listView.ItemsSource = query;
+
         }
         private void btnSuaNhaSanXuat_Thoat(object sender, RoutedEventArgs e)
         {
             var thongbao = MessageBox.Show("Bạn có muốn thoát phiếu sửa", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (thongbao == MessageBoxResult.OK)
                 this.Close();
+        }
+        public static bool IsValidEmail(string email)
+        {
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+        private bool IsNumericString(string s)
+        {
+            if (txtSuaSoDienThoaiNhaSanXuat.Text.Length != 10)
+            {
+                return false;
+            }
+            foreach (char c in s)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    return false; // Nếu có ký tự khoảng trắng, trả về false
+                }
+            }
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

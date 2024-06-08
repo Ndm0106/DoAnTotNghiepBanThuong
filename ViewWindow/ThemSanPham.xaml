@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="ThemSanPham" Height="610" Width="720">
-    <Border Background="AliceBlue" CornerRadius="20">
+    <Border Background="AliceBlue" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -50,8 +50,7 @@
                             Height="49.96"
                             VerticalAlignment="Top"
                             materialDesign:HintAssist.Hint="Mã sản phẩm"
-                            AcceptsReturn="True"
-                                IsEnabled="False"
+                            AcceptsReturn="True" 
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
                             TextWrapping="Wrap"
                             VerticalScrollBarVisibility="Auto" />

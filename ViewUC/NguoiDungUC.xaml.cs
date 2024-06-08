@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using XAct.Library.Settings;
 
 namespace DoAnTotNghiepBanThuong.ViewUC
 {
@@ -23,27 +24,30 @@ namespace DoAnTotNghiepBanThuong.ViewUC
     /// </summary>
     public partial class NguoiDungUC : UserControl
     {
-        private QLQuayThuocBanThuongContext _db;
+        private QLQuayThuocBanThuongContext db;
         public static System.Windows.Controls.ListView? listView;
         public NguoiDungUC()
         {
             InitializeComponent();
             LoadDataNhanVien();
-            _db = new QLQuayThuocBanThuongContext();
+            db = new QLQuayThuocBanThuongContext();
         }
         private void LoadDataNhanVien()
         {
             using (var db = new QLQuayThuocBanThuongContext())
             {
-                var queryDATA = db.NhanViens.Select(nv => new NhanVien_MLV
-                {
-                    TenHienThi = nv.TenHienThi,
-                    TenChucVu = nv.IdChucVuNavigation.TenChucVu,
-                    TaiKhoan = nv.TaiKhoan,
-                    MatKhau = nv.MatKhau,
-                    SoDienThoai = nv.SoDienThoai,
-                    Email = nv.Email,
-                }).ToList();
+                var queryDATA = (from nv in db.NhanViens
+                                 select new NhanVien_MLV
+                                 {
+                                     IdNhanVien = nv.IdNhanVien,
+                                     TenHienThi = nv.TenHienThi,
+                                     TenChucVu = nv.IdChucVuNavigation.TenChucVu,
+                                     TaiKhoan = nv.TaiKhoan,
+                                     MatKhau = nv.MatKhau,
+                                     SoDienThoai = nv.SoDienThoai,
+                                     IdChucVu = nv.IdChucVu,
+                                     Email = nv.Email,
+                                 }).ToList();
                 listViewNhanVien.ItemsSource = queryDATA;
                 listView = listViewNhanVien;
             }
@@ -52,7 +56,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
 
         private void ThemNhanVienWindow_Click(object sender, RoutedEventArgs e)
         {
-            var themNhanVien = new ThemNhanVien(_db);
+            var themNhanVien = new ThemNhanVien(db);
             themNhanVien.Show();
             LoadDataNhanVien();
         }
@@ -66,11 +70,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                 var suaNhanVien = new SuaNhanVien(nhanvien);
                 suaNhanVien.Show();
                 LoadDataNhanVien();
-            }
-            else
-            {
-                MessageBox.Show("Cần chọn một sản phẩm để sửa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            } 
         }
 
         private void XoaNhanVien_Click(object sender, RoutedEventArgs e)
@@ -78,24 +78,34 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             var button = sender as System.Windows.Controls.Button;
             if (button != null)
             {
-                var nhanvien = (NhanVien_MLV)button.DataContext;
-                MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có muốn xoá tài khoản này ?", "Xác nhận xoá", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (messageBoxResult == MessageBoxResult.Yes)
+                NhanVien_MLV nhanvien = (NhanVien_MLV)button.DataContext;
+                if(nhanvien.TenChucVu == "admin")
                 {
-                    var deleteNV = _db.NhanViens.FirstOrDefault(x => x.TenHienThi == nhanvien.TenHienThi);
-                    _db.NhanViens.Remove(deleteNV);
-                    _db.SaveChanges();
-                    LoadDataNhanVien();
-                    MessageBox.Show("Xoá thành công", "Thông báo", MessageBoxButton.OK);
+                    MessageBox.Show("Không thể xoá tài khoản admin", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                bool isUsedInDNH = db.DonNhapHangs.Any(s => s.IdNhanVien == nhanvien.IdNhanVien);
+                bool isUsedInDBH = db.DonBanHangs.Any(s => s.IdNhanVien == nhanvien.IdNhanVien);
+                if (isUsedInDNH || isUsedInDBH)
+                {
+                    MessageBox.Show("Không thể xoá người dùng này vì đã thực hiện ít nhất một đơn nhập hàng hoặc đơn bán hàng.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có muốn xoá tài khoản này ?", "Xác nhận xoá", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                    {
+                        var deleteNV = db.NhanViens.FirstOrDefault(x => x.IdNhanVien == nhanvien.IdNhanVien);
+                        if (deleteNV != null) {
+                            db.NhanViens.Remove(deleteNV);
+                            db.SaveChanges();
+                            LoadDataNhanVien();
+                            MessageBox.Show("Xoá thành công", "Thông báo", MessageBoxButton.OK);
+                        }
+                    }
                 }
             }
         }
-
-        private void CapQuyenNhanVien_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void DoiMatKhauNhanVienWindow_Click(object sender, RoutedEventArgs e)
         {
             NhanVien_MLV selectedNV = (NhanVien_MLV)listViewNhanVien.SelectedItem;
@@ -109,6 +119,36 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             {
                 MessageBox.Show("Vui lòng chọn 1 nhân viên để đổi mật khẩu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
+            }
+        }
+
+        private void txtNguoiDung_TimKiem_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = txtNguoiDung_TimKiem.Text.Trim().ToLower();
+            if (string.IsNullOrEmpty(searchText))
+            {
+                listViewNhanVien.ItemsSource = db.NhanViens.Select(nhanVien => new NhanVien_MLV
+                {
+                    IdNhanVien = nhanVien.IdNhanVien,
+                    TenHienThi = nhanVien.TenHienThi,
+                    TaiKhoan = nhanVien.TaiKhoan,
+                    TenChucVu = nhanVien.IdChucVuNavigation.TenChucVu,
+                    SoDienThoai = nhanVien.SoDienThoai,
+
+                }).ToList();
+            }
+            else
+            {
+                var filteredDonViList = db.NhanViens.Where(nhanVien => nhanVien.TenHienThi.ToLower().Contains(searchText))
+                                                   .Select(nhanVien => new NhanVien_MLV
+                                                   {
+                                                       IdNhanVien = nhanVien.IdNhanVien,
+                                                       TenHienThi = nhanVien.TenHienThi,
+                                                       TaiKhoan = nhanVien.TaiKhoan,
+                                                       TenChucVu = nhanVien.IdChucVuNavigation.TenChucVu,
+                                                       SoDienThoai = nhanVien.SoDienThoai,
+                                                   }).ToList();
+                listViewNhanVien.ItemsSource = filteredDonViList;
             }
         }
     }

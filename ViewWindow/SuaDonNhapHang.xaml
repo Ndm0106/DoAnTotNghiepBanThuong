@@ -11,7 +11,7 @@
         WindowStyle="None"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="SuaDonNhapHang" Height="770" Width="1500">
-    <Border Background="#cfd8dc" CornerRadius="20">
+    <Border Background="#cfd8dc" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>

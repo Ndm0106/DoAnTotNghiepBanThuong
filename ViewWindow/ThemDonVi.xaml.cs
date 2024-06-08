@@ -1,4 +1,5 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
+using XAct.Library.Settings;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
 {
@@ -21,11 +24,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class ThemDonVi : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
+        private QLQuayThuocBanThuongContext _db;
         public ThemDonVi(QLQuayThuocBanThuongContext db)
         {
             InitializeComponent();
-            _dbContext = db;
+            _db = db;
             Guid guid = Guid.NewGuid();
 
             // Tạo một đối tượng Random
@@ -42,7 +45,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         private void btnThemDonVi_Luu(object sender, RoutedEventArgs e)
         {
             string tenDV = txtTenDonViThem.Text.Trim();
-            var TENDV = _dbContext.DonVis.Any(x => x.TenDonVi == tenDV);
+            var TENDV = _db.DonVis.Any(x => x.TenDonVi == tenDV);
             if (string.IsNullOrEmpty(tenDV))
             {
                 MessageBox.Show("Tên đơn vị không đc để trống", "Thông báo", MessageBoxButton.OK);
@@ -60,11 +63,23 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 IdDonVi = txtIdDonViThem.Text,
                 TenDonVi = txtTenDonViThem.Text
             };
-            _dbContext.DonVis.Add(newdonvi);
-            _dbContext.SaveChanges();
-            DonViTinhUC.listView.ItemsSource = _dbContext.DonVis.ToList();
+            _db.DonVis.Add(newdonvi);
+            _db.SaveChanges();
+            LoadDataDonVi();
             MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButton.OK);
             this.Close();
+        }
+        private void LoadDataDonVi()
+        {
+            var query = (from dv in _db.DonVis
+                         select new DonVi_MLV
+                         {
+                             IdDonVi = dv.IdDonVi,
+                             TenDonVi = dv.TenDonVi
+
+                         }).ToList();
+            DonViTinhUC.listView.ItemsSource = query;
+            
         }
         private void btnThemDonVi_Thoat(object sender, RoutedEventArgs e)
         {

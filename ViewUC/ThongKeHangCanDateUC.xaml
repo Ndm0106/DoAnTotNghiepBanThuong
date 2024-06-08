@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewUC"
              mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
     <Border Background="AliceBlue">
         <Grid>
@@ -16,8 +17,16 @@
             <Grid Grid.Row="0" Margin="20">
                 <TextBlock FontSize="30"><Bold>THỐNG KÊ SẢN PHẨM CẬN DATE/HẾT HẠN</Bold></TextBlock>
             </Grid>
-            <Grid Grid.Row="1">
-                <StackPanel Margin="0 0 20 0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Grid Grid.Row="1" Margin="0 10 20 5">
+                <StackPanel  Margin="0 0 20 0" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <ComboBox SelectionChanged="cbxThoiGianCanDate_SelectionChanged" Visibility="Hidden" Background="White" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Chọn ngày cận date" Margin="0 0 10 0" x:Name="cbxThoiGianCanDate">
+                        <ComboBoxItem
+                              Content="30 ngày"/>
+                        <ComboBoxItem
+                              Content="15 ngày"/>
+                        <ComboBoxItem
+                              Content="7 ngày"/>
+                    </ComboBox>
                     <CheckBox x:Name="CkbCanDate" Content="Sản phẩm cận date" Checked="CkbCanDate_Checked" Unchecked="CkbCanDate_Unchecked" />
                     <CheckBox x:Name="CkbHetHan" Content="Sản phẩm hết hạn" Checked="CkbHetHan_Checked" Unchecked="CkbHetHan_Unchecked" Margin="10,0,0,0"/>
                 </StackPanel>
@@ -32,28 +41,28 @@
                                         <GridViewColumn Header="Mã sản phẩm">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding IdSanPham}" Padding="20 0 0 0"/>
+                                                    <TextBlock Text="{Binding IdSanPham}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
                                         <GridViewColumn Header="Tên sản phẩm">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding TenSanPham}" Padding="20 0 0 0"/>
+                                                    <TextBlock Text="{Binding TenSanPham}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
                                         <GridViewColumn Header="Đơn vị">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding TenDonVi}" Padding="20 0 0 0"/>
+                                                    <TextBlock Text="{Binding TenDonVi}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
                                         <GridViewColumn Header="Hạn sử dụng">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding HanSuDung,StringFormat='dd/MM/yyyy'}" Padding="20 0 0 0"/>
+                                                    <TextBlock Text="{Binding HanSuDung,StringFormat='dd/MM/yyyy'}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>

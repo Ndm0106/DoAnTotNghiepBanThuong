@@ -1,4 +1,5 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
@@ -35,16 +36,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string randomDigits1 = random.Next(0, 1000).ToString("D3");
             string IdSPNgauNhien = $"SP000{randomDigits1}";
 
-            //tạo barcode
-            string guidDigits = guid.ToString().Substring(guid.ToString().Length - 11).Replace("-", "");
-            int randomNumber = random.Next(0, 100);
-            string randomDigits2 = randomNumber.ToString("D2");
-            string barcode = guidDigits + randomDigits2;
-
             txtThemIdSanPham.Text = IdSPNgauNhien;
-
-
-            txtThemBarCodeSanPham.Text = barcode;
 
         }
         private void btnThemSanPham_Them(object sender, RoutedEventArgs e)
@@ -54,7 +46,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string hamluongSP = txtThemHamLuongSanPham.Text;
             DateTime? hansudungSP = txtThemHanSuDungSanPham.SelectedDate;
             string gianhapSP = txtThemGiaNhapSanPham.Text;
-            string giabanleSP = txtThemGiaBanLeSanPham.Text;
+            string giabanSP = txtThemGiaBanLeSanPham.Text;
+            string barcodeSP = txtThemBarCodeSanPham.Text;
             NhaSanXuat? selectedtenNSX_SP = txtThemNhaSanXuatSanPham.SelectedItem as NhaSanXuat;
             string soluongtonSP = txtThemSoLuongTonSanPham.Text;
             string thanhphanSP = txtThemThanhPhanSanPham.Text;
@@ -65,17 +58,28 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 MessageBox.Show("tên sản phẩm không đc để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            //if(checkSoLo) {
-            //    MessageBox.Show("Sản phẩm này đã tồn tại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}     
-            if (selectedTenDV_SP != null && selectedTenDV_SP.IdDonVi != null)
+            bool trungtenSP = db.SanPhams.Any(x=>x.TenSanPham == tenSP);
+            if(trungtenSP)
+            {
+                MessageBox.Show("Đã tồn tại sản phẩm này", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }   
+            if(int.Parse(soluongtonSP) <= 0 || decimal.Parse(giabanSP) <= 0 || decimal.Parse(gianhapSP) <= 0)
+            {
+                MessageBox.Show("Vui lòng nhập giá trị hợp lệ", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!IsNumericString(soluongtonSP) || !IsNumericString(gianhapSP) || !IsNumericString(giabanSP))
+            {
+                MessageBox.Show("Vui lòng nhập giá trị hợp lệ", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if ((selectedTenDV_SP != null && selectedTenDV_SP.IdDonVi != null) || (selectedtenNSP_SP != null && selectedtenNSP_SP.IdNhomSanPham != null) || (selectedtenNSX_SP != null && selectedtenNSX_SP.IdNhaSanXuat != null))
             {
                 // Tiếp tục xử lý
                 var sanpham = new SanPham
                 {
-                    BarCode = txtThemBarCodeSanPham.Text,
+                    BarCode = barcodeSP,
                     IdSanPham = txtThemIdSanPham.Text,
                     TenSanPham = tenSP,
                     IdDonVi = selectedTenDV_SP.IdDonVi,
@@ -83,7 +87,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     SoLuongTon = int.Parse(soluongtonSP),
                     HamLuong = hamluongSP,
                     GiaNhap = decimal.Parse(gianhapSP),
-                    GiaBan = decimal.Parse(giabanleSP),
+                    GiaBan = decimal.Parse(giabanSP),
                     HanSuDung = hansudungSP,
                     IdNhaSanXuat = selectedtenNSX_SP.IdNhaSanXuat,
                     IdNhomSanPham = selectedtenNSP_SP.IdNhomSanPham,
@@ -106,8 +110,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         public void LoadListView()
         {
             var queryDATA = from sp in db.SanPhams
-
-                            select new
+                            select new SanPham_MLV
                             {
                                 IdDonVi = sp.IdDonVi,
                                 IdNhaSanXuat = sp.IdNhaSanXuat,
@@ -117,7 +120,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                                 TenDonVi = sp.IdDonViNavigation.TenDonVi,
                                 TenNhaSanXuat = sp.IdNhaSanXuatNavigation.TenNhaSanXuat,
                                 SoLuongTon = sp.SoLuongTon,
-                                GiaBanLe = sp.GiaBan,
+                                GiaBan = sp.GiaBan,
                                 ThanhPhan = sp.ThanhPhan,
                                 HamLuong = sp.HamLuong,
                                 GiaNhap = sp.GiaNhap,
@@ -147,6 +150,17 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             txtThemNhomSanPhamSanPham.ItemsSource = db.NhomSanPhams.ToList();
             txtThemNhomSanPhamSanPham.DisplayMemberPath = "TenNhomSanPham";
             txtThemNhomSanPhamSanPham.SelectedValuePath = "IdNhomSanPham";
+        }
+        private bool IsNumericString(string s)
+        {
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

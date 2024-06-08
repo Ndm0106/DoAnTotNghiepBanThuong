@@ -1,8 +1,10 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using XAct.Users;
 using XSystem.Security.Cryptography;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
@@ -22,11 +25,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class ThemNhanVien : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
+        private QLQuayThuocBanThuongContext db;
         public ThemNhanVien(QLQuayThuocBanThuongContext _db)
         {
             InitializeComponent();
-            _dbContext = _db;
+            db = _db;
             LoadComboBox();
         }
         private void LoadListView()
@@ -34,11 +37,12 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             using (var db = new QLQuayThuocBanThuongContext())
             {
                 var queryDATA = (from nv in db.NhanViens
-                                 join cv in db.ChucVus on nv.IdChucVu equals cv.IdChucVu
-                                 select new
+                                 select new NhanVien_MLV
                                  {
+                                     IdNhanVien = nv.IdNhanVien,
+                                     IdChucVu = nv.IdChucVu,
                                      TenHienThi = nv.TenHienThi,
-                                     TenChucVu = cv.TenChucVu,
+                                     TenChucVu = nv.IdChucVuNavigation.TenChucVu,
                                      TaiKhoan = nv.TaiKhoan,
                                      SoDienThoai = nv.SoDienThoai,
                                      Email = nv.Email,
@@ -62,7 +66,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             }
             if (!IsNumericString(themSoDienThoaiNV))
             {
-                MessageBox.Show("Phải nhập đúng định dạng số điện thoại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Số điện thoại đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (!IsValidCredentials(themTaiKhoanNV, themMatKhauNV))
@@ -70,22 +74,45 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 MessageBox.Show("Tài khoản và mật khẩu không được phép có khoảng trắng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if(!IsValidEmail(themEmailNV))
+            {
+                MessageBox.Show("Email phải đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }   
+            var checkTenNV = db.NhanViens.Any(x=>x.TenHienThi ==  themTenNV);
+            if (checkTenNV)
+            {
+                MessageBox.Show("Đã tồn tại người dùng này", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             if (selectedChucVuNV != null && selectedChucVuNV.IdChucVu != null)
             {
+                // Sinh GUID mới
+                Guid guid = Guid.NewGuid();
+
+                // Tạo một đối tượng Random
+                Random random = new Random();
+
+                // Sinh số ngẫu nhiên từ 0 đến 999 và định dạng nó thành chuỗi có 3 chữ số, sau đó thêm vào cuối chuỗi "SP000"
+                string randomDigits = random.Next(0, 1000).ToString("D3");
+
+                // Kết hợp chuỗi "SP000" với chuỗi số ngẫu nhiên
+                string result = $"NV000{randomDigits}";
 
                 string passEncode = MD5Hash(Base64Encode(themMatKhauNV));
-                var cv = Convert.ToInt32(selectedChucVuNV.IdChucVu);
+                
                 var nhanvien = new Model.NhanVien
                 {
+                    IdNhanVien = result,
                     TenHienThi = themTenNV,
                     TaiKhoan = themTaiKhoanNV,
                     MatKhau = passEncode,
                     SoDienThoai = themSoDienThoaiNV,
                     Email = themEmailNV,
-                    IdChucVu = cv
+                    IdChucVu = selectedChucVuNV.IdChucVu,
                 };
-                _dbContext.Add(nhanvien);
-                _dbContext.SaveChanges();
+                db.Add(nhanvien);
+                db.SaveChanges();
                 LoadListView();
                 MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButton.OK);
                 this.Close();
@@ -106,12 +133,23 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         }
         private void LoadComboBox()
         {
-            txtThemChucVu_NhanVien.ItemsSource = _dbContext.ChucVus.ToList();
+            txtThemChucVu_NhanVien.ItemsSource = db.ChucVus.ToList();
             txtThemChucVu_NhanVien.DisplayMemberPath = "TenChucVu";
             txtThemChucVu_NhanVien.SelectedValuePath = "IdChucVu";
         }
         private bool IsNumericString(string s)
         {
+            if (txtThemSoDienThoai_NhanVien.Text.Length != 10)
+            {
+                return false;
+            }
+            foreach (char c in s)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    return false; // Nếu có ký tự khoảng trắng, trả về false
+                }
+            }
             foreach (char c in s)
             {
                 if (!char.IsDigit(c))
@@ -159,6 +197,23 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             }
 
             return true; // Nếu không có ký tự khoảng trắng, trả về true
+        }
+        public static bool IsValidEmail(string email)
+        {
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }

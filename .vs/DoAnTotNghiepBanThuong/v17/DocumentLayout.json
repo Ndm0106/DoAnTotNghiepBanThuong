@@ -1,53 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewuc\\thongkenhaphanguc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewuc\\thongkenhaphanguc.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|e:\\visualstudioc#\\doantotnghiepbanthuong\\viewuc\\thongkenhaphanguc.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{593B8AA6-BCDE-4B44-A91A-3C4A331FFAE2}|DoAnTotNghiepBanThuong.csproj|solutionrelative:viewuc\\thongkenhaphanguc.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 8,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ThongKeNhapHangUC.xaml.cs",
-              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml.cs",
-              "RelativeDocumentMoniker": "ViewUC\\ThongKeNhapHangUC.xaml.cs",
-              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml.cs",
-              "RelativeToolTip": "ViewUC\\ThongKeNhapHangUC.xaml.cs",
-              "ViewState": "AQIAAJIAAAAAAAAAAAAAAKgAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T16:52:13.422Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ThongKeNhapHangUC.xaml",
-              "DocumentMoniker": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml",
-              "RelativeDocumentMoniker": "ViewUC\\ThongKeNhapHangUC.xaml",
-              "ToolTip": "E:\\VisualStudioC#\\DoAnTotNghiepBanThuong\\ViewUC\\ThongKeNhapHangUC.xaml",
-              "RelativeToolTip": "ViewUC\\ThongKeNhapHangUC.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-26T16:49:58.806Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

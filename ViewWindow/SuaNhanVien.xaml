@@ -11,7 +11,8 @@ Background="Transparent"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         Title="SuaNhanVien" Height="320" Width="630">
-    <Border Background="#f1f8e9" CornerRadius="20" >
+
+    <Border Background="#f1f8e9" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -49,10 +50,8 @@ Background="Transparent"
                           HorizontalAlignment="Left"
                           DisplayMemberPath="TenChucVu"
                           SelectedValuePath="IdChucVu"
-                          IsEditable="True" IsTextSearchEnabled="True"
-                TextSearch.TextPath="TenChucVu"
 Width="250"
-materialDesign:HintAssist.Hint="chức vụ"
+materialDesign:HintAssist.Hint="Chức vụ"
 Style="{StaticResource MaterialDesignOutlinedComboBox}">
                         </ComboBox>
                     </StackPanel>

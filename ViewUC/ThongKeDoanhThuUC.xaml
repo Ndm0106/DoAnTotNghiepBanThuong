@@ -7,29 +7,22 @@
              mc:Ignorable="d" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="AliceBlue" CornerRadius="20">
+    <Border Background="White" CornerRadius="0 0 20 20">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="0 20 0 0">
-                <TextBlock FontSize="40" HorizontalAlignment="Center"><Bold>DOANH THU</Bold></TextBlock>
+                <TextBlock FontSize="40" HorizontalAlignment="Center"><Bold>DOANH THU THEO THÁNG</Bold></TextBlock>
             </Grid>
-            <!--<Grid Grid.Row="1" Margin="20 20 0 0">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontSize="20" HorizontalAlignment="Center"><Bold>Tổng doanh thu:</Bold></TextBlock>
-                    <Label x:Name="txtTongDoanhThu" Content=""/>
-                </StackPanel>
-            </Grid>-->
-            <Grid Grid.Row="2" Margin="20 20 20 20">
+            <Grid Grid.Row="1" Margin="20 20 20 20">
                 <lvc:CartesianChart Name="DoanhThuChart" LegendLocation="Right">
                     <lvc:CartesianChart.AxisX>
-                        <lvc:Axis Title="Tháng" Labels="{Binding Labels}" />
+                        <lvc:Axis  Labels="{Binding Labels}" />
                     </lvc:CartesianChart.AxisX>
                     <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Doanh thu" />
+                        <lvc:Axis Title="VNĐ"/>
                     </lvc:CartesianChart.AxisY>
                 </lvc:CartesianChart>
             </Grid>

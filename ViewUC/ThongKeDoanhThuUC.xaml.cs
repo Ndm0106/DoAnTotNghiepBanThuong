@@ -39,7 +39,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
             // Gán dữ liệu vào biểu đồ
             var doanhThuValues = new ChartValues<double>(doanhThuTheoThang.Select(dt => dt.DoanhThu).ToArray());
             var labels = doanhThuTheoThang.Select(dt => dt.Thang).ToArray();
-
+            
             DoanhThuChart.Series = new SeriesCollection
             {
                 new ColumnSeries
@@ -68,7 +68,6 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                     .OrderBy(g => g.Year)
                     .ThenBy(g => g.Month)
                     .ToList();
-
                 var doanhThuTheoThang = rawData
                     .Select(data => new DoanhThuThang
                     {
@@ -76,9 +75,7 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                         DoanhThu = (double)data.DoanhThu
                     })
                     .ToList();
-
                 return doanhThuTheoThang;
-                
             }
         }
         // Class để lưu trữ dữ liệu doanh thu theo tháng

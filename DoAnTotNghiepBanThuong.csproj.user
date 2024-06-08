@@ -49,6 +49,9 @@
     <Compile Update="ViewUC\ThongKeNhapHangUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ViewUC\ThongKeThuocDaBanUC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewUC\ThongKeTonKhoUC.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -172,6 +175,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ViewUC\ThongKeNhapHangUC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewUC\ThongKeThuocDaBanUC.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ViewUC\ThongKeTonKhoUC.xaml">

@@ -1,8 +1,10 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
 {
@@ -21,13 +24,13 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class SuaNhaPhanPhoi : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
-        private NhaPhanPhoi _NhaPhanPhoi;
+        private QLQuayThuocBanThuongContext db;
+        private NhaPhanPhoi_MLV _NhaPhanPhoi;
 
-        public SuaNhaPhanPhoi(QLQuayThuocBanThuongContext db, NhaPhanPhoi NhaPhanPhoi)
+        public SuaNhaPhanPhoi(QLQuayThuocBanThuongContext _db, NhaPhanPhoi_MLV NhaPhanPhoi)
         {
             InitializeComponent();
-            _dbContext = db;
+            db = _db;
             _NhaPhanPhoi = NhaPhanPhoi;
             txtSuaIdNhaPhanPhoi.Text = _NhaPhanPhoi.IdNhaPhanPhoi;
             txtSuaTenNhaPhanPhoi.Text = _NhaPhanPhoi.TenNhaPhanPhoi;
@@ -47,26 +50,94 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string suaMaSoThueNPP = txtSuaEmailNhaPhanPhoi.Text;
             if (string.IsNullOrEmpty(suaTenNPP))
             {
-                MessageBox.Show("Không được để trống tên nhà cung cấp", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Không được để trống tên nhà phân phối", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            _NhaPhanPhoi.TenNhaPhanPhoi = suaTenNPP;
-            _NhaPhanPhoi.DiaChi = suaDiaChiNPP;
-            _NhaPhanPhoi.SoDienThoai = suaSoDienThoaiNPP;
-            _NhaPhanPhoi.Fax = suaSoFaxNPP;
-            _NhaPhanPhoi.Email = suaEmailNPP;
-            _NhaPhanPhoi.MaSoThue = suaMaSoThueNPP;
-            _dbContext.SaveChanges();
-            NhaPhanPhoiUC.listView.ItemsSource = _dbContext.NhaPhanPhois.ToList();
-            //NhaPhanPhoiUC.listView.ItemsSource = _dbContext.NhaPhanPhois.ToList();
-            MessageBox.Show("Sửa thành công", "Thông báo");
-            this.Close();
+            if (!IsNumericString(suaSoDienThoaiNPP))
+            {
+                MessageBox.Show("Số điện thoại đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!IsValidEmail(suaEmailNPP))
+            {
+                MessageBox.Show("Email phải đúng định dạng", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var suaNhaPhanPhoi = db.NhaPhanPhois.FirstOrDefault(x => x.IdNhaPhanPhoi == _NhaPhanPhoi.IdNhaPhanPhoi);
+            if (suaNhaPhanPhoi != null)
+            {
+                suaNhaPhanPhoi.TenNhaPhanPhoi = suaTenNPP;
+                suaNhaPhanPhoi.DiaChi = suaDiaChiNPP;
+                suaNhaPhanPhoi.SoDienThoai = suaSoDienThoaiNPP;
+                suaNhaPhanPhoi.Fax = suaSoFaxNPP;
+                suaNhaPhanPhoi.Email = suaEmailNPP;
+                suaNhaPhanPhoi.MaSoThue = suaMaSoThueNPP;
+                db.SaveChanges();
+                LoadDataNhaPhanPhoi();
+                MessageBox.Show("Sửa thành công", "Thông báo");
+                this.Close();
+            }
+        }
+        private void LoadDataNhaPhanPhoi()
+        {
+            var query = (from npp in db.NhaPhanPhois
+                         select new NhaPhanPhoi_MLV
+                         {
+                             IdNhaPhanPhoi = npp.IdNhaPhanPhoi,
+                             TenNhaPhanPhoi = npp.TenNhaPhanPhoi,
+                             DiaChi = npp.DiaChi,
+                             Fax = npp.Fax,
+                             SoDienThoai = npp.SoDienThoai,
+                             Email = npp.Email,
+                             MaSoThue = npp.MaSoThue,
+
+                         }).ToList();
+            NhaPhanPhoiUC.listView.ItemsSource = query;
         }
         private void btnSuaNhaPhanPhoi_Thoat(object sender, RoutedEventArgs e)
         {
-            var thongbao = MessageBox.Show("Bạn có muốn thoát phiếu sửa", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (thongbao == MessageBoxResult.OK)
                 this.Close();
+        }
+        private bool IsNumericString(string s)
+        {
+            if (txtSuaSoDienThoaiNhaPhanPhoi.Text.Length != 10)
+            {
+                return false;
+            }
+            foreach (char c in s)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    return false; // Nếu có ký tự khoảng trắng, trả về false
+                }
+            }
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static bool IsValidEmail(string email)
+        {
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }

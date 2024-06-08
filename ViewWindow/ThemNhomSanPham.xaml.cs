@@ -1,4 +1,5 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
+using XAct.Library.Settings;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
 {
@@ -21,11 +24,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class ThemNhomSanPham : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
+        private QLQuayThuocBanThuongContext db;
         public ThemNhomSanPham(QLQuayThuocBanThuongContext _db)
         {
             InitializeComponent();
-            _dbContext = _db;
+            db = _db;
             // Sinh GUID mới
             Guid guid = Guid.NewGuid();
 
@@ -44,7 +47,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string tenNSP = txtThemTenNhomSanPham.Text.Trim();
             string ghichuNSP = txtThemGhiChuNhomSanPham.Text.Trim();
 
-            var queryNSP = _dbContext.NhomSanPhams.Any(x => x.TenNhomSanPham == tenNSP);
+            var queryNSP = db.NhomSanPhams.Any(x => x.TenNhomSanPham == tenNSP);
             if (string.IsNullOrEmpty(tenNSP))
             {
                 MessageBox.Show("Tên nhà cung cấp không đc để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -60,15 +63,28 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
 
             NhomSanPham nhomsanpham = new NhomSanPham
             {
-                IdNhomSanPham = txtThemTenNhomSanPham.Text,
+                IdNhomSanPham = txtThemIdNhomSanPham.Text,
                 TenNhomSanPham = tenNSP,
                 GhiChu = ghichuNSP
             };
-            _dbContext.NhomSanPhams.Add(nhomsanpham);
-            _dbContext.SaveChanges();
-            NhomSanPhamUC.listView.ItemsSource = _dbContext.NhomSanPhams.ToList();
+            db.NhomSanPhams.Add(nhomsanpham);
+            db.SaveChanges();
+            LoadDataNhomSanPham();
             MessageBox.Show("Nhóm sản phẩm mới đã được thêm thành công", "Thông báo", MessageBoxButton.OK);
             this.Close();
+        }
+        private void LoadDataNhomSanPham()
+        {
+            var query = (from nsp in db.NhomSanPhams
+                         select new NhomSanPham_MLV
+                         {
+                             IdNhomSanPham = nsp.IdNhomSanPham,
+                             TenNhomSanPham = nsp.TenNhomSanPham,
+                             GhiChu = nsp.GhiChu,
+
+                         }).ToList();
+            NhomSanPhamUC.listView.ItemsSource = query;
+            
         }
         private void btnThemNhomSanPham_Thoat(object sender, RoutedEventArgs e)
         {

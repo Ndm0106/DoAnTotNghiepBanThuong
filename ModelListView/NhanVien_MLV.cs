@@ -8,8 +8,8 @@ namespace DoAnTotNghiepBanThuong.ModelListView
 {
     public class NhanVien_MLV
     {
-        public string? IdNhanVien { get; set; }
-        public string? TenHienThi { get; set; }
+        public string IdNhanVien { get; set; } = null!;
+        public string TenHienThi { get; set; } = null!;
         public string? TaiKhoan { get; set; }
         public string? MatKhau { get; set; }
         public string? SoDienThoai { get; set; }

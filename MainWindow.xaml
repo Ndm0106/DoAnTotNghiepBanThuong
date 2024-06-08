@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong"
         mc:Ignorable="d"
+        xmlns:effects="clr-namespace:System.Windows.Media.Effects;assembly=PresentationCore"
         WindowStyle="None"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="Transparent"    
+        x:Name="ManHinhChinh"
         Title="MainWindow" Height="780" Width="1380">
     <Border Background="#eceff1" CornerRadius="20">
         <Grid>
@@ -50,14 +52,14 @@
                                 </Grid>
                                 <Border CornerRadius="10" Margin="10 0 10 0" Background="White" Grid.Row="1" >
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" x:Name="txtTenHienThi" Text="Họ Tên:" Foreground="#80deea"/>
-                                        <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14"  x:Name="lblTenHienThi" Content=""/>
+                                        <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="12" x:Name="txtTenHienThi" Text="Họ tên:" Foreground="#004d66"/>
+                                        <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"  x:Name="lblTenHienThi" Content=""/>
                                     </StackPanel>
                                 </Border>
                                 <Border CornerRadius="10" Margin="10 5 10 0" Background="White" Grid.Row="2" >
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" x:Name="txtTenChucVu" Text="Chức vụ:" Foreground="#80deea"/>
-                                        <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14"  x:Name="lblTenChucVu"  Content=""/>
+                                        <TextBlock Grid.Column="0" Margin="5 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="12" x:Name="txtTenChucVu" Text="Chức vụ:" Foreground="#004d66"/>
+                                        <Label Grid.Column="1" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"  x:Name="lblTenChucVu"  Content=""/>
                                     </StackPanel>
                                 </Border>
                             </Grid>
@@ -72,49 +74,49 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <Button Click="BtnClick_TrangChinh" Grid.Row="0" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnTrangChinh" Click="BtnClick_TrangChinh" Visibility="Visible" Grid.Row="0" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Home" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Trang chính" Style="{StaticResource menuButtonText}"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="BtnClick_BanHang" Grid.Row="1" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnBanHang" Click="BtnClick_BanHang" Visibility="Visible" Grid.Row="1" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Shopping" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Bán hàng" Style="{StaticResource menuButtonText}"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="BtnClick_SanPham" Grid.Row="2" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnSanPham" Click="BtnClick_SanPham" Visibility="Visible" Grid.Row="2" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Medication" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Sản phẩm" Style="{StaticResource menuButtonText}"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="BtnClick_KhachHang" Grid.Row="3" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnKhachHang" Click="BtnClick_KhachHang" Visibility="Visible" Grid.Row="3" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="AccountMultiple" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="BtnClick_NhapHang" Grid.Row="4" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnNhapHang" Click="BtnClick_NhapHang" Visibility="Visible" Grid.Row="4" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="TrayArrowDown" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Nhập hàng" Style="{StaticResource menuButtonText}"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="BtnClick_QuanLy" Grid.Row="5" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnQuanLy" Click="BtnClick_QuanLy" Visibility="Visible" Grid.Row="5" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="ListBox" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Quản lý" Style="{StaticResource menuButtonText}"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="BtnClick_ThongKe" Grid.Row="6" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnThongKe" Click="BtnClick_ThongKe" Visibility="Visible" Grid.Row="6" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Finance" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Thống kê" Style="{StaticResource menuButtonText}"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Click="BtnClick_NhanVien" Grid.Row="7" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnNhanVien" Click="BtnClick_NhanVien" Visibility="Visible" Grid.Row="7" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="AccountCog" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Người dùng" Style="{StaticResource menuButtonText}"/>
@@ -122,7 +124,7 @@
                                 </Button>
                             </Grid>
                             <Grid Grid.Row="2">
-                                <Button Click="BtnClick_DangXuat" Width="190" VerticalAlignment="Bottom" Margin="0 0 0 10" Style="{StaticResource menuButton}">
+                                <Button x:Name="btnDangXuat" Click="BtnClick_DangXuat" Visibility="Visible" Width="190" VerticalAlignment="Bottom" Margin="0 0 0 10" Style="{StaticResource menuButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
                                         <TextBlock Text="Đăng xuất" Style="{StaticResource menuButtonText}"/>

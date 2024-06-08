@@ -12,7 +12,7 @@ WindowStartupLocation="CenterScreen"
 AllowsTransparency="true"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="SuaDonVi" Height="340" Width="350">
-    <Border Background="#e1f5fe" BorderThickness="1" BorderBrush="#cfd8dc" CornerRadius="20">
+    <Border Background="#e1f5fe" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>

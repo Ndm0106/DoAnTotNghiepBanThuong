@@ -4,6 +4,9 @@ E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\DoAnTotNghiepB
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\DoAnTotNghiepBanThuong.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\DoAnTotNghiepBanThuong.pdb
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Practices.ServiceLocation.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\EPPlus.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\EPPlus.Interfaces.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\EPPlus.System.Drawing.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Humanizer.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\LiveCharts.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\LiveCharts.Wpf.dll
@@ -17,9 +20,15 @@ E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Enti
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.EntityFrameworkCore.SqlServer.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Caching.Memory.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.Json.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Options.dll
@@ -30,9 +39,11 @@ E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Iden
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.IdentityModel.Protocols.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.IdentityModel.Tokens.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.IO.RecyclableMemoryStream.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\System.IdentityModel.Tokens.Jwt.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\System.Runtime.Caching.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\System.Security.Cryptography.Pkcs.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\XAct.Core.PCL.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
@@ -41,6 +52,7 @@ E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\win-a
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\DoAnTotNghiepBanThuong.csproj.AssemblyReference.cache
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\LoginWindow.g.cs
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\MainWindow.g.cs
@@ -57,6 +69,7 @@ E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\SanPham
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeDoanhThuUC.g.cs
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeHangCanDateUC.g.cs
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeNhapHangUC.g.cs
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeThuocDaBanUC.g.cs
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeTonKhoUC.g.cs
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeUC.g.cs
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeXuatHangUC.g.cs
@@ -103,6 +116,7 @@ E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\SanPham
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeDoanhThuUC.baml
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeHangCanDateUC.baml
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeNhapHangUC.baml
+E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeThuocDaBanUC.baml
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeTonKhoUC.baml
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeUC.baml
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ViewUC\ThongKeXuatHangUC.baml
@@ -141,15 +155,3 @@ E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\refint\DoAnTot
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\DoAnTotNghiepBanThuong.pdb
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\DoAnTotNghiepBanThuong.genruntimeconfig.cache
 E:\VisualStudioC#\DoAnTotNghiepBanThuong\obj\Debug\net6.0-windows\ref\DoAnTotNghiepBanThuong.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\EPPlus.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\EPPlus.Interfaces.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\EPPlus.System.Drawing.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.Json.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\Microsoft.IO.RecyclableMemoryStream.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\System.Security.Cryptography.Pkcs.dll
-E:\VisualStudioC#\DoAnTotNghiepBanThuong\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

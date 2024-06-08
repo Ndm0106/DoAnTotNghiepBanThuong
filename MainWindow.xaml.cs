@@ -30,6 +30,13 @@ namespace DoAnTotNghiepBanThuong
             _chucVu = chucVu;
             _idnhanVien = idNhanVien;
             HienThiThongTinNguoiDung(_nhanVien, _chucVu);
+            if(lblTenChucVu.Content.ToString() == "nhân viên")
+            {
+                btnQuanLy.Visibility = Visibility.Collapsed;
+                btnKhachHang.Visibility = Visibility.Collapsed;
+                btnSanPham.Visibility = Visibility.Collapsed;
+                btnNhanVien.Visibility = Visibility.Collapsed;
+            }    
         }
         private void BtnClick_TrangChinh(object sender, RoutedEventArgs e)
         {
@@ -81,10 +88,6 @@ namespace DoAnTotNghiepBanThuong
             lblTenHienThi.Content = tenNguoiDung;
             lblTenChucVu.Content = chucVu;
         }
-
-
-
-
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -106,17 +109,10 @@ namespace DoAnTotNghiepBanThuong
         {
             this.Close();
         }
-
         private void Logout()
         {
-            // Thực hiện các thao tác cần thiết khi đăng xuất, ví dụ như xóa thông tin người dùng khỏi bộ nhớ
-            // Tùy thuộc vào cách bạn quản lý trạng thái đăng nhập, bạn có thể cần phải xóa thông tin người dùng ở đây
-
-            // Mở cửa sổ đăng nhập
             var loginWindow = new LoginWindow();
             loginWindow.Show();
-
-            // Đóng cửa sổ hiện tại (MainWindow)
             this.Close();
         }
     }

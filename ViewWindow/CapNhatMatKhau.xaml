@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DoAnTotNghiepBanThuong.ViewWindow"
         mc:Ignorable="d"
+        xmlns:effects="clr-namespace:System.Windows.Media.Effects;assembly=PresentationCore"
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None"
+        
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="CapNhatMatKhau" Height="390" Width="470">
-    <Border Background="AliceBlue" CornerRadius="20">
+        Title="CapNhatMatKhau" Height="390" Width="480">
+
+    <Border Margin="5" Background="AliceBlue" CornerRadius="20">
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" Direction="0" Color="Black" Opacity="0.2"/>
+        </Border.Effect>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>

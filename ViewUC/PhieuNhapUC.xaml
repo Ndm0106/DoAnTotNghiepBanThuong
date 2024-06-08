@@ -25,8 +25,9 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="1">
+                    <Grid Grid.Column="5">
                         <Button materialDesign:ButtonAssist.CornerRadius="10" Background="#80deea" BorderBrush="#80deea" x:Name="ThemPhieuNhapWindow" Click="ThemPhieuNhapWindow_Click" Width="160" Height="49.96" Margin="10 0 0 0" HorizontalAlignment="Left">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon VerticalAlignment="Center" Kind="Plus"/>
@@ -34,43 +35,57 @@
                             </StackPanel>
                         </Button>
                     </Grid>
-                    <Grid Grid.Column="2" Margin="10 0 0 0">
-                        <Button   
-                            Width="50"   
-                            Height="46"
-                            Background="#80deea"
-                            BorderBrush="#80deea"
-                            HorizontalAlignment="Left"    
-                            materialDesign:ButtonAssist.CornerRadius="10"
-                            Content="{materialDesign:PackIcon TrayArrowDown}"   
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"    
-                            ToolTip="Icon"/>
-                    </Grid>
                     <Grid Grid.Column="0" Margin="10 0 0 0">
-                        <TextBox 
-                            Background="White"
-                            HorizontalAlignment="Left"
-                            materialDesign:HintAssist.Hint="Tìm kiếm"
-                            Width="170"
-                            Height="49.96"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        <ComboBox                        
+                            x:Name="cbxPhieuNhap_NhanVien"
+                        DisplayMemberPath="TenHienThi"
+                        SelectedValuePath="IdNhanVien"
+                        IsEditable="True" IsTextSearchEnabled="True"
+                        TextSearch.TextPath="TenHienThi"
+                        Background="White"
+Width="180"
+materialDesign:HintAssist.Hint="Người thực hiện"
+Style="{StaticResource MaterialDesignOutlinedComboBox}">
+
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="15 5 0 5">
+                        <DatePicker
+                            x:Name="datePickerPhieuNhap_TuNgay"
+                    Background="White"
+                    Width="150" 
+                    materialDesign:HintAssist.Hint="Từ ngày"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="15 5 0 5">
+                        <DatePicker
+                            x:Name="datePickerPhieuNhap_DenNgay"
+                    Background="White"
+Width="150" 
+materialDesign:HintAssist.Hint="Đến ngày"
+Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
                     </Grid>
                     <Grid Grid.Column="3" Margin="10 0 0 0">
                         <Button   
-                            x:Name="btnPhieuNhap_Reload"
-                            Click="btnPhieuNhap_Reload_Click"
+                            x:Name="btnPhieuNhap_TimKiem"
+                            Click="btnPhieuNhap_TimKiem_Click"
                             Background="#80deea"
                             BorderBrush="#80deea"
                             materialDesign:ButtonAssist.CornerRadius="10"
-        Width="50"   
-        Height="46"
-        HorizontalAlignment="Left"    
-        Content="{materialDesign:PackIcon Reload}"
-        ToolTip="Icon"/>
+        
+        Height="49.96"
+        HorizontalAlignment="Left"
+        >
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="Search"/>
+                                <TextBlock FontSize="14" VerticalAlignment="Center" Text="Tìm kiếm"/>
+                            </StackPanel>
+                        </Button>
                     </Grid>
                 </Grid>
             </Border>
-            <Border Margin="20" BorderThickness="1" CornerRadius="20" Grid.Row="2" Background="White">
+            <Border Margin="20 10 20 10" BorderThickness="1" CornerRadius="20" Grid.Row="2" Background="White">
                 <Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Visible">
                         <ListView x:Name="listViewPhieuNhap">
@@ -80,11 +95,8 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Margin="0 0 10 0" Orientation="Horizontal">
-                                                    <Button x:Name="SuaPhieuNhapWindow" BorderBrush="Transparent" Foreground="White" Background="ForestGreen" Click="SuaPhieuNhapWindow_Click">
+                                                    <Button x:Name="SuaPhieuNhapWindow" Margin="20 0 0 0" BorderBrush="Transparent" Foreground="White" Background="ForestGreen" Click="SuaPhieuNhapWindow_Click">
                                                         <materialDesign:PackIcon Kind="Pencil"/>
-                                                    </Button>
-                                                    <Button x:Name="XoaPhieuNhap" BorderBrush="Transparent" Foreground="White" Background="OrangeRed" Click="XoaPhieuNhap_Click" Margin="10 0 0 0">
-                                                        <materialDesign:PackIcon Kind="Close"/>
                                                     </Button>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -118,7 +130,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Người tạo">
+                                    <GridViewColumn Header="Người thực hiện">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding TenHienThi}" Padding="20 10 0 0"/>

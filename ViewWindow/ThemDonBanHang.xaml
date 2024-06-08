@@ -9,9 +9,10 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
+        x:Name="ThemDonBanHang_Window"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="ThemDonBanHang" Height="680" Width="1530">
-    <Border Background="#cfd8dc" CornerRadius="20">
+    <Border Background="#cfd8dc" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="130"></RowDefinition>
@@ -115,6 +116,7 @@ IsEnabled="False" />
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="20 0 0 0">
                             <StackPanel>
@@ -147,37 +149,29 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}">
                             <StackPanel>
                                 <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Đơn vị tính</Bold></TextBlock>
                                 <ComboBox   
- x:Name="txtThemDonBanHang_DonViTinh"
- Style="{StaticResource MaterialDesignOutlinedComboBox}"
- Background="White"
- Margin="0 0 0 0"
- HorizontalAlignment="Left"
- Width="170"
- DisplayMemberPath="TenDonVi"
- SelectedValuePath="IdDonVi"
- materialDesign:HintAssist.Hint="Chọn đơn vị tính">
+    x:Name="txtThemDonBanHang_DonViTinh"
+    Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                       DisplayMemberPath="TenDonVi"
+                                    SelectedValuePath="IdDonVi"
+                                    
+    Background="White"
+                                    IsEnabled="False"
+    Margin="0 0 0 0"
+    HorizontalAlignment="Left"
+    Width="170"
+    materialDesign:HintAssist.Hint="Đơn vị tính">
                                 </ComboBox>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Column="3" Margin="20 0 0 0">
-                            <StackPanel>
-                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Hạn sử dụng</Bold></TextBlock>
-                                <DatePicker
-x:Name="txtThemDonBanHang_HanSuDung"
-Width="140"                  
-Background="White"                 
-materialDesign:HintAssist.Hint="Hạn sử dụng"                 
-Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                             </StackPanel>
                         </Grid>
                         <Grid Grid.Column="2" Margin="20 0 0 0" >
                             <StackPanel>
-                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lượng tồn</Bold></TextBlock>
+                                <TextBlock Margin="0 20 0 0" FontSize="14"><Bold>Số lượng tồn hiện tại</Bold></TextBlock>
                                 <TextBox 
-x:Name="txtThemDonBanHang_SoLuongTon"
+x:Name="txtThemDonBanHang_SoLuongTonHienTai"
 Background="White"
+                                    IsEnabled="False"
 HorizontalAlignment="Left"
-materialDesign:HintAssist.Hint="Số lượng tồn"
+materialDesign:HintAssist.Hint="Số lượng tồn hiện tại"
 Width="170"
 Height="49.96"
 Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
@@ -189,6 +183,7 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                 <TextBox 
  x:Name="txtThemDonBanHang_ChietKhau"
  Background="White"
+                     IsEnabled="False"               
  HorizontalAlignment="Left"
  materialDesign:HintAssist.Hint="Chiết khấu"
  Width="170"
@@ -202,6 +197,7 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                 <TextBox    
 x:Name="txtThemDonBanHang_SoLuongBan"
 Background="White"     
+                                    IsEnabled="False"
 HorizontalAlignment="Left"      
 materialDesign:HintAssist.Hint="Số lượng"            
 Width="170"       
@@ -215,6 +211,7 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                 <TextBox 
  x:Name="txtThemDonBanHang_GiaBan"
  Background="White"
+                                    IsEnabled="False"
  HorizontalAlignment="Left"
  materialDesign:HintAssist.Hint="Giá bán"
  Width="170"
@@ -228,6 +225,7 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                             Click="btnThemDonBanHang_Them_Click"
                             Background="ForestGreen"
                                 BorderBrush="ForestGreen"
+                                Visibility="Visible"
                                 Foreground="White"
                             Height="49.96"
                             materialDesign:ButtonAssist.CornerRadius="10"                    
@@ -239,6 +237,23 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                 </StackPanel>
                             </Button>
                         </Grid>
+                        <Grid Grid.Column="8" Margin="20 0 0 0" >
+                            <Button
+     x:Name="btnThemDonBanHang_Sua"  
+    Click="btnThemDonBanHang_Sua_Click"
+    Background="#0074b0"
+        BorderBrush="#0074b0"
+        Foreground="White"
+                               Visibility="Collapsed"
+    Height="49.96"
+    materialDesign:ButtonAssist.CornerRadius="10"                    
+    Style="{StaticResource MaterialDesignRaisedButton}"
+    ToolTip="MaterialDesignRaisedButton with Round Corners">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon VerticalAlignment="Center" Kind="ContentSave"/>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Border>
             </Grid>
@@ -246,15 +261,15 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 <Border Margin="0" Background="White" CornerRadius="20">
                     <Grid>
                         <ScrollViewer>
-                            <ListView x:Name="listViewThemDonBanHang">
+                            <ListView x:Name="listViewThemDonBanHang" SelectionChanged="listViewThemDonBanHang_SelectionChanged">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Hành động">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="btnThemDonBanHang_Xoa" Click="btnThemDonBanHang_Xoa_Click" Background="White" BorderBrush="Black">
+                                                    <Button Margin="20 0 0 0" x:Name="btnThemDonBanHang_Xoa" Click="btnThemDonBanHang_Xoa_Click" Background="OrangeRed" Foreground="White" BorderBrush="Transparent">
                                                         <StackPanel>
-                                                            <materialDesign:PackIcon Kind="Close"/>
+                                                            <materialDesign:PackIcon Kind="DeleteForever"/>
                                                         </StackPanel>
                                                     </Button>
                                                 </DataTemplate>
@@ -281,20 +296,20 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="Số lượng">
+                                        <GridViewColumn Header="Số lượng tồn">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding SoLuongTon}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
-                                        <GridViewColumn Header="Hạn dùng">
+                                        <!--<GridViewColumn Header="Hạn dùng">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock Text="{Binding HanSuDung,StringFormat='dd/MM/yyyy'}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
+                                        </GridViewColumn>-->
                                         <GridViewColumn Header="Số lượng bán">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
@@ -305,21 +320,21 @@ Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                                         <GridViewColumn Header="Giá bán" >
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding GiaBanLe,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                    <TextBlock Text="{Binding GiaBan,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
                                         <GridViewColumn Header="Chiết khấu" >
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding ChietKhau,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                    <TextBlock Text="{Binding ChietKhau,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
                                         <GridViewColumn Header="Tổng tiền">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Text="{Binding TongTienSanPham,StringFormat={}{0:N0} ₫}" Padding="20 10 0 0"/>
+                                                    <TextBlock Text="{Binding TongTienSanPham,StringFormat={}{0:N0}, ConverterCulture=vi-VN}" Padding="20 10 0 0"/>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>

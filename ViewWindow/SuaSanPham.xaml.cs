@@ -30,9 +30,8 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             txtSuaTenSanPham.Text = _sanpham.TenSanPham;
             txtSuaGhiChuSanPham.Text = _sanpham.GhiChu;
             txtSuaIdSanPham.Text = _sanpham.IdSanPham;
-            //txtSuaSoLoSanPham.Text = _sanpham.SoLo;
             txtSuaSoLuongTonSanPham.Text = _sanpham.SoLuongTon.ToString();
-            txtSuaGiaBanLeSanPham.Text = _sanpham.GiaBanLe.HasValue ? $"{_sanpham.GiaBanLe.Value:F0}" : "N/A";
+            txtSuaGiaBanLeSanPham.Text = _sanpham.GiaBan.HasValue ? $"{_sanpham.GiaBan.Value:F0}" : "N/A";
             txtSuaGiaNhapSanPham.Text = _sanpham.GiaNhap.HasValue ? $"{_sanpham.GiaNhap.Value:F0}" : "N/A";
 
             txtSuaHamLuongSanPham.Text = _sanpham.HamLuong;
@@ -61,26 +60,22 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string suaIdNhaSanXuat;
             string suaIdNhomSanPham;
 
-
-
             using (var db = new QLQuayThuocBanThuongContext())
             {
-                if (txtSuaDonViSanPham.Text != null && txtSuaNhaSanXuatSanPham.Text != null && txtSuaNhomSanPhamSanPham.Text != null)
+                
+                if (txtSuaDonViSanPham.Text == null)
                 {
-
-
-                    var selectedIdDonVi = (DonVi)txtSuaDonViSanPham.SelectedItem;
-                    suaIdDonVi = selectedIdDonVi.IdDonVi;
-
-                    var selectedIdNhaSanXuat = (NhaSanXuat)txtSuaNhaSanXuatSanPham.SelectedItem;
-                    suaIdNhaSanXuat = selectedIdNhaSanXuat.IdNhaSanXuat;
-
-                    var selectedIdNhomSanPham = (NhomSanPham)txtSuaNhomSanPhamSanPham.SelectedItem;
-                    suaIdNhomSanPham = selectedIdNhomSanPham.IdNhomSanPham;
+                    MessageBox.Show("Không được bỏ trống đơn vị", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
-                else
+                if (txtSuaNhaSanXuatSanPham.Text == null)
                 {
-                    MessageBox.Show("Vui lòng chọn đơn vị cho sản phẩm.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Không được bỏ trống nhà sản xuất", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                if (txtSuaNhomSanPhamSanPham.Text == null)
+                {
+                    MessageBox.Show("Không được bỏ trống nhóm sản phẩm", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
                 var updateHopLe = db.SanPhams.Any(x => x.TenSanPham == suaTenSP && x.TenSanPham != _sanpham.TenSanPham);
@@ -99,14 +94,30 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     MessageBox.Show("Giá bán lẻ phải là một số hợp lệ.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-
+                if(giaBanLe<=0)
+                {
+                    MessageBox.Show("Giá bán lẻ phải là một số không âm.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }    
                 // Validate and parse GiaNhap
                 if (!decimal.TryParse(txtSuaGiaNhapSanPham.Text, out decimal giaNhap))
                 {
                     MessageBox.Show("Giá nhập phải là một số hợp lệ.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                if (giaNhap <= 0)
+                {
+                    MessageBox.Show("Giá nhập phải là một số không âm.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                var selectedIdDonVi = (DonVi)txtSuaDonViSanPham.SelectedItem;
+                suaIdDonVi = selectedIdDonVi.IdDonVi;
 
+                var selectedIdNhaSanXuat = (NhaSanXuat)txtSuaNhaSanXuatSanPham.SelectedItem;
+                suaIdNhaSanXuat = selectedIdNhaSanXuat.IdNhaSanXuat;
+
+                var selectedIdNhomSanPham = (NhomSanPham)txtSuaNhomSanPhamSanPham.SelectedItem;
+                suaIdNhomSanPham = selectedIdNhomSanPham.IdNhomSanPham;
                 var suaSanPham = db.SanPhams.FirstOrDefault(x => x.IdSanPham == _sanpham.IdSanPham && x.TenSanPham == suaTenSP);
 
                 if (suaSanPham != null)
@@ -152,7 +163,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                     SoLuongTon = sp.SoLuongTon,
                     GiaNhap = sp.GiaNhap,
                     HamLuong = sp.HamLuong,
-                    GiaBanLe = sp.GiaBan,
+                    GiaBan = sp.GiaBan,
                     ThanhPhan = sp.ThanhPhan,
                     HanSuDung = sp.HanSuDung,
                     TenNhaSanXuat = sp.IdNhaSanXuatNavigation.TenNhaSanXuat,

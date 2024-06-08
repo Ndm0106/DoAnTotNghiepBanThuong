@@ -11,7 +11,7 @@
         WindowStyle="None"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="SuaNhomSanPham" Height="380" Width="460">
-    <Border Background="#e8eaf6" CornerRadius="20">
+    <Border Background="#e8eaf6" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>

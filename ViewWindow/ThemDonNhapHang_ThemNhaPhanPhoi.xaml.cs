@@ -3,6 +3,7 @@ using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +22,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class ThemDonNhapHang_ThemNhaPhanPhoi : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
+        private QLQuayThuocBanThuongContext db;
         public ThemDonNhapHang_ThemNhaPhanPhoi(QLQuayThuocBanThuongContext _db)
         {
             InitializeComponent();
-            _dbContext = _db;
+            db = _db;
             // Sinh GUID mới
             Guid guid = Guid.NewGuid();
 
@@ -49,7 +50,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string sodienthoaiNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_SoDienThoai.Text.Trim();
             string emailNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_Email.Text.Trim();
             string masothueNPP = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_MaSoThue.Text.Trim();
-            var queryNPP = _dbContext.NhaPhanPhois.Any(x => x.TenNhaPhanPhoi == tenNPP);
+            var queryNPP = db.NhaPhanPhois.Any(x => x.TenNhaPhanPhoi == tenNPP);
             if (string.IsNullOrEmpty(tenNPP))
             {
                 MessageBox.Show("Tên nhà cung cấp không đc để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -57,10 +58,19 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             }
             if (queryNPP)
             {
-                MessageBox.Show("Đã tồn tại nhà cung cấp này", "Thông báo", MessageBoxButton.OK);
+                MessageBox.Show("Đã tồn tại nhà phân phối này", "Thông báo", MessageBoxButton.OK);
                 return;
             }
-
+            if (!IsNumericString(sodienthoaiNPP))
+            {
+                MessageBox.Show("Số điện thoại phải hợp lệ", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
+            if (!IsValidEmail(emailNPP))
+            {
+                MessageBox.Show("Emai phải đúng định dạng", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
             NhaPhanPhoi NhaPhanPhoi = new NhaPhanPhoi
             {
                 IdNhaPhanPhoi = txtThemMoiDonNhapHang_ThemNhaPhanPhoi_IdNhaPhanPhoi.Text,
@@ -71,8 +81,9 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 Email = emailNPP,
                 MaSoThue = masothueNPP
             };
-            _dbContext.NhaPhanPhois.Add(NhaPhanPhoi);
-            _dbContext.SaveChanges();            
+            db.NhaPhanPhois.Add(NhaPhanPhoi);
+            db.SaveChanges();       
+            ThemDonNhapHang.nhaphanphoiMoi = db.NhaPhanPhois.ToList();
             MessageBox.Show("Nhà phân phối mới đã được thêm thành công", "Thông báo", MessageBoxButton.OK);
             this.Close();
         }
@@ -81,7 +92,59 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
         {
             var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (thongbao == MessageBoxResult.OK)
+            {
+                ThemDonNhapHang.nhaphanphoiMoi = db.NhaPhanPhois.ToList();
                 this.Close();
+            }    
+                
+        }
+        private bool IsNumericString(string s)
+        {
+            if (txtThemMoiDonNhapHang_ThemNhaPhanPhoi_SoDienThoai.Text.Length != 10)
+            {
+                return false;
+            }
+            foreach (char c in s)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    return false; // Nếu có ký tự khoảng trắng, trả về false
+                }
+            }
+            char firstText = s[0];
+            if (firstText != '0')
+            {
+                return false;
+            }
+            if (s == null)
+            {
+                return false;
+            }
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static bool IsValidEmail(string email)
+        {
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }

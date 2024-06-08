@@ -11,7 +11,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         Title="ThemDonNhapHang_ThemSanPhamMoi" Height="600" Width="720">
-    <Border Background="AliceBlue" CornerRadius="20">
+    <Border Background="AliceBlue" BorderThickness="1" BorderBrush="DarkGray" CornerRadius="20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>

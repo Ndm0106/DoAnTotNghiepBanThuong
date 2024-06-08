@@ -1,4 +1,5 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
+using XAct.Library.Settings;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoAnTotNghiepBanThuong.ViewWindow
 {
@@ -21,12 +25,12 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class SuaNhomSanPham : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
-        private NhomSanPham _NhomSanPham;
-        public SuaNhomSanPham(QLQuayThuocBanThuongContext db, NhomSanPham nhomsanpham)
+        private QLQuayThuocBanThuongContext db;
+        private NhomSanPham_MLV _NhomSanPham;
+        public SuaNhomSanPham(QLQuayThuocBanThuongContext _db, NhomSanPham_MLV nhomsanpham)
         {
             InitializeComponent();
-            _dbContext = db;
+            db = _db;
             _NhomSanPham = nhomsanpham;
             txtSuaIdNhomSanPham.Text = _NhomSanPham.IdNhomSanPham;
             txtSuaTenNhomSanPham.Text = _NhomSanPham.TenNhomSanPham;
@@ -43,12 +47,29 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 MessageBox.Show("Không được để trống tên nhóm sản phẩm", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            _NhomSanPham.TenNhomSanPham = suaTenNSP;
-            _NhomSanPham.GhiChu = suaDiaChiNSP;
-            _dbContext.SaveChanges();
-            NhomSanPhamUC.listView.ItemsSource = _dbContext.NhomSanPhams.ToList();
-            MessageBox.Show("Sửa thành công", "Thông báo");
-            this.Close();
+            var suaNhomSanPham = db.NhomSanPhams.FirstOrDefault(x => x.IdNhomSanPham == _NhomSanPham.IdNhomSanPham);
+            if (suaNhomSanPham != null)
+            {
+                suaNhomSanPham.TenNhomSanPham = suaTenNSP;
+                suaNhomSanPham.GhiChu = suaDiaChiNSP;
+                db.SaveChanges();
+                LoadDataNhomSanPham();
+                MessageBox.Show("Sửa thành công", "Thông báo");
+                this.Close();
+            }      
+        }
+        private void LoadDataNhomSanPham()
+        {
+            var query = (from nsp in db.NhomSanPhams
+                         select new NhomSanPham_MLV
+                         {
+                             IdNhomSanPham = nsp.IdNhomSanPham,
+                             TenNhomSanPham = nsp.TenNhomSanPham,
+                             GhiChu = nsp.GhiChu,
+
+                         }).ToList();
+            NhomSanPhamUC.listView.ItemsSource = query;
+            
         }
         private void btnSuaNhomSanPham_Thoat(object sender, RoutedEventArgs e)
         {

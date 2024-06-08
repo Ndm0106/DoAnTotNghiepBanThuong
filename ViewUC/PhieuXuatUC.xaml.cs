@@ -29,9 +29,19 @@ namespace DoAnTotNghiepBanThuong.ViewUC
         public PhieuXuatUC(string idNhanVien, string tenNhanVien)
         {
             InitializeComponent();
-            LoadDataPhieuXuat();
             this.tenNhanVien = tenNhanVien;
             this.idNhanVien = idNhanVien;
+            LoadDataPhieuXuat();
+            LoadComboBox();
+        }
+        private void LoadComboBox()
+        {
+            using (var db = new QLQuayThuocBanThuongContext())
+            {
+                cbxPhieuXuat_NhanVien.ItemsSource = db.NhanViens.ToList();
+                cbxPhieuXuat_NhanVien.DisplayMemberPath = "TenHienThi";
+                cbxPhieuXuat_NhanVien.SelectedValuePath = "IdNhanVien";
+            }
         }
         private void LoadDataPhieuXuat()
         {
@@ -48,8 +58,9 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                     TenKhachHang = dbh.IdKhachHangNavigation.TenKhachHang,
                     TongTienDonBanHang = dbh.TongTienDonBanHang
                 }).ToList();
-                listViewPhieuXuat.ItemsSource = queryDATA;
-                listView = listViewPhieuXuat;
+                //listViewPhieuXuat.ItemsSource = queryDATA;
+                //listView = listViewPhieuXuat;
+                UpdateListView(queryDATA);
             }
         }
 
@@ -70,10 +81,6 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                     // Tạo một cửa sổ mới để hiển thị chi tiết đơn nhập hàng
                     SuaDonBanHang detailWindow = new SuaDonBanHang(selectedDonBanHang);
                     detailWindow.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Không tìm thấy thông tin đơn hàng.");
                 }
             }
         }
@@ -105,10 +112,60 @@ namespace DoAnTotNghiepBanThuong.ViewUC
                 }
             }
         }
-
-        private void btnPhieuXuat_Reload_Click(object sender, RoutedEventArgs e)
+        private void UpdateListView(List<DonBanHang_MLV> data)
         {
-            LoadDataPhieuXuat();
+            listViewPhieuXuat.ItemsSource = data;
+            listView = listViewPhieuXuat;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewPhieuXuat.ItemsSource);
+            view.GroupDescriptions.Clear();
+            //PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChiTietDonNhapHang_MLV");
+            //view.GroupDescriptions.Add(groupDescription);
+        }
+        private void btnPhieuXuat_TimKiem_Click(object sender, RoutedEventArgs e)
+        {
+            using (var _db = new QLQuayThuocBanThuongContext())
+            {
+                DateTime? startDate = datePickerPhieuXuat_TuNgay.SelectedDate;
+                DateTime? endDate = datePickerPhieuXuat_DenNgay.SelectedDate;
+
+
+                string selectedNhanVienId = null;
+
+
+                if (cbxPhieuXuat_NhanVien.SelectedItem != null)
+                {
+                    selectedNhanVienId = (cbxPhieuXuat_NhanVien.SelectedItem as NhanVien).IdNhanVien;
+                }
+
+                // Thực hiện truy vấn LINQ
+                var query = from dbh in _db.DonBanHangs
+                            join kh in _db.KhachHangs on dbh.IdKhachHang equals kh.IdKhachHang
+                            join nv in _db.NhanViens on dbh.IdNhanVien equals nv.IdNhanVien
+                            where (string.IsNullOrEmpty(selectedNhanVienId) || dbh.IdNhanVien == selectedNhanVienId)
+                               && (!startDate.HasValue || dbh.NgayBan >= startDate.Value)
+                               && (!endDate.HasValue || dbh.NgayBan <= endDate.Value)
+                            select new DonBanHang_MLV
+                            {
+                                IdDonBanHang = dbh.IdDonBanHang,
+                                NgayBan = dbh.NgayBan,
+                                TenKhachHang = kh.TenKhachHang,
+                                TenHienThi = nv.TenHienThi,
+                                TongTienDonBanHang = dbh.TongTienDonBanHang
+                            };
+
+                // Thực hiện truy vấn và chuyển kết quả sang danh sách
+                var result = query.ToList();
+
+                // Kiểm tra nếu không có kết quả
+                if (!result.Any())
+                {
+                    MessageBox.Show("Không có đơn bán hàng nào cho lựa chọn này.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                // Hiển thị kết quả
+                UpdateListView(result);
+            }
         }
     }
 }

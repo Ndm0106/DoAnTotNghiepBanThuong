@@ -1,8 +1,10 @@
 ﻿using DoAnTotNghiepBanThuong.Model;
+using DoAnTotNghiepBanThuong.ModelListView;
 using DoAnTotNghiepBanThuong.ViewUC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +23,11 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
     /// </summary>
     public partial class ThemNhaPhanPhoi : Window
     {
-        private QLQuayThuocBanThuongContext _dbContext;
+        private QLQuayThuocBanThuongContext db;
         public ThemNhaPhanPhoi(QLQuayThuocBanThuongContext _db)
         {
             InitializeComponent();
-            _dbContext = _db;
+            db = _db;
             // Sinh GUID mới
             Guid guid = Guid.NewGuid();
 
@@ -47,7 +49,7 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
             string sodienthoaiNPP = txtThemSoDienThoaiNhaPhanPhoi.Text.Trim();
             string emailNPP = txtThemEmailNhaPhanPhoi.Text.Trim();
             string masothueNPP = txtThemEmailNhaPhanPhoi.Text.Trim();
-            var queryNPP = _dbContext.NhaPhanPhois.Any(x => x.TenNhaPhanPhoi == tenNPP);
+            var queryNPP = db.NhaPhanPhois.Any(x => x.TenNhaPhanPhoi == tenNPP);
             if (string.IsNullOrEmpty(tenNPP))
             {
                 MessageBox.Show("Tên nhà cung cấp không đc để trống", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -58,7 +60,16 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 MessageBox.Show("Đã tồn tại nhà cung cấp này", "Thông báo", MessageBoxButton.OK);
                 return;
             }
-
+            if (!IsNumericString(sodienthoaiNPP))
+            {
+                MessageBox.Show("Số điện thoại phải hợp lệ", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
+            if (!IsValidEmail(emailNPP))
+            {
+                MessageBox.Show("Emai phải đúng định dạng", "Thông báo", MessageBoxButton.OK);
+                return;
+            }
             NhaPhanPhoi NhaPhanPhoi = new NhaPhanPhoi
             {
                 IdNhaPhanPhoi = txtThemIdNhaPhanPhoi.Text,
@@ -69,18 +80,73 @@ namespace DoAnTotNghiepBanThuong.ViewWindow
                 Email = emailNPP,
                 MaSoThue = masothueNPP
             };
-            _dbContext.NhaPhanPhois.Add(NhaPhanPhoi);
-            _dbContext.SaveChanges();
-
-            NhaPhanPhoiUC.listView.ItemsSource = _dbContext.NhaPhanPhois.ToList();
+            db.NhaPhanPhois.Add(NhaPhanPhoi);
+            db.SaveChanges();
+            LoadDataNhaPhanPhoi();
             MessageBox.Show("Nhà phân phối mới đã được thêm thành công", "Thông báo", MessageBoxButton.OK);
             this.Close();
+        }
+        private void LoadDataNhaPhanPhoi()
+        {
+            var query = (from npp in db.NhaPhanPhois
+                         select new NhaPhanPhoi_MLV
+                         {
+                             IdNhaPhanPhoi = npp.IdNhaPhanPhoi,
+                             TenNhaPhanPhoi = npp.TenNhaPhanPhoi,
+                             DiaChi = npp.DiaChi,
+                             Fax = npp.Fax,
+                             SoDienThoai = npp.SoDienThoai,
+                             Email = npp.Email,
+                             MaSoThue = npp.MaSoThue,
+
+                         }).ToList();
+            NhaPhanPhoiUC.listView.ItemsSource = query;
+
         }
         private void btnThemNhaPhanPhoi_Thoat(object sender, RoutedEventArgs e)
         {
             var thongbao = MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (thongbao == MessageBoxResult.OK)
                 this.Close();
+        }
+        public static bool IsValidEmail(string email)
+        {
+            if (!email.Contains("@") || !email.Contains("."))
+            {
+                return false;
+            }
+
+            try
+            {
+                new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+        private bool IsNumericString(string s)
+        {
+            if (txtThemSoDienThoaiNhaPhanPhoi.Text.Length != 10)
+            {
+                return false;
+            }
+            foreach (char c in s)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    return false; // Nếu có ký tự khoảng trắng, trả về false
+                }
+            }
+            foreach (char c in s)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

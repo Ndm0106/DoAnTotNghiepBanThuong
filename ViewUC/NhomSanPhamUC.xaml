@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Background="AliceBlue" CornerRadius="20">
+    <Border Background="AliceBlue" CornerRadius="0 0 20 20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" ></RowDefinition>
@@ -27,6 +27,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="15 0 0 0">
                     <TextBox
+                        x:Name="txtNhomSanPham_TimKiem"
+                        TextChanged="txtNhomSanPham_TimKiem_TextChanged"
                         Width="150"
                     Background="White"
 Height="49.96"

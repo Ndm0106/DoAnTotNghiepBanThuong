@@ -17,72 +17,68 @@
             <Grid Grid.Row="0" Margin="20 20 0 0">
                 <TextBlock FontSize="40"><Bold>BÁN HÀNG</Bold></TextBlock>
             </Grid>
-
-            <Grid Grid.Row="1" Margin="10 10 20 5" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-
-
-
-                <Grid Grid.Column="1">
-                    <TextBox
+            <Grid Grid.Row="1" HorizontalAlignment="Right" Margin="0 0 20 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="15 5 0 5">
+                        <ComboBox                        
+                            x:Name="cbxPhieuXuat_NhanVien"
+                        DisplayMemberPath="TenHienThi"
+                        SelectedValuePath="IdNhanVien"
+                        IsEditable="True" IsTextSearchEnabled="True"
+                        TextSearch.TextPath="TenHienThi"
                         Background="White"
-                        Height="49.96"
-                        Width="150"
-                        VerticalAlignment="Top"
-                        materialDesign:HintAssist.Hint="Tìm kiếm" 
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                </Grid>
+Width="180"
+materialDesign:HintAssist.Hint="Người thực hiện"
+Style="{StaticResource MaterialDesignOutlinedComboBox}">
 
-                <Grid Grid.Column="2" Margin="15 0 0 0">
-                    <DatePicker
-                        Background="White"
-                        Width="150" 
-                        materialDesign:HintAssist.Hint="Ngày bắt đầu"
-                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                </Grid>
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="15 5 0 5">
+                        <DatePicker
+                            x:Name="datePickerPhieuXuat_TuNgay"
+                    Background="White"
+                    Width="150" 
+                    materialDesign:HintAssist.Hint="Từ ngày"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                    </Grid>
 
-                <Grid Grid.Column="3" Margin="15 0 0 0">
-                    <DatePicker
-                        Background="White"
-    Width="150" 
-    materialDesign:HintAssist.Hint="Ngày kết thúc"
-    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                    <Grid Grid.Column="2" Margin="15 5 0 5">
+                        <DatePicker
+                            x:Name="datePickerPhieuXuat_DenNgay"
+                    Background="White"
+Width="150" 
+materialDesign:HintAssist.Hint="Đến ngày"
+Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
+                    </Grid>
+                    <Grid Grid.Column="3"  Margin="15 5 0 5">
+                        <Button x:Name="btnPhieuXuat_TimKiem"  Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10"  Click="btnPhieuXuat_TimKiem_Click" Width="auto" Height="49.96">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="Search"/>
+                                <TextBlock FontSize="14" VerticalAlignment="Center" Text="Tìm kiếm"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="4"  Margin="15 5 0 5">
+                        <Button x:Name="ThemPhieuXuatWindow" Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10"  Click="ThemPhieuXuatWindow_Click" Width="auto" Height="49.96">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="Plus"/>
+                                <TextBlock FontSize="14" VerticalAlignment="Center" Text="Thêm đơn hàng mới"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                 </Grid>
-
-                <Grid Grid.Column="4" Margin="15 0 0 0">
-                    <Button x:Name="ThemPhieuXuatWindow" Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10"  Click="ThemPhieuXuatWindow_Click" Width="180" Height="49.96">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="Plus"/>
-                            <TextBlock FontSize="14" VerticalAlignment="Center" Text="Thêm đơn hàng mới"/>
-                        </StackPanel>
-                    </Button>
-                </Grid>
-                <Grid Grid.Column="5" Margin="15 0 0 0">
-                    <Button Width="49.96" x:Name="btnPhieuXuat_Reload" Click="btnPhieuXuat_Reload_Click" Height="49.96" Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="Reload"/>
-                        </StackPanel>
-                    </Button>
-                </Grid>
-                <Grid Grid.Column="6"  Margin="15 0 0 0">
-                    <Button Width="49.96" Height="49.96" Background="#80deea" BorderBrush="#80deea" materialDesign:ButtonAssist.CornerRadius="10">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Height="20" Width="20" VerticalAlignment="Center" Kind="TrayArrowDown"/>
-                        </StackPanel>
-                    </Button>
-                </Grid>
-
-
-
+                
             </Grid>
             <Border Margin="20 10 20 10" BorderThickness="1" CornerRadius="20" Grid.Row="2" Background="White" >
                 <Grid>
@@ -94,11 +90,8 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button x:Name="SuaPhieuXuatWindow" BorderBrush="Transparent" Foreground="White" Background="ForestGreen" Click="SuaPhieuXuatWindow_Click">
+                                                    <Button x:Name="SuaPhieuXuatWindow" BorderBrush="Transparent" Foreground="White" Background="ForestGreen" Margin="20 0 0 0" Click="SuaPhieuXuatWindow_Click">
                                                         <materialDesign:PackIcon Kind="Pencil"/>
-                                                    </Button>
-                                                    <Button x:Name="XoaPhieuXuat" BorderBrush="Transparent" Foreground="White" Click="XoaPhieuXuat_Click" Background="OrangeRed" Margin="5 0 0 0">
-                                                        <materialDesign:PackIcon Kind="Close"/>
                                                     </Button>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -146,7 +139,6 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    
                                 </GridView>
                             </ListView.View>
                         </ListView>

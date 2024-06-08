@@ -28,6 +28,8 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Margin="15 0 0 0">
                     <TextBox
+                        x:Name="txtNhaSanXuat_TimKiem"
+                        TextChanged="txtNhaSanXuat_TimKiem_TextChanged"
                          Width="150"
                      Background="White"
  Height="49.96"
@@ -48,6 +50,8 @@
                 </Border>
                 <Grid Margin="10 0 0 0" Grid.Column="3">
                     <Button
+                        x:Name="btnNhaSanXuat_XuatFile"
+                        Click="btnNhaSanXuat_XuatFile_Click"
                      Background="#80deea" BorderBrush="#80deea" 
                         materialDesign:ButtonAssist.CornerRadius="10"
                      Width="49.96"
